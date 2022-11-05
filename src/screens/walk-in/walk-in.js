@@ -45,7 +45,7 @@ const WalkIn = (props) => {
   const { bookingID, selected } = route.params;
   const bussinessId=3333;
   const bookingId=bookingID;
-  const customerId=selected;
+  const customerId=3333//selected;
   console.log("Customer id ",customerId)
   const date=moment(new Date()).format("YYYY-MM-DD");
   const [couponPickerVisible,setCouponPickerVisible]=useState(false)
