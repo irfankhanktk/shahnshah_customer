@@ -1,0 +1,7 @@
+<svg id="share" xmlns="http://www.w3.org/2000/svg" width="12.786" height="14.917" viewBox="0 0 12.786 14.917">
+  <path id="Shape" d="M0,2.486A2.486,2.486,0,1,1,2.486,4.972,2.489,2.489,0,0,1,0,2.486Z" transform="translate(0 4.972)"/>
+  <path id="Shape-2" data-name="Shape" d="M0,2.486A2.486,2.486,0,1,1,2.486,4.972,2.489,2.489,0,0,1,0,2.486Z" transform="translate(7.814 0)"/>
+  <path id="Shape-3" data-name="Shape" d="M0,2.486A2.486,2.486,0,1,1,2.486,4.972,2.489,2.489,0,0,1,0,2.486Z" transform="translate(7.814 9.945)"/>
+  <path id="Rectangle" d="M0,0,5.548.018l0,.814L0,.814Z" transform="translate(4.384 5.885) rotate(-32.894)"/>
+  <path id="Rectangle-2" data-name="Rectangle" d="M0,0,.854,0,.872,5.4l-.854,0Z" transform="matrix(0.544, -0.839, 0.839, 0.544, 4.371, 8.578)"/>
+</svg>
