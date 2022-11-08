@@ -17,10 +17,11 @@ const HeadingTitle = ({
       style={{
         justifyContent: 'center',
         paddingHorizontal: mvs(18),
+        // height:mvs(30),
         marginVertical: marginVertical,
         backgroundColor: colors.FBF8F8,
-        paddingBottom: paddingBottom,
-        paddingTop: paddingTop,
+        // paddingBottom: paddingBottom,
+        // paddingTop: 7,
         paddingVertical: paddingVertical,
         ...style,
       }}>
