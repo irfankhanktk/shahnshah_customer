@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { HighlightedPercent } from '../../assets/common-icons';
+import { Percent } from '../../assets/common-icons';
+// import { {} } from '../../assets/common-icons';
 import { CouponIcon, NoCouponIcon } from '../../assets/images';
 import Medium from '../../presentation/typography/medium-text';
 import Regular from '../../presentation/typography/regular-text';
@@ -21,13 +22,13 @@ const NewCouponItem =
     return (
         <Row style={{marginVertical:mvs(10)}}>
              <ImagePlaceholder containerStyle={styles.image} uri={showCoupon?CouponIcon:NoCouponIcon}/>
-             <View style={{ marginLeft: mvs(10) }}>
+             <View style={{ marginLeft: mvs(10), }}>
                 <Medium size={mvs(15)} label={title} color={colors.black}/>
                 <Regular color={colors.lightgrey1} size={mvs(13)} label={subTitle} />
                 {
                   showHighLighted?
                    <Row alignItems='center' style={styles.highlighted}>
-                      <HighlightedPercent/>
+                      <Percent/>
                        <Regular color={colors.black} 
                        size={mvs(13)} label={highlightedText} 
                        style={{marginLeft:mvs(6),flex: 1,}}

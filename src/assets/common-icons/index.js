@@ -50,6 +50,7 @@ export {default as Coupon} from '../profile-icons/coupon.svg';
 export {default as Coupons} from '../profile-icons/coupons.svg';
 export {default as Arrow} from '../profile-icons/arrow.svg';
 export {default as Arrows} from '../profile-icons/arrows.svg';
+export {default as VehicleTwo} from './vehicle2.svg';
 export {default as Vehicle} from '../profile-icons/vehicle.svg';
 export {default as Vehicles} from '../profile-icons/vehicles.svg';
 export {default as Notification} from '../profile-icons/notification.svg';
