@@ -162,7 +162,7 @@ const WalkIn = (props) => {
           
           <SlotItem
            showAccept={selectedSlot?.view?.accept}
-           showChange={selectedSlot?.view?.find ||selectedSlot?.view?.remove?false:true}
+           showChange={selectedSlot?.view?.change}
            showFind={selectedSlot?.view?.find}
            noSlot={selectedSlot?.view?.find}
            showRemove={selectedSlot?.view?.remove}
@@ -188,14 +188,14 @@ const WalkIn = (props) => {
               />
               <View 
                 style={{alignSelf:coupon?.view?.remove && !coupon?.view?.applyCoupon && !coupon?.view?.applyDiscount && !coupon?.view?.changeCoupon && !coupon?.view?.changeDiscount?  'flex-end':'flex-start'}}>
-               {coupon?.view?.change?
+                {coupon?.view?.change?
                  <ActionButton
-                 title="Change"
-                 bgColor={colors.lightYellow} 
-                 borderColor={colors.primary} 
-                 titleColor={colors.primary}
-                 onClick={()=>getCoupons()}
-                 style={{alignSelf: 'flex-end'}}
+                  title="Change"
+                  bgColor={colors.lightYellow} 
+                  borderColor={colors.primary} 
+                  titleColor={colors.primary}
+                  onClick={()=>getCoupons()}
+                  style={{alignSelf: 'flex-end'}}
                 />:null}
                {coupon?.view?.remove?
                <ActionButton title="Remove"
@@ -232,48 +232,85 @@ const WalkIn = (props) => {
              color={booking?.payment?.view?.error?colors.red : colors.lightgrey1}
              size={14}/>
              
-             <Medium label={'Worker'} color={colors.black} size={16} style={{marginVertical:mvs(15)}}/>
-             <Row alignItems="center">
-               {
-                worker!=null &&
-                  ( <WorkerItem item={worker} style={{flex:1}}/>)
-                 }
-             </Row>
             <BillView invoice={booking?.invoice}/>
-            <AlertMessage 
-             view={booking?.view}
-             color={booking?.view?.message?.color}
-             title={booking?.view?.message?.message}
-              bgColor={
-              booking?.view?.message?.color=="green"?
-              colors.lightGreen1
-              :booking?.view?.message?.color=="red"?
-               colors.lightPink1
-              :booking?.view?.message?.color=="blue"?
-               colors.lightBlue
-              :booking?.view?.message?.color=="grey"?
-               colors.lightgrey:
-               null
-             } 
-            
-            fillColor={
-                      booking?.view?.message?.color=="green"?
-                      colors.green
-                      :booking?.view?.message?.color=="red"?
-                       colors.red
-                      :booking?.view?.message?.color=="blue"?
-                       colors.blue
-                      :booking?.view?.message?.color=="grey"?
-                       colors.lightgrey1:
-                       null 
-                    }
-            />
+            <Medium label={'Booking Lifecycle'}
+              color={colors.black} size={16} style={{marginVertical:mvs(15)}}/>
+             {booking?.lifecycle?.booked &&
+             (
+              <LifeCycleItem buttonText={'Book'} 
+               item={booking?.lifecycle?.booked} 
+               onClick={()=>console.log("Booked")}/>
+             )}
+             {booking?.lifecycle?.cancelled &&
+             (
+              <LifeCycleItem buttonText={'Cancel'} 
+              item={booking?.lifecycle?.cancelled} 
+              onClick={()=>console.log("cancelled")}/>
+             )}
+             {booking?.lifecycle?.noshow &&
+             (
+              <LifeCycleItem buttonText={'No show'} 
+              item={booking?.lifecycle?.noshow} 
+              />
+             )}
+             {booking?.lifecycle?.checkin &&
+             (
+              <LifeCycleItem buttonText={'Check in'} 
+              item={booking?.lifecycle?.checkin} 
+              />
+             )}
+             {booking?.lifecycle?.started &&
+             (
+              <LifeCycleItem buttonText={'Start'} 
+               item={booking?.lifecycle?.started} 
+               assignWorker={false}
+              />
+             )}
+             {booking?.lifecycle?.completed &&
+             (
+              <LifeCycleItem buttonText={'Complete'}
+               item={booking?.lifecycle?.completed} 
+              />
+             )}
+         
+        
           
         </ScrollView>
-        {booking?.view?.conintue &&
-         (<View style={styles.bottomView}>
+        
+         <View style={styles.bottomView}>
+         {booking?.view?.conintue?
            <Buttons.ButtonPrimary title="Confirm"/>
-        </View>)}
+           :
+           <AlertMessage 
+           view={booking?.view}
+           color={booking?.view?.message?.color}
+           title={booking?.view?.message?.message}
+            bgColor={
+             booking?.view?.message?.color=="green"?
+             colors.lightGreen1
+            :booking?.view?.message?.color=="red"?
+             colors.lightPink1
+            :booking?.view?.message?.color=="blue"?
+             colors.lightBlue
+            :booking?.view?.message?.color=="grey"?
+             colors.lightgrey:
+             null
+           } 
+          
+          fillColor={
+                    booking?.view?.message?.color=="green"?
+                    colors.green
+                    :booking?.view?.message?.color=="red"?
+                     colors.red
+                    :booking?.view?.message?.color=="blue"?
+                     colors.blue
+                    :booking?.view?.message?.color=="grey"?
+                     colors.lightgrey1:
+                     null 
+                  }
+          />
+         }
+        </View>
         <CouponModal
           value={coupon}
           visible={couponPickerVisible}
