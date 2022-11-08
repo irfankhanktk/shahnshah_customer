@@ -227,8 +227,7 @@ const CouponDetails = props => {
                 paddingHorizontal: mvs(20),
                 paddingBottom: mvs(10),
               }}>
-              {coupon?.otherConditions &&
-                coupon?.otherConditions?.map((item, index) => {
+              {/* {coupon?.otherConditions?.map((item, index) => {
                   console.log('item:', item);
                   return (
                     <Row
@@ -250,7 +249,7 @@ const CouponDetails = props => {
                       </Row>
                     </Row>
                   );
-                })}
+                })} */}
 
               {/* {coupon?.saleConditions?.map((item, index) => {
                 return;

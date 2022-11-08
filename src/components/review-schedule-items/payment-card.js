@@ -5,7 +5,7 @@ import { mvs } from "../../services/metrices";
 import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
 import LinearGradient from "react-native-linear-gradient";
 import Regular from "../../presentation/typography/regular-text";
-// import * as SVG from '../../assets/common-icons/payment-method/index'
+import * as SVG from '../../assets/common-icons/payment-method/index'
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 const PaymentCard = ({
   title='Accept',
@@ -15,14 +15,14 @@ const PaymentCard = ({
   onClick,
   selectable=true
 }) => {
-    // const Icon=SVG[icon]
+    const Icon=SVG[icon]
   return (
      <TouchableOpacity activeOpacity={selectable?0:1}
            style={{...styles.CONTAINER,borderColor:borderColor}} onPress={onClick}>
           <Regular label={title} color={colors.lightgrey1} size={14} style={{marginBottom:mvs(5)}}/>
-          {/* {Icon &&(
+          {Icon &&(
              <Icon/>
-          )} */}
+          )}
          {selected &&
          ( 
           <View style={{position:'absolute',right:-10,top:-15}}>
