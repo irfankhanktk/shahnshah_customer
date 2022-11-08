@@ -42,9 +42,9 @@ const WalkIn = (props) => {
          apply_coupon,
          route
         }=props;  
-  const { bookingID, selected } = route.params;
+ // const { bookingID, selected } = route.params;
   const bussinessId=3333;
-  const bookingId=bookingID;
+  const bookingId=273;
   const customerId=3333//selected;
   console.log("Customer id ",customerId)
   const date=moment(new Date()).format("YYYY-MM-DD");
@@ -188,7 +188,7 @@ const WalkIn = (props) => {
               />
               <View 
                 style={{alignSelf:coupon?.view?.remove && !coupon?.view?.applyCoupon && !coupon?.view?.applyDiscount && !coupon?.view?.changeCoupon && !coupon?.view?.changeDiscount?  'flex-end':'flex-start'}}>
-               {coupon?.view?.changeCoupon || coupon?.view?.changeDiscount?
+               {coupon?.view?.change?
                  <ActionButton
                  title="Change"
                  bgColor={colors.lightYellow} 
@@ -196,24 +196,6 @@ const WalkIn = (props) => {
                  titleColor={colors.primary}
                  onClick={()=>getCoupons()}
                  style={{alignSelf: 'flex-end'}}
-                />:null}
-               {coupon?.view?.applyCoupon?
-                <ActionButton
-                 title="Apply Coupon"
-                 bgColor={colors.lightGreen1} 
-                 borderColor={colors.green} 
-                 titleColor={colors.green} 
-                 style={{alignSelf: 'flex-end'}}
-                 onClick={()=>apply_booking_discount(coupon?.id)}/>
-              :null}
-               {coupon?.view?.applyDiscount?
-                 <ActionButton 
-                 title="Apply Discount"
-                 bgColor={colors.lightGreen1} 
-                 borderColor={colors.green} 
-                 titleColor={colors.green} 
-                 style={{alignSelf: 'flex-end'}}
-                 onClick={()=>apply_booking_discount(coupon?.id)}
                 />:null}
                {coupon?.view?.remove?
                <ActionButton title="Remove"
@@ -249,61 +231,15 @@ const WalkIn = (props) => {
             <Regular label={booking?.payment?.view?.message} 
              color={booking?.payment?.view?.error?colors.red : colors.lightgrey1}
              size={14}/>
-          
-            <Medium label={'Booking Lifecycle'}
-              color={colors.black} size={16} style={{marginVertical:mvs(15)}}/>
-             {booking?.lifecycle?.booked &&
-             (
-              <LifeCycleItem buttonText={'Book'} 
-               item={booking?.lifecycle?.booked} 
-               onClick={()=>console.log("Booked")}/>
-             )}
-             {booking?.lifecycle?.cancelled &&
-             (
-              <LifeCycleItem buttonText={'Cancel'} 
-              item={booking?.lifecycle?.cancelled} 
-              onClick={()=>console.log("cancelled")}/>
-             )}
-             {booking?.lifecycle?.noshow &&
-             (
-              <LifeCycleItem buttonText={'No show'} 
-              item={booking?.lifecycle?.noshow} 
-              onClick={()=>no_show_booking()}/>
-             )}
-             {booking?.lifecycle?.checkin &&
-             (
-              <LifeCycleItem buttonText={'Check in'} 
-              item={booking?.lifecycle?.checkin} 
-              onClick={()=>checkin_booking()}/>
-             )}
-             {booking?.lifecycle?.started &&
-             (
-              <LifeCycleItem buttonText={'Start'} 
-              item={booking?.lifecycle?.started} 
-              onClick={()=>start_booking()}/>
-             )}
-             {booking?.lifecycle?.completed &&
-             (
-              <LifeCycleItem buttonText={'Complete'}
-               item={booking?.lifecycle?.completed} 
-               onClick={()=>complete_booking()}/>
-             )}
+             
              <Medium label={'Worker'} color={colors.black} size={16} style={{marginVertical:mvs(15)}}/>
              <Row alignItems="center">
                {
                 worker!=null &&
-                 ( <WorkerItem item={worker} style={{flex:1}}/>)
-               }
-                <ActionButton 
-                 title={worker==null?"Assign Worker":"Change Worker"}
-                 bgColor={colors.lightGreen1} 
-                 borderColor={colors.green} 
-                 titleColor={colors.green}
-                 onClick={()=>getWorkers()}/>
+                  ( <WorkerItem item={worker} style={{flex:1}}/>)
+                 }
              </Row>
-             
             <BillView invoice={booking?.invoice}/>
-
             <AlertMessage 
              view={booking?.view}
              color={booking?.view?.message?.color}
