@@ -44,8 +44,8 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
         title="Coupons & Promos"
         marginVertical={0}
         size={mvs(18)}
-        paddingBottom={mvs(10)}
-        paddingTop={mvs(22)}
+        // paddingBottom={mvs(10)}
+        // paddingTop={mvs(22)}
       />
       <View>
         {coupons?.length === 1 && (
@@ -269,7 +269,7 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                       // borderTopRightRadius: mvs(8),
                       borderRadius: mvs(8),
                       // borderWidth: 1,
-                      overflow: 'hidden',
+                      // overflow: 'hidden',
                       // width:
                       //   coupons?.length === 1 ? width - mvs(30) : width - mvs(70),
                       // // height: mvs(270),
@@ -306,7 +306,7 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                       borderBottomRightRadius: mvs(8),
                     }}>
                     <Row justifyContent="space-between">
-                      <View>
+                      <View style={{width:'60%'}}>
                         <ShimmerPlaceholder
                           style={{
                             // height: mvs(24),
@@ -347,6 +347,7 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                             fontSize: mvs(8),
                             color: colors.black,
                             marginLeft: mvs(4),
+                            width: mvs(70),
                           }}
                         />
                       </Pressable>
@@ -364,6 +365,9 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                         size={mvs(14)}
                         color={colors.G5E5E5E}
                         label={ele?.subTitle}
+                        style={{
+                          width: '60%',
+                        }}
                       />
 
                       <Row

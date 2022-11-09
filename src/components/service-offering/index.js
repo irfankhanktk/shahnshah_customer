@@ -47,7 +47,7 @@ const ServiceOffering = ({
 
   return (
     // <View style={{backgroundColor: colors.white}}>
-    <View>
+    <>
       {data?.length === 1 && (
         <View
           style={{
@@ -304,7 +304,7 @@ const ServiceOffering = ({
                 const {discount} = ele;
                 console.log(ele?.discount?.view?.statusLine?.color);
                 return (
-                  <Pressable
+                  <TouchableOpacity
                     // style={globalStyles.boxShadow}
                     style={[
                       globalStyles.boxShadow,
@@ -320,7 +320,7 @@ const ServiceOffering = ({
                         // borderTopLeftRadius:mvs(8),
                         borderRadius: mvs(8),
                         // borderWidth: 1,
-                        overflow: 'hidden',
+                        // overflow: 'hidden',
                       },
                     ]}
                     key={index}
@@ -530,13 +530,13 @@ const ServiceOffering = ({
                         </ShimmerPlaceholder>
                       )}
                     </View>
-                  </Pressable>
+                  </TouchableOpacity>
                 );
               })
               .filter(Boolean)}
         </ScrollView>
       )}
-    </View>
+    </>
     // </View>
   );
 };

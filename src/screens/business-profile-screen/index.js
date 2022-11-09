@@ -833,7 +833,7 @@ const BusinessProfile = props => {
 
           <View
             style={{
-              backgroundColor: colors.FBF8F8,
+              // backgroundColor: colors.FBF8F8,
               flexGrow: 1,
               // borderWidth: 1,
               // paddingBottom: mvs(30),
@@ -843,8 +843,8 @@ const BusinessProfile = props => {
               <HeadingTitle
                 marginVertical={0}
                 size={mvs(18)}
-                paddingBottom={mvs(10)}
-                paddingTop={mvs(22)}
+                // paddingBottom={mvs(10)}
+                // paddingTop={mvs(22)}
                 title="Service offering"
               />
             )}

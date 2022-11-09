@@ -135,7 +135,7 @@ const Bookings = props => {
   }
   const getBookings=async()=>{
     const customerId=await getData("customer_id");
-    console.log(customerId)
+    console.log({customerId})
     const response=await get_bookings(1)
     var booked=[];
     var draft=[];

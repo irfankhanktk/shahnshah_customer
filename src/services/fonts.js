@@ -2,10 +2,10 @@
 * @providesModule Fonts
 */
 const fonts = {
-    light:'SFProDisplay-Light_1',
-    regular:'SFProDisplay-Regular_1',
-    medium:'SFProDisplay-Medium_1',
-    bold:'SFProDisplay-Bold_1',
-    semi_bold:'SFProDisplay-Semibold_3',
+    light: 'Poppins-Light',
+    regular: 'Poppins-Regular',
+    medium: 'Poppins-Medium',
+    semi_bold: 'Poppins-Bold',
+    bold: 'Poppins-Bold',
   };
   export default fonts;
