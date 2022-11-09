@@ -10,7 +10,7 @@ import {ACTIONS} from '../../store/actions';
 import {Splash_Styles as styles} from './splash-styles';
 import Buttons from '../../components/atoms/Button';
 import {Logo} from '../../assets/common-icons';
-import {getData} from '../../localStorage';
+import {getData, storeData} from '../../localStorage';
 
 const Splash = props => {
   const {setUserInfo, navigation} = props;
@@ -24,11 +24,15 @@ const Splash = props => {
 
       setTimeout(() => {
         if (getToken != null) {
+
           navigation.replace('BottomTab');
         } else {
           // setSocket(ioClient);
           // setUserInfo(JSON.parse(user));
-          navigation.replace('Onboarding');
+          //storeData('user', JSON.stringify(result.data));
+          storeData('customer_id', "3333");
+          navigation.replace('BottomTab');
+          //navigation.replace('Onboarding');
         }
       }, 3000);
     })();

@@ -63,11 +63,11 @@ const Otp = ({navigation, route}, props) => {
           code: value,
         })
         console.log('result data=>',result?.data);
-                  storeData('token', result.data.token);
-                  storeData('user', JSON.stringify(result.data));
-                  storeData('customer_id', result.data.id.toString());
-                  dispatch(customerData(result.data));
-                  delayAPI(result.data, result.data.id);
+        storeData('token', result.data.token);
+        storeData('user', JSON.stringify(result.data));
+        storeData('customer_id', result.data.id.toString());
+        dispatch(customerData(result.data));
+        delayAPI(result.data, result.data.id);
   
       } catch (error) {
         console.log('error=>',error);
