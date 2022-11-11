@@ -155,7 +155,7 @@ const WalkIn = (props) => {
  }
   return (
     <SafeAreaView style={styles.conntainer}>
-      <CustomAppHeader  title={"Review & Schedule"} color={colors?.lightgrey2} />
+      <CustomAppHeader style={{paddingTop:mvs(25)}} title={"Review & Schedule"} color={colors?.lightgrey2} />
       <View style={styles.body}>
         <ScrollView contentContainerStyle={{ paddingHorizontal: mvs(20),paddingBottom:mvs(20) }}>
           <BussinessCustomer item={booking}/>

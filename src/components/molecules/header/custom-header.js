@@ -9,11 +9,12 @@ import Row from '../../atoms/row';
 export const CustomAppHeader = ({
   title = 'Home',
   color=colors?.primary,
-  size=18
+  size=18,
+  style,
 }) => {
   const navigation=useNavigation();
   return (
-    <Row alignItems='center' style={styles.CONTAINER}>
+    <Row alignItems='center' style={[styles.CONTAINER,style]}>
              <TouchableOpacity onPress={() => navigation.goBack()}>
               <BlackBack />
              </TouchableOpacity>
@@ -33,6 +34,6 @@ export const CustomAppHeader = ({
 
 const styles = StyleSheet.create({
   CONTAINER: {
-    paddingHorizontal:mvs(10)
+    paddingHorizontal:mvs(10),
   }
 });

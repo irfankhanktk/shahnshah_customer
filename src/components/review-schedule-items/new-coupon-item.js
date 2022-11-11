@@ -24,7 +24,7 @@ const NewCouponItem =
              <ImagePlaceholder containerStyle={styles.image} uri={showCoupon?CouponIcon:NoCouponIcon}/>
              <View style={{ marginLeft: mvs(10), }}>
                 <Medium size={mvs(15)} label={title} color={colors.black}/>
-                <Regular color={colors.lightgrey1} size={mvs(13)} label={subTitle}/>
+                <Regular  color={colors.lightgrey1} size={mvs(13)} label={subTitle}/>
                 {
                   showHighLighted?
                    <Row alignItems='center' style={styles.highlighted}>
@@ -37,7 +37,7 @@ const NewCouponItem =
                    :
                    <Regular 
                     color={showCoupon & !isExpiring?colors.lightgrey1:isExpiring?colors.red:colors.primary} 
-                    size={mvs(13)} label={statusLine} style={{width:mvs(180)}} numberOfLines={2}/>
+                    size={mvs(13)} label={statusLine}  numberOfLines={1}/>
                   }
             </View>
         </Row>

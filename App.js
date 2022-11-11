@@ -61,7 +61,7 @@ const App = () => {
       ? {...DefaultTheme.colors, ...palette.darkTheme}
       : {...DefaultTheme.colors, ...palette.lightTheme};
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{flex:1}}>
       <Provider store={store}>
         <ThemeContext.Provider value={themeContext}>
           <NavigationContainer theme={theme}>

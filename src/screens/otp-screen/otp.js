@@ -48,9 +48,7 @@ const Otp = ({navigation, route}, props) => {
   };
 
   const delayAPI = (user, id) => {
-    setTimeout(() => {
       navigation.navigate(user ? 'BottomTab' : 'About', {id, phone:route.params?.phone});
-    }, 4000);
   };
   const verifyOTP = async () => {
     if (value.length <= 0) {

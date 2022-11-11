@@ -42,9 +42,7 @@ const Signin = props => {
     setPhoneSignUp(true);
   };
   const delayAPI = phone => {
-    setTimeout(() => {
       navigation.navigate('Otp', {phone});
-    }, 4000);
   };
   const getMobile = async () => {
     if (formattedValue.length <= 0) {

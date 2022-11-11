@@ -95,12 +95,10 @@ const ServiceOfferingDetails = props => {
     });
   };
   const delayAPI = (responseID, businessID) => {
-    setTimeout(() => {
       navigation.navigate('WalkIn', {
         bookingID: responseID,
         businessID: businessID,
       });
-    }, 4000);
   };
   const BookNow = async () => {
     setpayload({...payload, bookNowStart: true});
