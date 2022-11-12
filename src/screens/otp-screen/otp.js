@@ -49,6 +49,14 @@ const Otp = ({navigation, route}, props) => {
 
   const delayAPI = (user, id) => {
       navigation.navigate(user ? 'BottomTab' : 'About', {id, phone:route.params?.phone});
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: user ? 'BottomTab' : 'About',params:{id, phone:route.params?.phone} },
+          ],
+        })
+      );
   };
   const verifyOTP = async () => {
     if (value.length <= 0) {

@@ -21,7 +21,7 @@ const Splash = props => {
       const getToken = await getData('token');
       // const token = await AsyncStorage.getItem('token');
       // const user = await AsyncStorage.getItem('@user');
-
+      console.log('getToken=>>>>',getToken);
       setTimeout(() => {
         if (getToken != null) {
 
@@ -31,8 +31,8 @@ const Splash = props => {
           // setUserInfo(JSON.parse(user));
           //storeData('user', JSON.stringify(result.data));
           storeData('customer_id', "3333");
-          navigation.replace('BottomTab');
-          //navigation.replace('Onboarding');
+          // navigation.replace('Signin');
+          navigation.replace('Onboarding');
         }
       }, 3000);
     })();

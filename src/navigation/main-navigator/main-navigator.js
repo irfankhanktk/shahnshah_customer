@@ -1,8 +1,8 @@
 // In App.js in a new project
 
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import * as React from 'react';
-import { SafeAreaView, StatusBar, View } from 'react-native';
+import {SafeAreaView, StatusBar, View} from 'react-native';
 import BusinessProfile from '../../screens/business-profile-screen';
 import Otp from '../../screens/otp-screen/otp';
 import Splash from '../../screens/splash-screen/splash';
@@ -24,7 +24,7 @@ const Stack = createStackNavigator();
 const horizontalAnimation = {
   headerShown: false,
   gestureDirection: 'horizontal',
-  cardStyleInterpolator: ({ current, layouts }) => {
+  cardStyleInterpolator: ({current, layouts}) => {
     return {
       cardStyle: {
         transform: [
@@ -41,9 +41,11 @@ const horizontalAnimation = {
 };
 export const MainNavigator = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle={'dark-content'} backgroundColor={colors.white} />
-      <Stack.Navigator initialRouteName='SaleCoupon' screenOptions={horizontalAnimation}>
+      <Stack.Navigator
+        initialRouteName="Splash"
+        screenOptions={horizontalAnimation}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Onboarding" component={Onboarding} />
         <Stack.Screen name="Otp" component={Otp} />
@@ -51,7 +53,10 @@ export const MainNavigator = () => {
         <Stack.Screen name="BottomTab" component={TabNavigator} />
         <Stack.Screen name="BusinessProfile" component={BusinessProfile} />
         <Stack.Screen name="ServiceDetails" component={ServiceDetails} />
-        <Stack.Screen name="ServiceOfferingDetails" component={ServiceOfferingDetails} />
+        <Stack.Screen
+          name="ServiceOfferingDetails"
+          component={ServiceOfferingDetails}
+        />
         <Stack.Screen name="CouponDetails" component={CouponDetails} />
         <Stack.Screen name="About" component={About} />
         <Stack.Screen name="MyVehicle" component={MyVehicle} />

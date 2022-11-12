@@ -189,6 +189,7 @@ const BusinessProfile = props => {
         })
       .then(result => {
         console.log('result=>>> business profile',result);
+        console.log('result.rating',result.rating);
         if (result != null) {
           setbusinessProfile(result);
           dispatch(addReviews(result));
@@ -950,8 +951,7 @@ const BusinessProfile = props => {
                       <View
                         style={{
                           ...styles.ratingPercentage,
-
-                          width: mvs(ratingg[0] ? (ratingg[0] / 5) * 100 : 0),
+                          width: `${ratingg[0] ? (ratingg[0] / 5) * 100 : 0}%`,
                         }}
                       />
                     </View>
@@ -959,7 +959,7 @@ const BusinessProfile = props => {
                       <View
                         style={{
                           ...styles.ratingPercentage,
-                          width: mvs(ratingg[1] ? (ratingg[1] / 5) * 100 : 0),
+                          width:`${ratingg[1] ? (ratingg[1] / 5) * 100 : 0}%`,
                         }}
                       />
                     </View>
@@ -967,7 +967,7 @@ const BusinessProfile = props => {
                       <View
                         style={{
                           ...styles.ratingPercentage,
-                          width: mvs(ratingg[2] ? (ratingg[2] / 5) * 100 : 0),
+                          width: `${ratingg[2] ? (ratingg[2] / 5) * 100 : 0}%`,
                         }}
                       />
                     </View>
@@ -975,7 +975,7 @@ const BusinessProfile = props => {
                       <View
                         style={{
                           ...styles.ratingPercentage,
-                          width: mvs(ratingg[3] ? (ratingg[3] / 5) * 100 : 0),
+                          width: `${ratingg[3] ? (ratingg[3] / 5) * 100 : 0}%`,
                         }}
                       />
                     </View>
@@ -983,7 +983,7 @@ const BusinessProfile = props => {
                       <View
                         style={{
                           ...styles.ratingPercentage,
-                          width: mvs(ratingg[4] ? (ratingg[4] / 5) * 100 : 0),
+                          width:`${ratingg[4] ? (ratingg[4] / 5) * 100 : 0}%`,
                         }}
                       />
                     </View>
