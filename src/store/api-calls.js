@@ -111,7 +111,10 @@ const get_bussiness_coupons = bussinessId => {
   return async (dispatch, getState) => {
     try {
       // console.log(URLS.coupon.get_coupon_details + bussinessId + '/coupons');
-      console.log('URLS.coupon.get_coupon_details + bussinessId',URLS.coupon.get_coupon_details + bussinessId + '/coupons');
+      console.log(
+        'URLS.coupon.get_coupon_details + bussinessId',
+        URLS.coupon.get_coupon_details + bussinessId + '/coupons',
+      );
       const response = await API_REQUESTS.getData(
         URLS.coupon.get_coupon_details +
           bussinessId +
@@ -271,170 +274,216 @@ const complete_coupon_purchase = (id, couponId) => {
     }
   };
 };
-const get_booking = (bookingId,businessId) => {
+const get_booking = (bookingId, businessId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.getData(
-        `${URLS.booking.get_booking}${businessId}/bookings/${bookingId}/byBusiness`
+        `${URLS.booking.get_booking}${businessId}/bookings/${bookingId}/byBusiness`,
       );
-     return response;
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const get_available_slots = (bookingId,date) => {
-  const payLoad={date:date}
+const get_available_slots = (bookingId, date) => {
+  const payLoad = {date: date};
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.postData(
         `${URLS.booking.get_available_slots}${bookingId}/slots`,
-         payLoad
+        payLoad,
       );
-     return response;
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const get_booking_coupons = (bookingId,customerId) => {
- 
+const get_booking_coupons = (bookingId, customerId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.getData(
-        `${URLS.booking.get_available_coupons}${customerId}/bookings/${bookingId}/coupons`);
-     return response;
+        `${URLS.booking.get_available_coupons}${customerId}/bookings/${bookingId}/coupons`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const checkin = (businessId,bookingId) => {
+const checkin = (businessId, bookingId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putDataWithoutBody(
-        `${URLS.lifecycle.checkin}${businessId}/bookings/${bookingId}/checkin`);
-     return response;
+        `${URLS.lifecycle.checkin}${businessId}/bookings/${bookingId}/checkin`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const no_show = (businessId,bookingId) => {
+const no_show = (businessId, bookingId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putDataWithoutBody(
-        `${URLS.lifecycle.no_show}${businessId}/bookings/${bookingId}/noshow`);
-     return response;
+        `${URLS.lifecycle.no_show}${businessId}/bookings/${bookingId}/noshow`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const complete_job = (businessId,bookingId) => {
+const complete_job = (businessId, bookingId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putDataWithoutBody(
-        `${URLS.lifecycle.complete_job}${businessId}/bookings/${bookingId}/completeJob`);
-     return response;
+        `${URLS.lifecycle.complete_job}${businessId}/bookings/${bookingId}/completeJob`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const start = (businessId,bookingId) => {
+const start = (businessId, bookingId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putDataWithoutBody(
-        `${URLS.lifecycle.start}${businessId}/bookings/${bookingId}/start`);
-     return response;
+        `${URLS.lifecycle.start}${businessId}/bookings/${bookingId}/start`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const get_workers = (businessId,bookingId) => {
+const get_workers = (businessId, bookingId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.getData(
-        `${URLS.lifecycle.get_workers}${businessId}/bookings/${bookingId}/workers`);
-     return response;
+        `${URLS.lifecycle.get_workers}${businessId}/bookings/${bookingId}/workers`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const assign_worker = (businessId,bookingId,workerId) => {
+const assign_worker = (businessId, bookingId, workerId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putDataWithoutBody(
-        `${URLS.lifecycle.assign_worker}${businessId}/bookings/${bookingId}/worker/${workerId}`);
-     return response;
+        `${URLS.lifecycle.assign_worker}${businessId}/bookings/${bookingId}/worker/${workerId}`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const update_booking_payment = (bookingId,paymentMethod,reference) => {
-  var paymentData={
-    "method": paymentMethod,
-    "reference": reference
-  }
+const update_booking_payment = (bookingId, paymentMethod, reference) => {
+  var paymentData = {
+    method: paymentMethod,
+    reference: reference,
+  };
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putData(
         `${URLS.booking.update_payment}${bookingId}/payment`,
-        paymentData
+        paymentData,
       );
-     return response;
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const update_slot = (bookingId,slotId) => {
-  var slotData={"slotId": slotId}
+const update_slot = (bookingId, slotId) => {
+  var slotData = {slotId: slotId};
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putData(
         `${URLS.booking.update_slot}${bookingId}/slot`,
-         slotData
+        slotData,
       );
-     return response;
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const remove_slot = (bookingId) => {
+const remove_slot = bookingId => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.deleteData(
-        `${URLS.booking.remove_slot}${bookingId}/slot`);
-     return response;
+        `${URLS.booking.remove_slot}${bookingId}/slot`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const apply_coupon = (bookingId,couponId,customerId) => {
- 
+const apply_coupon = (bookingId, couponId, customerId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putDataWithoutBody(
-        `${URLS.booking.apply_coupon}${customerId}/bookings/${bookingId}/coupon/${couponId}`);
-     return response;
+        `${URLS.booking.apply_coupon}${customerId}/bookings/${bookingId}/coupon/${couponId}`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
   };
 };
-const remove_discount = (bookingId,businessId) => {
+const remove_discount = (bookingId, businessId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.deleteData(
-        `${URLS.booking.remove_discount}${businessId}/bookings/${bookingId}/discount`);
-     return response;
+        `${URLS.booking.remove_discount}${businessId}/bookings/${bookingId}/discount`,
+      );
+      return response;
+    } catch (error) {
+      console.log(error?.response?.data);
+    }
+  };
+};
+const get_coupon_sale = (couponId, businessId, customerId) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await API_REQUESTS.getData(
+        `${URLS.coupon.get_coupon_sale}${businessId}/coupons/${couponId}?customerId=${customerId}`,
+      );
+      return response;
+    } catch (error) {
+      console.log(error?.response?.data);
+    }
+  };
+};
+const update_payment_coupon = (couponId, customerId, method) => {
+  var payLoad = {method: method, reference: '123'};
+  return async (dispatch, getState) => {
+    try {
+      const response = await API_REQUESTS.putData(
+        `${URLS.coupon.update_coupon_payment}${customerId}/coupons/${couponId}/payment`,
+        payLoad,
+      );
+      return response;
+    } catch (error) {
+      console.log(error?.response?.data);
+    }
+  };
+};
+const complete_purchase_coupon = (couponId, customerId) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await API_REQUESTS.putDataWithoutBody(
+        `${URLS.coupon.update_coupon_payment}${customerId}/coupons/${couponId}/complete`,
+      );
+      return response;
     } catch (error) {
       console.log(error?.response?.data);
     }
@@ -474,6 +523,10 @@ const DIVIY_API = {
   get_available_booking_coupons,
   get_bussiness_coupons,
   get_coupon_sale_details,
+  //Coupon Sale Api's
+  get_coupon_sale,
+  update_payment_coupon,
+  complete_purchase_coupon,
 };
 
 export default DIVIY_API;
