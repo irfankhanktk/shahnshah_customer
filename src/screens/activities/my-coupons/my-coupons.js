@@ -17,73 +17,63 @@ const MyCoupons = props => {
   
   const {navigation,get_coupons} = props;
   const [actives, setActivesCoupon] = useState([
-    {
-      bussinessName: 'Total Al Safeer Car Wash…',
-      address: 'Sharjah Al nahada road',
-      image: '../../assets/images/carwash.png',
-      subImage: '../../assets/images/carwash.png',
-      discount: '40',
-      aed: '20.00',
-      progress: 0.4,
-      price: 84.5,
-      expireTime: 'May 09 2021',
-    },
-    {
-      bussinessName: 'Total Al Safeer Car Wash…',
-      address: 'Sharjah Al nahada road',
-      image: '../../assets/images/carwash.png',
-      subImage: '../../assets/images/carwash.png',
-      discount: '40',
-      aed: '20.00',
-      progress: 0.7,
-      price: 84.5,
-      expireTime: 'May 09 2021',
-    },
+    // {
+    //   bussinessName: 'Total Al Safeer Car Wash…',
+    //   address: 'Sharjah Al nahada road',
+    //   image: '../../assets/images/carwash.png',
+    //   subImage: '../../assets/images/carwash.png',
+    //   discount: '40',
+    //   aed: '20.00',
+    //   progress: 0.4,
+    //   price: 84.5,
+    //   expireTime: 'May 09 2021',
+    // },
+    // {
+    //   bussinessName: 'Total Al Safeer Car Wash…',
+    //   address: 'Sharjah Al nahada road',
+    //   image: '../../assets/images/carwash.png',
+    //   subImage: '../../assets/images/carwash.png',
+    //   discount: '40',
+    //   aed: '20.00',
+    //   progress: 0.7,
+    //   price: 84.5,
+    //   expireTime: 'May 09 2021',
+    // },
   ]);
   const [expires, setExpiresCoupons] = useState([
-    {
-      bussinessName: 'Total Al Safeer Car Wash…',
-      address: 'Sharjah Al nahada road',
-      image: '../../assets/images/carwash.png',
-      subImage: '../../assets/images/carwash.png',
-      discount: '40',
-      aed: '20.00',
-      progress: 1,
-      price: 84.5,
-      expireTime: 'May 09 2021',
-    },
-    {
-      bussinessName: 'Total Al Safeer Car Wash…',
-      address: 'Sharjah Al nahada road',
-      image: '../../assets/images/carwash.png',
-      subImage: '../../assets/images/carwash.png',
-      discount: '40',
-      aed: '20.00',
-      progress: 1,
-      price: 84.5,
-      expireTime: 'May 09 2021',
-    },
+    // {
+    //   bussinessName: 'Total Al Safeer Car Wash…',
+    //   address: 'Sharjah Al nahada road',
+    //   image: '../../assets/images/carwash.png',
+    //   subImage: '../../assets/images/carwash.png',
+    //   discount: '40',
+    //   aed: '20.00',
+    //   progress: 1,
+    //   price: 84.5,
+    //   expireTime: 'May 09 2021',
+    // },
+    // {
+    //   bussinessName: 'Total Al Safeer Car Wash…',
+    //   address: 'Sharjah Al nahada road',
+    //   image: '../../assets/images/carwash.png',
+    //   subImage: '../../assets/images/carwash.png',
+    //   discount: '40',
+    //   aed: '20.00',
+    //   progress: 1,
+    //   price: 84.5,
+    //   expireTime: 'May 09 2021',
+    // },
   ]);
   useEffect(()=>{
      getCouponsHistory();
   },[])
   const getCouponsHistory=async()=>{
     const customerId=await getData("customer_id");
-    const response=await get_coupons(1)
-    console.log(response?.data)
-    var booked=[];
-    var draft=[];
-    for(var i=0;i<response?.data.length;i++){
-       if(response?.data[i]?.status=="Draft"){
-        draft.push(response?.data[i])
-       }else{
-        booked.push(response?.data[i])
-       }
-    }
-    console.log("Length of  Draft  ",draft.length)
-    console.log("Bought of  Draft  ",booked.length)
-    setActivesCoupon(booked)
-    setExpiresCoupons(draft)
+    const response=await get_coupons(3333)
+    console.log('response?.data of mycoupons=>',response?.data)
+    setActivesCoupon(response?.data?.active);
+    setExpiresCoupons(response?.data?.expired);
+    //response?.data?.draft 
   }
   return (
     <SafeAreaView style={styles.container}>

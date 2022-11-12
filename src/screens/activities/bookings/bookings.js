@@ -136,25 +136,14 @@ const Bookings = props => {
   const getBookings=async()=>{
     const customerId=await getData("customer_id");
     console.log({customerId})
-    const response=await get_bookings(1)
-    var booked=[];
-    var draft=[];
-    var complet=[];
-    for(var i=0;i<response?.data.length;i++){
-       if(response?.data[i]?.status=="Draft"){
-        draft.push(response?.data[i])
-       }else if(response?.data[i]?.status=="Booked"){
-        booked.push(response?.data[i])
-       }else{
-        complet.push(response?.data[i])
-       }
-    }
-    console.log("Length of  Draft  ",draft.length)
-    console.log("complet of  Draft  ",complet.length)
-    console.log("booked of  Draft  ",booked.length)
-    setCancelledData(draft)
-    setCompletedData(complet)
-    setScheduleData(booked)
+    const response=await get_bookings(3333);
+    console.log('response=>> of bookings',response?.data);
+    setCancelledData(cancelled)
+    setCompletedData(response?.data?.completed)
+    setScheduleData(response?.data?.scheduled)
+    //response?.data?.draft
+    //response?.data?.history
+    //response?.data?.cancelled
   }
   const submitReview=async()=>{
     const customerId=await getData("customer_id");

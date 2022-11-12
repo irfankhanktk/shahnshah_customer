@@ -56,8 +56,9 @@ const History = props => {
  const getBookings=async()=>{
   const customerId=await getData("customer_id");
   console.log(customerId)
-  const response=await get_bookings(1)
-  setHistoryData(response?.data)
+  const response=await get_bookings(3333);
+  console.log('response of history=>',response?.data?.history);
+  setHistoryData(response?.data?.history)
 }
   return (
     <SafeAreaView style={styles.container}>
@@ -70,11 +71,11 @@ const History = props => {
             data={history}
             renderItem={({item}) => (
               <ActivityItem
-                address={item?.business?.street+","+item?.business?.area+","+item?.business?.city}
+                address={item?.business?.view?.address||''}
                 bussinessName={item?.business?.title}
                 bookingTime={item?.slot?.date+" "+item?.slot?.from[0]+":"+item?.slot?.from[1]+"-"+item?.slot?.to[0]+":"+item?.slot?.to[1]}
                 details={item?.offering?.title}
-                status="complete"
+                status={item?.view?.status}
                 subDetails={item?.offering?.subTitle}
                 onPress={() => {}}
                 progress={0.3}
@@ -105,6 +106,7 @@ const mapStateToProps = store => ({
   // user_info: store.state.user_info,
  });
  const mapDispatchToProps = {
-   get_bookings:(id)=>DIVIY_API.get_customer_bookings_history(id)
+  //  get_bookings:(id)=>DIVIY_API.get_customer_bookings_history(id)
+   get_bookings:(id)=>DIVIY_API.get_customer_bookings(id)
  };
  export default connect(mapStateToProps, mapDispatchToProps)(History);

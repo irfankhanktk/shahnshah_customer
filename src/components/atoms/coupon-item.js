@@ -48,9 +48,9 @@ const CouponItem = ({onPress,image=require('../../assets/images/carwash.png'),su
              <View style={{alignItems:'flex-end'}}>
                  {
                   status!='active'?
-                     <TouchableOpacity style={{...styles.BUTTON,backgroundColor:colors.gray}} onPress={onPress}>
+                     <View style={{...styles.BUTTON,backgroundColor:colors.gray}}>
                      <Regular label={'Expired'} style={{...styles.BUTTONTEXT,color:colors.lightgrey1}}/>
-                    </TouchableOpacity>
+                    </View>
                      :
                       <TouchableOpacity style={{...styles.BUTTON}} onPress={onPress}>
                         <Regular label={'View'} style={{...styles.BUTTONTEXT}}/>
