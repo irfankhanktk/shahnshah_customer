@@ -8,6 +8,7 @@ import { mvs } from '../../../services/metrices';
 import { Home_Styles as styles } from './home-styles';
 
 const Home = props => {
+  const { businessId } = props?.route?.params;
   const [payLoad, setpayLoad] = useState({
     laoding: true,
     data: [],
@@ -21,15 +22,15 @@ const Home = props => {
 
     await fetch(`${BaseURL}auth/all_business`, requestOptions)
       .then(response => {
-        if(!response.ok)
-        throw response;
+        if (!response.ok)
+          throw response;
         return response.json();
       })
       .then(result => {
-        
+
         if (result != null) {
           console.log('vendor data=====', result);
-          setpayLoad({...payLoad, data: result.data.result[0], laoding: false});
+          setpayLoad({ ...payLoad, data: result.data.result[0], laoding: false });
         }
       })
       .catch(error => {
@@ -42,7 +43,7 @@ const Home = props => {
   }, [payLoad.laoding]);
 
   return (
-    <View style={{...styles.conntainer}}>
+    <View style={{ ...styles.conntainer }}>
       <ScrollView contentContainerStyle={styles.body}>
         {/* {payLoad?.data &&
           payLoad?.data?.map((item, index) => (
@@ -55,12 +56,12 @@ const Home = props => {
               />
             </View>
           ))} */}
-            <Buttons.ButtonPrimary    
-                onClick={() =>
-                  props?.navigation?.navigate('BusinessProfile', {id: 3333})
-                }
-                title={'Business Name'}
-              />
+        <Buttons.ButtonPrimary
+          onClick={() =>
+            props?.navigation?.navigate('BusinessProfile', { id: businessId })
+          }
+          title={'Business Name'}
+        />
       </ScrollView>
     </View>
   );

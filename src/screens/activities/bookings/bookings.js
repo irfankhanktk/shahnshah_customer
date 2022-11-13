@@ -41,7 +41,7 @@ const Bookings = props => {
   }, [])
   const onLikePress = async (bookingId) => {
     try {
-      const customerId = 3333//await getData("customer_id");
+      const customerId = await getData("customer_id");
       const response = await rate_booking(customerId, bookingId)
       console.log("review response =>", response?.data)
       // if(response?.data){
@@ -49,7 +49,7 @@ const Bookings = props => {
       //   console.log("Review Rate Response ",reviewRateReponse?.data);
       // }
       setReviewModal(true);
-      // setBookingId(id)
+      setBookingId(bookingId)
     } catch (error) {
       console.log('SERVICES._returnError(error)=>', SERVICES._returnError(error));
       // showToast('error', SERVICES._returnError(error));
@@ -58,8 +58,7 @@ const Bookings = props => {
   }
   const getBookings = async () => {
     const customerId = await getData("customer_id");
-    console.log({ customerId })
-    const response = await get_bookings(3333);
+    const response = await get_bookings(customerId);
     console.log('response=>> of bookings', response?.data);
     // setCancelledData(response?.data?.cancelled)
     // setCompletedData(response?.data?.completed)

@@ -36,8 +36,7 @@ const History = props => {
 
   const getBookings = async () => {
     const customerId = await getData("customer_id");
-    console.log(customerId)
-    const response = await get_bookings(3333);
+    const response = await get_bookings(customerId);
     console.log('response of history=>', response?.data?.history);
     // setHistoryData(response?.data?.history)
     // setCancelledData(response?.data?.cancelled)
@@ -47,7 +46,7 @@ const History = props => {
 
   const onLikePress = async (bookingId) => {
     try {
-      const customerId = 3333//await getData("customer_id");
+      const customerId = await getData("customer_id");
       const response = await rate_booking(customerId, bookingId)
       console.log("review response =>", response?.data)
       // if(response?.data){

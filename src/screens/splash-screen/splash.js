@@ -1,36 +1,38 @@
 // import AsyncStorage from '@react-native-community/async-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import {Image, View} from 'react-native';
-import {connect} from 'react-redux';
-import {splash} from '../../assets';
-import {mvs} from '../../services/metrices';
-import {ACTIONS} from '../../store/actions';
-import {Splash_Styles as styles} from './splash-styles';
+import { Image, View } from 'react-native';
+import { connect } from 'react-redux';
+import { splash } from '../../assets';
+import { mvs } from '../../services/metrices';
+import { ACTIONS } from '../../store/actions';
+import { Splash_Styles as styles } from './splash-styles';
 import Buttons from '../../components/atoms/Button';
-import {Logo} from '../../assets/common-icons';
-import {getData, storeData} from '../../localStorage';
+import { Logo } from '../../assets/common-icons';
+import { getData, storeData } from '../../localStorage';
 
 const Splash = props => {
-  const {setUserInfo, navigation} = props;
-  const {colors} = useTheme();
+  const { setUserInfo, navigation } = props;
+  const { colors } = useTheme();
 
   React.useEffect(() => {
     (async () => {
       const getToken = await getData('token');
+      const customerId = await getData('customer_id');
+      // const token = await AsyncStorage.getItem('token');
       // const token = await AsyncStorage.getItem('token');
       // const user = await AsyncStorage.getItem('@user');
-      console.log('getToken=>>>>',getToken);
+      console.log('getToken=>>>>', getToken);
       setTimeout(() => {
         if (getToken != null) {
 
-          navigation.replace('BottomTab');
+          navigation.replace('BottomTab', { id: customerId });
         } else {
           // setSocket(ioClient);
           // setUserInfo(JSON.parse(user));
           //storeData('user', JSON.stringify(result.data));
-          storeData('customer_id', "3333");
+          // storeData('customer_id', "3333");
           // navigation.replace('Signin');
           navigation.replace('Onboarding');
         }
@@ -39,7 +41,7 @@ const Splash = props => {
   }, []);
 
   return (
-    <View style={{...styles.container, backgroundColor: colors.background}}>
+    <View style={{ ...styles.container, backgroundColor: colors.background }}>
       <Logo />
     </View>
   );

@@ -27,7 +27,7 @@ const MyCoupons = props => {
   }, [])
   const getCouponsHistory = async () => {
     const customerId = await getData("customer_id");
-    const response = await get_coupons(3333)
+    const response = await get_coupons(customerId)
     console.log('response?.data of mycoupons=>', response?.data)
     // setActivesCoupon(response?.data?.active);
     // setExpiresCoupons(response?.data?.expired);

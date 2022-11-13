@@ -12,28 +12,30 @@ import TopTabNavigator from '../tab-navigator/top-tab-navigator';
 import Home from './../../screens/tab-screens/home-tab/home-tab';
 const BottomTab = createBottomTabNavigator();
 
-const TabNavigator = () => {
-  
+const TabNavigator = (props) => {
+  const { id } = props?.route?.params;
   return (
-    <View style={{flex: 1, backgroundColor: colors.white}}>
+    <View style={{ flex: 1, backgroundColor: colors.white }}>
       <BottomTab.Navigator
         // options={{tabBarHideOnKeyboard:true}}
         screenOptions={{
           headerShown: false,
-          tabBarHideOnKeyboard: true}}
+          tabBarHideOnKeyboard: true
+        }}
         tabBar={props => <BottomMenu {...props} colors={colors} />}>
         <BottomTab.Screen
           name="Home"
+          initialParams={{ businessId: id }}
           component={Home}
           options={{
             title: 'Home',
             tabBarIcon: focused => (
-              <Row style={{...styles.tabOption,backgroundColor:focused==true?colors.lightYellow:colors.white}}>
-                  <TabHomeIcon/>
-                  {focused==true?<Regular label={"Home"} style={styles.lableStyle}/>:null}
-                 
+              <Row style={{ ...styles.tabOption, backgroundColor: focused == true ? colors.lightYellow : colors.white }}>
+                <TabHomeIcon />
+                {focused == true ? <Regular label={"Home"} style={styles.lableStyle} /> : null}
+
               </Row>
-              
+
               // <BottomMenuIcon name="home" focused={focused} />
             ),
           }}
@@ -57,14 +59,14 @@ const TabNavigator = () => {
           options={{
             title: 'Activity',
             tabBarIcon: focused => (
-              <Row style={{...styles.tabOption,backgroundColor:focused==true?colors.lightYellow:colors.white}}>
-                  <TabActivityIcon/>
-                  {focused==true?<Regular label={"Activity"} style={styles.lableStyle}/>:null}
+              <Row style={{ ...styles.tabOption, backgroundColor: focused == true ? colors.lightYellow : colors.white }}>
+                <TabActivityIcon />
+                {focused == true ? <Regular label={"Activity"} style={styles.lableStyle} /> : null}
               </Row>
             ),
           }}
         />
-        
+
 
         <BottomTab.Screen
           name="Profile"
@@ -72,15 +74,15 @@ const TabNavigator = () => {
           options={{
             title: '',
             tabBarIcon: focused => (
-              <Row style={{...styles.tabOption,backgroundColor:focused==true?colors.lightYellow:colors.white}}>
-              <TabProfileIcon/>
-              {focused==true?<Regular label={"Profile"} style={styles.lableStyle}/>:null}
-             </Row>
+              <Row style={{ ...styles.tabOption, backgroundColor: focused == true ? colors.lightYellow : colors.white }}>
+                <TabProfileIcon />
+                {focused == true ? <Regular label={"Profile"} style={styles.lableStyle} /> : null}
+              </Row>
             ),
           }}
         />
       </BottomTab.Navigator>
-    
+
     </View>
   );
 };
@@ -88,14 +90,14 @@ const styles = StyleSheet.create({
   tabOption: {
     justifyContent: 'space-between',
     alignItems: 'center',
-    width:mvs(88),
-    borderRadius:6,
-    height:mvs(32),
-    paddingHorizontal:mvs(9)
+    width: mvs(88),
+    borderRadius: 6,
+    height: mvs(32),
+    paddingHorizontal: mvs(9)
   },
-  lableStyle:{
-    color:colors.primary,
-    fontSize:14
+  lableStyle: {
+    color: colors.primary,
+    fontSize: 14
   }
 });
 export default TabNavigator;

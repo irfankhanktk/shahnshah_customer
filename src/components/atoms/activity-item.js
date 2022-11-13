@@ -90,6 +90,7 @@ const ActivityItem = ({
                         borderColor={colors.gray}
                         progress={Math.fround(progress / 100)}
                         showsText
+                        animated={false}
                         textStyle={styles.PROGRESSTEXT} />
                       : null
             //  status == "Completed" ?
