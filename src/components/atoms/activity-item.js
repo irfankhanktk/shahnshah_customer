@@ -11,10 +11,23 @@ import Medium from '../../presentation/typography/medium-text';
 import * as Progress from 'react-native-progress';
 const ActivityItem = ({
   onPress,
-  image = require('../../assets/images/carwash.png'), subImage = require('../../assets/images/carwash.png'),
-  price = '0.0', rating = 0, progress = 0.5, bussinessName = 'Total Al Safeer Car Wash…', address = 'Sharjah Al nahada road',
-  bookingTime = '12 February 2021-9:30 AM-10:00 AM', details = 'Lorem ipsum dolor Lorem ipsum dolor sit amet...',
-  subDetails = 'Lorem ipsum dolor sit amet...', isLiked = false, status = 'cancel', tab = "schedule", onLikePress }) => {
+  image = require('../../assets/images/carwash.png'),
+  subImage = require('../../assets/images/carwash.png'),
+  price = '0.0',
+  rating,
+  progress,
+  bussinessName = 'Total Al Safeer Car Wash…',
+  address = 'Sharjah Al nahada road',
+  bookingTime = '12 February 2021-9:30 AM-10:00 AM',
+  details = 'Lorem ipsum dolor Lorem ipsum dolor sit amet...',
+  subDetails = 'Lorem ipsum dolor sit amet...',
+  isLiked = false,
+  status = 'cancel',
+  section = "schedule",
+  onLikePress,
+  onResumePress,
+}) => {
+  console.log('progress=>>>', progress);
   return (
 
     <View style={styles.CONTAINER}>
@@ -25,12 +38,12 @@ const ActivityItem = ({
           <Regular label={subDetails} style={{ fontSize: 12 }} />
           <Regular label={bookingTime} style={{ fontSize: 10, color: colors.primary }} />
         </View>
-        <View style={{ alignItems: 'center' }}>
+        {/* <View style={{ alignItems: 'center' }}>
           {status == 'schedule' || status == "Completed" ?
             tab == "history" ?
               <Row style={styles.RATING}>
                 <SVG.Star />
-                <Bold label={rating} />
+                <Bold label={rating||'0'} />
               </Row>
               :
               <Progress.Circle size={36} color={status == "Completed" ? colors.green : colors.primary} borderColor={colors.gray}
@@ -38,7 +51,7 @@ const ActivityItem = ({
 
             : null}
           <Bold label={"$" + price} style={{ marginTop: mvs(14) }} />
-        </View>
+        </View> */}
       </Row>
       <Row style={{ ...styles.UPPERROW, ...styles.BOTTOMROW }}>
         <ImagePlaceholder containerStyle={styles.SUBIMAGE} uri={subImage} />
@@ -48,29 +61,52 @@ const ActivityItem = ({
 
         </View>
         <View style={{ alignItems: 'flex-end' }}>
-          {
-            status == 'schedule' ?
-              <Row alignItems='center'>
-                <TouchableOpacity style={{ ...styles.BUTTON, backgroundColor: colors.lightPink }} onPress={onPress}>
-                  <Regular label={'Cancel'} style={{ ...styles.BUTTONTEXT, color: colors.red }} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.BUTTON, marginLeft: mvs(4) }} onPress={onLikePress}>
-                  {isLiked == false ? <SVG.Like style={{ marginRight: mvs(5) }} /> : <SVG.Liked style={{ marginRight: mvs(5) }} />}
-                  <Regular label={'Like'} style={{ ...styles.BUTTONTEXT }} />
-                </TouchableOpacity>
-              </Row>
-
-              : status == "Completed" ?
-                <TouchableOpacity style={{ ...styles.BUTTON }} onPress={onPress}>
-                  {isLiked == false ? <SVG.Like style={{ marginRight: mvs(5) }} /> : <SVG.Liked style={{ marginRight: mvs(5) }} />}
-                  <Regular label={isLiked == false ? 'Like' : 'Liked'} style={{ ...styles.BUTTONTEXT }} />
-                </TouchableOpacity>
-                : status == "cancel" ?
-                  <TouchableOpacity style={{ ...styles.BUTTON, backgroundColor: colors.gray }} onPress={onPress}>
-                    <Regular label={'Cancelled'} style={{ ...styles.BUTTONTEXT, color: colors.lightgrey1 }} />
+          {section == "draft" ?
+            <TouchableOpacity style={{ ...styles.BUTTON, backgroundColor: colors.gray }} onPress={onResumePress}>
+              <Regular label={'Resume'} style={{ ...styles.BUTTONTEXT, color: colors.lightgrey1 }} />
+            </TouchableOpacity> :
+            status == "No Show" ?
+              <View style={{ ...styles.BUTTON, backgroundColor: colors.gray }} onPress={onPress}>
+                <Regular label={'No Show'} style={{ ...styles.BUTTONTEXT, color: colors.lightgrey1 }} />
+              </View> :
+              status == "Booked" ?
+                <View style={{ ...styles.BUTTON, backgroundColor: colors.gray }} onPress={onPress}>
+                  <Regular label={'Make Payment'} style={{ ...styles.BUTTONTEXT, color: colors.lightgrey1 }} />
+                </View> :
+                section === 'schedule' && status === 'Completed' && !rating ?
+                  <TouchableOpacity style={{ ...styles.BUTTON, marginLeft: mvs(4) }} onPress={onLikePress}>
+                    {isLiked == false ? <SVG.Like style={{ marginRight: mvs(5) }} /> : <SVG.Liked style={{ marginRight: mvs(5) }} />}
+                    <Regular label={'Like'} style={{ ...styles.BUTTONTEXT }} />
                   </TouchableOpacity>
-                  : null
+
+
+                  : rating ?
+                    <Row style={styles.RATING}>
+                      <SVG.Star />
+                      <Bold label={rating || '0'} />
+                    </Row> : progress ?
+                      <Progress.Circle size={36}
+                        color={status == "Completed" ? colors.green : colors.primary}
+                        borderColor={colors.gray}
+                        progress={Math.fround(progress / 100)}
+                        showsText
+                        textStyle={styles.PROGRESSTEXT} />
+                      : null
+            //  status == "Completed" ?
+            //   <TouchableOpacity style={{ ...styles.BUTTON }} onPress={onPress}>
+            //     {isLiked == false ? <SVG.Like style={{ marginRight: mvs(5) }} /> : <SVG.Liked style={{ marginRight: mvs(5) }} />}
+            //     <Regular label={isLiked == false ? 'Like' : 'Liked'} style={{ ...styles.BUTTONTEXT }} />
+            //   </TouchableOpacity>
+            // : status == "cancel" ?
+            //   <TouchableOpacity style={{ ...styles.BUTTON, backgroundColor: colors.gray }} onPress={onPress}>
+            //     <Regular label={'Cancelled'} style={{ ...styles.BUTTONTEXT, color: colors.lightgrey1 }} />
+            //   </TouchableOpacity>
+            // : null
           }
+
+
+
+          {/* <Bold label={"$" + price} style={{ marginTop: mvs(14) }} /> */}
 
         </View>
       </Row>
@@ -122,14 +158,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.lightYellow,
-    width: mvs(80),
+    // width: mvs(90),
     height: mvs(29),
     borderRadius: 6,
-    paddingHorizontal: mvs(7)
+    paddingHorizontal: mvs(5)
 
   },
   BUTTONTEXT: {
     color: colors.primary,
+    fontSize: mvs(11)
   },
   RATING: {
     borderWidth: 0.4,

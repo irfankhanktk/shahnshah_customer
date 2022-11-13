@@ -1,0 +1,1287 @@
+{
+    "draft": [
+        {
+            "id": 271,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sat, Nov 12, 03:40 PM - 04:30 PM",
+                "date": "2022-11-12T00:00:00.000Z",
+                "from": [
+                    15,
+                    40
+                ],
+                "to": [
+                    16,
+                    30
+                ],
+                "startDate": "2022-11-12T11:40:00.000Z",
+                "endDate": "2022-11-12T12:30:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 1,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "view": {
+                "status": "Draft",
+                "section": "draft"
+            }
+        }
+    ],
+    "scheduled": [
+        {
+            "id": 273,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sat, Nov 12, 06:00 PM - 06:50 PM",
+                "date": "2022-11-12T00:00:00.000Z",
+                "from": [
+                    18,
+                    0
+                ],
+                "to": [
+                    18,
+                    50
+                ],
+                "startDate": "2022-11-12T14:00:00.000Z",
+                "endDate": "2022-11-12T14:50:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-11-12T10:53:19.000Z",
+            "startDate": "2022-11-12T10:54:18.000Z",
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 1,
+            "view": {
+                "status": "Inprogress",
+                "section": "scheduled",
+                "progress": {
+                    "minutes": 50,
+                    "start": "2022-11-12T14:00:00.000Z"
+                }
+            }
+        },
+        {
+            "id": 272,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sat, Nov 12, 03:40 PM - 04:30 PM",
+                "date": "2022-11-12T00:00:00.000Z",
+                "from": [
+                    15,
+                    40
+                ],
+                "to": [
+                    16,
+                    30
+                ],
+                "startDate": "2022-11-12T11:40:00.000Z",
+                "endDate": "2022-11-12T12:30:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 0,
+            "view": {
+                "status": "Booked",
+                "section": "scheduled"
+            }
+        }
+    ],
+    "completed": [
+        {
+            "id": 275,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": 3,
+            "slot": {
+                "title": "Sat, Nov 12, 07:40 PM - 08:30 PM",
+                "date": "2022-11-12T00:00:00.000Z",
+                "from": [
+                    19,
+                    40
+                ],
+                "to": [
+                    20,
+                    30
+                ],
+                "startDate": "2022-11-12T15:40:00.000Z",
+                "endDate": "2022-11-12T16:30:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-11-12T11:05:11.000Z",
+            "startDate": "2022-11-12T11:05:40.000Z",
+            "endDate": "2022-11-12T11:05:51.000Z",
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 1,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "view": {
+                "status": "Completed",
+                "section": "completed"
+            }
+        },
+        {
+            "id": 274,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sat, Nov 12, 06:50 PM - 07:40 PM",
+                "date": "2022-11-12T00:00:00.000Z",
+                "from": [
+                    18,
+                    50
+                ],
+                "to": [
+                    19,
+                    40
+                ],
+                "startDate": "2022-11-12T14:50:00.000Z",
+                "endDate": "2022-11-12T15:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-11-12T11:02:04.000Z",
+            "startDate": "2022-11-12T11:02:28.000Z",
+            "endDate": "2022-11-12T11:02:41.000Z",
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 1,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "view": {
+                "status": "Completed",
+                "section": "completed"
+            }
+        }
+    ],
+    "cancelled": [
+        {
+            "id": 276,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sat, Nov 12, 08:30 PM - 09:20 PM",
+                "date": "2022-11-12T00:00:00.000Z",
+                "from": [
+                    20,
+                    30
+                ],
+                "to": [
+                    21,
+                    20
+                ],
+                "startDate": "2022-11-12T16:30:00.000Z",
+                "endDate": "2022-11-12T17:20:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 1,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "view": {
+                "status": "Cancelled",
+                "section": "cancelled"
+            }
+        }
+    ],
+    "history": [
+        {
+            "id": 253,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 30, 12:50 PM - 01:40 PM",
+                "date": "2022-10-30T00:00:00.000Z",
+                "from": [
+                    12,
+                    50
+                ],
+                "to": [
+                    13,
+                    40
+                ],
+                "startDate": "2022-10-30T08:50:00.000Z",
+                "endDate": "2022-10-30T09:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-10-29T15:35:56.000Z",
+            "startDate": "2022-11-02T16:52:24.000Z",
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 1,
+            "isHistory": true,
+            "view": {
+                "status": "Inprogress",
+                "section": "history",
+                "progress": {
+                    "minutes": 50,
+                    "start": "2022-10-30T08:50:00.000Z"
+                }
+            }
+        },
+        {
+            "id": 252,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 30, 12:00 PM - 12:50 PM",
+                "date": "2022-10-30T00:00:00.000Z",
+                "from": [
+                    12,
+                    0
+                ],
+                "to": [
+                    12,
+                    50
+                ],
+                "startDate": "2022-10-30T08:00:00.000Z",
+                "endDate": "2022-10-30T08:50:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-10-29T15:34:36.000Z",
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 1,
+            "isInprogress": 0,
+            "isHistory": true,
+            "view": {
+                "status": "Checked in",
+                "section": "history"
+            }
+        },
+        {
+            "id": 251,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 30, 11:20 AM - 12:00 PM",
+                "date": "2022-10-30T00:00:00.000Z",
+                "from": [
+                    11,
+                    20
+                ],
+                "to": [
+                    12,
+                    0
+                ],
+                "startDate": "2022-10-30T07:20:00.000Z",
+                "endDate": "2022-10-30T08:00:00.000Z",
+                "minutes": 40
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 250,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 30, 10:30 AM - 11:20 AM",
+                "date": "2022-10-30T00:00:00.000Z",
+                "from": [
+                    10,
+                    30
+                ],
+                "to": [
+                    11,
+                    20
+                ],
+                "startDate": "2022-10-30T06:30:00.000Z",
+                "endDate": "2022-10-30T07:20:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 249,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 30, 09:40 AM - 10:30 AM",
+                "date": "2022-10-30T00:00:00.000Z",
+                "from": [
+                    9,
+                    40
+                ],
+                "to": [
+                    10,
+                    30
+                ],
+                "startDate": "2022-10-30T05:40:00.000Z",
+                "endDate": "2022-10-30T06:30:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-10-29T15:20:17.000Z",
+            "startDate": "2022-10-29T15:20:36.000Z",
+            "endDate": "2022-10-29T15:21:16.000Z",
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 1,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isHistory": true,
+            "view": {
+                "status": "Completed",
+                "section": "history"
+            }
+        },
+        {
+            "id": 248,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 30, 08:50 AM - 09:40 AM",
+                "date": "2022-10-30T00:00:00.000Z",
+                "from": [
+                    8,
+                    50
+                ],
+                "to": [
+                    9,
+                    40
+                ],
+                "startDate": "2022-10-30T04:50:00.000Z",
+                "endDate": "2022-10-30T05:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-10-29T15:16:05.000Z",
+            "startDate": "2022-10-29T15:17:02.000Z",
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 1,
+            "isHistory": true,
+            "view": {
+                "status": "Inprogress",
+                "section": "history",
+                "progress": {
+                    "minutes": 50,
+                    "start": "2022-10-30T04:50:00.000Z"
+                }
+            }
+        },
+        {
+            "id": 247,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 30, 08:50 AM - 09:40 AM",
+                "date": "2022-10-30T00:00:00.000Z",
+                "from": [
+                    8,
+                    50
+                ],
+                "to": [
+                    9,
+                    40
+                ],
+                "startDate": "2022-10-30T04:50:00.000Z",
+                "endDate": "2022-10-30T05:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 1,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isHistory": true,
+            "view": {
+                "status": "Cancelled",
+                "section": "history"
+            }
+        },
+        {
+            "id": 246,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 30, 05:00 AM - 05:50 AM",
+                "date": "2022-10-30T00:00:00.000Z",
+                "from": [
+                    5,
+                    0
+                ],
+                "to": [
+                    5,
+                    50
+                ],
+                "startDate": "2022-10-30T01:00:00.000Z",
+                "endDate": "2022-10-30T01:50:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isHistory": true,
+            "view": {
+                "status": "",
+                "section": "history"
+            }
+        },
+        {
+            "id": 245,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sat, Oct 29, 11:10 PM - 12:00 AM",
+                "date": "2022-10-29T00:00:00.000Z",
+                "from": [
+                    23,
+                    10
+                ],
+                "to": [
+                    24,
+                    0
+                ],
+                "startDate": "2022-10-29T19:10:00.000Z",
+                "endDate": "2022-10-29T20:00:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 244,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 23, 09:50 PM - 10:40 PM",
+                "date": "2022-10-23T00:00:00.000Z",
+                "from": [
+                    21,
+                    50
+                ],
+                "to": [
+                    22,
+                    40
+                ],
+                "startDate": "2022-10-23T17:50:00.000Z",
+                "endDate": "2022-10-23T18:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-10-23T17:50:37.000Z",
+            "startDate": "2022-10-23T17:53:59.000Z",
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 1,
+            "isHistory": true,
+            "view": {
+                "status": "Inprogress",
+                "section": "history",
+                "progress": {
+                    "minutes": 50,
+                    "start": "2022-10-23T17:50:00.000Z"
+                }
+            }
+        },
+        {
+            "id": 243,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 23, 08:50 AM - 09:40 AM",
+                "date": "2022-10-23T00:00:00.000Z",
+                "from": [
+                    8,
+                    50
+                ],
+                "to": [
+                    9,
+                    40
+                ],
+                "startDate": "2022-10-23T04:50:00.000Z",
+                "endDate": "2022-10-23T05:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-10-22T22:06:24.000Z",
+            "startDate": "2022-10-22T22:14:21.000Z",
+            "endDate": "2022-10-22T22:16:59.000Z",
+            "isDraft": 0,
+            "isBooked": 0,
+            "isCancelled": 0,
+            "isCompleted": 1,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isHistory": true,
+            "view": {
+                "status": "Completed",
+                "section": "history"
+            }
+        },
+        {
+            "id": 242,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 23, 08:00 AM - 08:50 AM",
+                "date": "2022-10-23T00:00:00.000Z",
+                "from": [
+                    8,
+                    0
+                ],
+                "to": [
+                    8,
+                    50
+                ],
+                "startDate": "2022-10-23T04:00:00.000Z",
+                "endDate": "2022-10-23T04:50:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 236,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Mon, Oct 17, 08:40 AM - 09:30 AM",
+                "date": "2022-10-17T00:00:00.000Z",
+                "from": [
+                    8,
+                    40
+                ],
+                "to": [
+                    9,
+                    30
+                ],
+                "startDate": "2022-10-17T04:40:00.000Z",
+                "endDate": "2022-10-17T05:30:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": "2022-10-16T18:05:12.000Z",
+            "startDate": "2022-10-16T18:05:12.000Z",
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 1,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history",
+                "progress": {
+                    "minutes": 50,
+                    "start": "2022-10-17T04:40:00.000Z"
+                }
+            }
+        },
+        {
+            "id": 235,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Mon, Oct 17, 07:50 AM - 08:40 AM",
+                "date": "2022-10-17T00:00:00.000Z",
+                "from": [
+                    7,
+                    50
+                ],
+                "to": [
+                    8,
+                    40
+                ],
+                "startDate": "2022-10-17T03:50:00.000Z",
+                "endDate": "2022-10-17T04:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 234,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Mon, Oct 17, 07:00 AM - 07:50 AM",
+                "date": "2022-10-17T00:00:00.000Z",
+                "from": [
+                    7,
+                    0
+                ],
+                "to": [
+                    7,
+                    50
+                ],
+                "startDate": "2022-10-17T03:00:00.000Z",
+                "endDate": "2022-10-17T03:50:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 233,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 16, 09:50 PM - 10:40 PM",
+                "date": "2022-10-16T00:00:00.000Z",
+                "from": [
+                    21,
+                    50
+                ],
+                "to": [
+                    22,
+                    40
+                ],
+                "startDate": "2022-10-16T17:50:00.000Z",
+                "endDate": "2022-10-16T18:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 232,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 16, 11:20 AM - 12:00 PM",
+                "date": "2022-10-16T00:00:00.000Z",
+                "from": [
+                    11,
+                    20
+                ],
+                "to": [
+                    12,
+                    0
+                ],
+                "startDate": "2022-10-16T07:20:00.000Z",
+                "endDate": "2022-10-16T08:00:00.000Z",
+                "minutes": 40
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 231,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Sun, Oct 16, 08:50 AM - 09:40 AM",
+                "date": "2022-10-16T00:00:00.000Z",
+                "from": [
+                    8,
+                    50
+                ],
+                "to": [
+                    9,
+                    40
+                ],
+                "startDate": "2022-10-16T04:50:00.000Z",
+                "endDate": "2022-10-16T05:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 220,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Thu, Oct 13, 08:00 AM - 08:50 AM",
+                "date": "2022-10-13T00:00:00.000Z",
+                "from": [
+                    8,
+                    0
+                ],
+                "to": [
+                    8,
+                    50
+                ],
+                "startDate": "2022-10-13T04:00:00.000Z",
+                "endDate": "2022-10-13T04:50:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        },
+        {
+            "id": 219,
+            "offeringId": 3334,
+            "offering": {
+                "cover": "####/3334_suv-fw-cover.jpg",
+                "title": "SUV Full Wash",
+                "subTitle": "SUV Full Wash Sub Title"
+            },
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "view": {
+                    "address": "undefined, undefined"
+                }
+            },
+            "rate": null,
+            "slot": {
+                "title": "Wed, Oct 12, 09:50 PM - 10:40 PM",
+                "date": "2022-10-12T00:00:00.000Z",
+                "from": [
+                    21,
+                    50
+                ],
+                "to": [
+                    22,
+                    40
+                ],
+                "startDate": "2022-10-12T17:50:00.000Z",
+                "endDate": "2022-10-12T18:40:00.000Z",
+                "minutes": 50
+            },
+            "checkinDate": null,
+            "startDate": null,
+            "endDate": null,
+            "isDraft": 0,
+            "isBooked": 1,
+            "isCancelled": 0,
+            "isCompleted": 0,
+            "isCheckin": 0,
+            "isInprogress": 0,
+            "isNoshow": 1,
+            "isHistory": true,
+            "view": {
+                "status": "No Show",
+                "section": "history"
+            }
+        }
+    ]
+}

@@ -24,7 +24,7 @@ import colors from '../../services/colors';
 import {mvs} from '../../services/metrices';
 import DIVIY_API from '../../store/api-calls';
 import {Styles as styles} from './style';
-const WalkIn = props => {
+const ReviewAndSchedule = props => {
   const {
     get_booking,
     get_available_slots,
@@ -417,4 +417,4 @@ const mapDispatchToProps = {
   apply_coupon: (bookingId, couponId, customerId) =>
     DIVIY_API.apply_coupon(bookingId, couponId, customerId),
 };
-export default connect(mapStateToProps, mapDispatchToProps)(WalkIn);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewAndSchedule);

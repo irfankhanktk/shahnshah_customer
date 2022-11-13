@@ -95,7 +95,7 @@ const ServiceOfferingDetails = props => {
     });
   };
   const delayAPI = (responseID, businessID) => {
-      navigation.navigate('WalkIn', {
+      navigation.navigate('ReviewAndSchedule', {
         bookingID: responseID,
         businessID: businessID,
       });
@@ -920,7 +920,7 @@ const ServiceOfferingDetails = props => {
             style={styles.lgBtn}
             onClick={() =>
               serviceDetails?.bookingId != null
-                ? navigation.navigate('WalkIn', {
+                ? navigation.navigate('ReviewAndSchedule', {
                     bookingID: serviceDetails?.bookingId,
                     businessID: bookingState?.serviceBooking?.offeringID,
                   })
@@ -928,7 +928,7 @@ const ServiceOfferingDetails = props => {
             }
             disabled={payload.bookNowStart}
             loading={payload.bookNowStart}
-            // onClick={() => props?.navigation?.navigate('WalkIn')}
+            // onClick={() => props?.navigation?.navigate('ReviewAndSchedule')}
             title={serviceDetails?.view?.buttonTitle}
           />
         </View>

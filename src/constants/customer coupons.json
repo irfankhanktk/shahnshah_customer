@@ -1,0 +1,248 @@
+{
+    "draft": [
+        {
+            "couponId": 3334,
+            "id": 71,
+            "discountId": 3334,
+            "type": "Coupon",
+            "title": "Flat Discount 20%",
+            "subTitle": "Flat Discount 20% Sub Title",
+            "highlight": "Flat Discount 20%",
+            "cover": "https://media.smallbiztrends.com/2018/05/shutterstock_682966966.jpg",
+            "rate": 20,
+            "value": null,
+            "conditions": {
+                "to": "2022-12-30",
+                "from": "2018-12-30",
+                "dailyLimit": 22223,
+                "totalLimit": 124,
+                "weeklyLimit": 113,
+                "yearlyLimit": 114,
+                "monthlyLimit": 110
+            },
+            "expired": 0,
+            "used": 0,
+            "status": "Booked",
+            "isBooked": 1,
+            "isBought": 0,
+            "isDraft": 0,
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "lat": "lat",
+                "lng": "lng",
+                "area": "Al Taawun",
+                "city": "Sharjah",
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "rating": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    2,
+                    12,
+                    40,
+                    3.5
+                ],
+                "street": "Al Taawun St.",
+                "view": {
+                    "address": "Sharjah, Al Taawun, Al Taawun St."
+                }
+            },
+            "couponUse": {
+                "date": "2022-11-12"
+            },
+            "view": {
+                "status": "Booked",
+                "section": "draft"
+            }
+        },
+        {
+            "couponId": 3334,
+            "id": 70,
+            "discountId": 3334,
+            "type": "Coupon",
+            "title": "Flat Discount 20%",
+            "subTitle": "Flat Discount 20% Sub Title",
+            "highlight": "Flat Discount 20%",
+            "cover": "https://media.smallbiztrends.com/2018/05/shutterstock_682966966.jpg",
+            "rate": 20,
+            "value": null,
+            "conditions": {
+                "to": "2022-12-30",
+                "from": "2018-12-30",
+                "dailyLimit": 22223,
+                "totalLimit": 124,
+                "weeklyLimit": 113,
+                "yearlyLimit": 114,
+                "monthlyLimit": 110
+            },
+            "expired": 0,
+            "used": 0,
+            "status": "Booked",
+            "isBooked": 1,
+            "isBought": 0,
+            "isDraft": 0,
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "lat": "lat",
+                "lng": "lng",
+                "area": "Al Taawun",
+                "city": "Sharjah",
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "rating": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    2,
+                    12,
+                    40,
+                    3.5
+                ],
+                "street": "Al Taawun St.",
+                "view": {
+                    "address": "Sharjah, Al Taawun, Al Taawun St."
+                }
+            },
+            "couponUse": {
+                "date": "2022-11-12"
+            },
+            "view": {
+                "status": "Booked",
+                "section": "draft"
+            }
+        }
+    ],
+    "active": [
+        {
+            "couponId": 3334,
+            "id": 72,
+            "discountId": 3334,
+            "type": "Coupon",
+            "title": "Flat Discount 20%",
+            "subTitle": "Flat Discount 20% Sub Title",
+            "highlight": "Flat Discount 20%",
+            "cover": "https://media.smallbiztrends.com/2018/05/shutterstock_682966966.jpg",
+            "rate": 20,
+            "value": null,
+            "conditions": {
+                "to": "2022-12-30",
+                "from": "2018-12-30",
+                "dailyLimit": 22223,
+                "totalLimit": 124,
+                "weeklyLimit": 113,
+                "yearlyLimit": 114,
+                "monthlyLimit": 110
+            },
+            "expired": 0,
+            "used": 0,
+            "status": "Bought",
+            "isBooked": 0,
+            "isBought": 1,
+            "isDraft": 0,
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "lat": "lat",
+                "lng": "lng",
+                "area": "Al Taawun",
+                "city": "Sharjah",
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "rating": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    2,
+                    12,
+                    40,
+                    3.5
+                ],
+                "street": "Al Taawun St.",
+                "view": {
+                    "address": "Sharjah, Al Taawun, Al Taawun St."
+                }
+            },
+            "couponUse": {
+                "date": "2022-11-12"
+            },
+            "view": {
+                "status": "Active",
+                "section": "active"
+            }
+        }
+    ],
+    "expired": [
+        {
+            "couponId": 3334,
+            "id": 68,
+            "discountId": 3334,
+            "type": "Coupon",
+            "title": "Flat Discount 20%",
+            "subTitle": "Flat Discount 20% Sub Title",
+            "highlight": "Flat Discount 20%",
+            "cover": "https://media.smallbiztrends.com/2018/05/shutterstock_682966966.jpg",
+            "rate": 20,
+            "value": null,
+            "conditions": {
+                "to": "2022-12-30",
+                "from": "2018-12-30",
+                "dailyLimit": 22223,
+                "totalLimit": 124,
+                "weeklyLimit": 113,
+                "yearlyLimit": 114,
+                "monthlyLimit": 110
+            },
+            "expired": 0,
+            "used": 1,
+            "status": "Bought",
+            "isBooked": 0,
+            "isBought": 1,
+            "isDraft": 0,
+            "businessId": 3333,
+            "business": {
+                "id": 3333,
+                "lat": "lat",
+                "lng": "lng",
+                "area": "Al Taawun",
+                "city": "Sharjah",
+                "logo": "####/3333_logo.jpg",
+                "title": "AL Safeer Car Wash",
+                "rating": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    2,
+                    12,
+                    40,
+                    3.5
+                ],
+                "street": "Al Taawun St.",
+                "view": {
+                    "address": "Sharjah, Al Taawun, Al Taawun St."
+                }
+            },
+            "couponUse": {
+                "date": "2022-11-12",
+                "daily": 0,
+                "total": 1,
+                "value": 50,
+                "saleId": 68,
+                "weekly": 0,
+                "yearly": 1,
+                "monthly": 0,
+                "discount": 10
+            },
+            "view": {
+                "status": "Used",
+                "section": "expired"
+            }
+        }
+    ]
+}
