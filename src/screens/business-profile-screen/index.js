@@ -15,6 +15,7 @@ import {
   FlatList,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Toast from 'react-native-toast-message';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import {
   HeartIcon,
@@ -239,6 +240,7 @@ const BusinessProfile = props => {
       })
       .catch(error => {
         console.log('Business reviews error', error);
+        SERVICES.showToast('error', SERVICES._returnError(error))
       });
 
     await fetch(

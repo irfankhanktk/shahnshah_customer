@@ -25,10 +25,10 @@ const SaleCouponBusinessCustomer = ({
         <Row style={{ ...styles.UPPERROW, ...styles.TIMETOPVIEW }}>
           <NewCouponItem
             showCoupon={true}
-            title={'title'}
-            subTitle={'sub-title'}
+            title={item?.title}
+            subTitle={item?.subTitle}
             highlightedText={'highleted text'}
-            statusLine={'message here'}
+            statusLine={item?.about}
             isExpiring={false}
             showHighLighted={false}
           />
@@ -36,8 +36,8 @@ const SaleCouponBusinessCustomer = ({
         <Row style={{ ...styles.UPPERROW, ...styles.TIMETOPVIEW }}>
           <ImagePlaceholder containerStyle={styles.IMAGE} uri={Gulf} />
           <View style={{ marginHorizontal: mvs(10), flex: 1 }}>
-            <Medium label={'business title'} size={16} />
-            <Regular label={'business address'} size={13} numberOfLines={2} />
+            <Medium label={item?.business?.title} size={16} />
+            <Regular label={item?.business?.view?.address} size={13} numberOfLines={2} />
           </View>
         </Row>
         <Row style={{ ...styles.UPPERROW, paddingTop: mvs(13), paddingBottom: mvs(19) }}>

@@ -895,8 +895,8 @@ const ServiceOfferingDetails = props => {
             onClick={() =>
               serviceDetails?.bookingId != null
                 ? navigation.navigate('ReviewAndSchedule', {
-                  bookingID: serviceDetails?.bookingId,
-                  businessID: bookingState?.serviceBooking?.offeringID,
+                  bookingId: serviceDetails?.bookingId,
+                  businessId: bookingState?.serviceBooking?.offeringID,
                 })
                 : BookNow()
             }

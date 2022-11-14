@@ -25,29 +25,32 @@ import BOOKING from '../../../constants/customer bookings.json';
 import SERVICES from '../../../services/common-services';
 // createa component
 const Bookings = props => {
-  const { get_bookings, update_review_rating, rate_booking, update_review_remarks } = props;
+  const { get_bookings, update_review_rating, rate_booking, update_review_remarks, upload_review_picture } = props;
   const navigation = useNavigation();
   const [reviewModal, setReviewModal] = useState(false)
-  const [bookingId, setBookingId] = useState(0)
+  const [bookingId, setBookingId] = useState(273)
   const [remarks, setRemarks] = useState(' ')
   const [ratingValue, setRatingValue] = useState(0)
-  console.log('BOOKING=>>>', BOOKING);
+  // console.log('BOOKING=>>>', BOOKING);
   const [schedule, setScheduleData] = useState(BOOKING?.scheduled || []);
   const [draft, setDrafteData] = useState(BOOKING?.draft || []);
   const [completed, setCompletedData] = useState(BOOKING?.completed || []);
   const [cancelled, setCancelledData] = useState(BOOKING?.cancelled);
   useEffect(() => {
-    getBookings();
+    // getBookings();
+    // onLikePress(273);
+    onUploadImage(273)
   }, [])
+
   const onLikePress = async (bookingId) => {
     try {
       const customerId = await getData("customer_id");
       const response = await rate_booking(customerId, bookingId)
-      console.log("review response =>", response?.data)
-      // if(response?.data){
-      //   const reviewRateReponse=await update_review_rating(customerId,response?.data,5)
-      //   console.log("Review Rate Response ",reviewRateReponse?.data);
-      // }
+      console.log("review response =>", response)
+      if (response?.data) {
+        const reviewRateReponse = await update_review_rating(customerId, response?.data, 5)
+        console.log("Review Rate Response ", reviewRateReponse?.data);
+      }
       setReviewModal(true);
       setBookingId(bookingId)
     } catch (error) {
@@ -56,10 +59,22 @@ const Bookings = props => {
     }
 
   }
+  const onUploadImage = async (image) => {
+    try {
+      const customerId = await getData("customer_id");
+      const response = await upload_review_picture(customerId, bookingId, { picture: 'picture1' })
+      console.log("review onUploadImage =>", response)
+
+    } catch (error) {
+      console.log('SERVICES._returnError(error)=>', SERVICES._returnError(error));
+      SERVICES?.showToast('error', SERVICES._returnError(error));
+    }
+
+  }
   const getBookings = async () => {
     const customerId = await getData("customer_id");
     const response = await get_bookings(customerId);
-    console.log('response=>> of bookings', response?.data);
+    // console.log('response=>> of bookings', response?.data);
     // setCancelledData(response?.data?.cancelled)
     // setCompletedData(response?.data?.completed)
     // setScheduleData(response?.data?.scheduled)
@@ -123,6 +138,9 @@ const Bookings = props => {
                       price={item?.offering?.price}
                       onLikePress={() => onLikePress(item?.id)}
                       rating={item?.rate}
+                      onPaymentPress={
+                            navigation.navigate('ReviewAndSchedule', {
+                      }
                     />
                   )}
                 />
@@ -148,8 +166,8 @@ const Bookings = props => {
                       onPress={() => { }}
                       onResumePress={() => navigation?.navigate('ReviewAndSchedule',
                         {
-                          bookingID: item?.id,
-                          businessID: item?.businessId,
+                          bookingId: item?.id,
+                          businessId: item?.businessId,
                         })}
                       progress={item?.view?.progress?.minutes}
                       isLiked={false}
@@ -181,6 +199,11 @@ const Bookings = props => {
                       price={item?.offering?.price}
                       onLikePress={() => onLikePress(item?.id)}
                       rating={item?.rate}
+                      onResumePress={() => navigation?.navigate('ReviewAndSchedule',
+                        {
+                          bookingId: item?.id,
+                          businessId: item?.businessId,
+                        })}
 
                     />
                   )}
@@ -209,6 +232,11 @@ const Bookings = props => {
                       isLiked={true}
                       price={item?.offering?.price}
                       rating={item?.rate}
+                      onResumePress={() => navigation?.navigate('ReviewAndSchedule',
+                        {
+                          bookingId: item?.id,
+                          businessId: item?.businessId,
+                        })}
                     />
                   )}
                 />
@@ -228,6 +256,7 @@ const Bookings = props => {
         )}
       </ScrollView>
       <ReviewModal visible={reviewModal}
+        onUploadImage={(image) => onUploadImage(image)}
         setRating={(rate) => {
           console.log(rate)
           setRatingValue(rate)
@@ -252,6 +281,6 @@ const mapDispatchToProps = {
   rate_booking: (cid, bid) => DIVIY_API.rate_booking(cid, bid),
   update_review_rating: (cid, rid, rate) => DIVIY_API.update_review_rating(cid, rid, rate),
   update_review_remarks: (cid, rid, remarks) => DIVIY_API.update_review_remarks(cid, rid, remarks),
-  upload_review_picture: (cid, rid, payload) => DIVIY_API.upload_review_picture(cid, rid, payload),
+  upload_review_picture: (customerId, bookingId, payload) => DIVIY_API.upload_review_picture(customerId, bookingId, payload),
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Bookings);

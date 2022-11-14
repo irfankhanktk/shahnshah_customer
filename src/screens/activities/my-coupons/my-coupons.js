@@ -28,7 +28,7 @@ const MyCoupons = props => {
   const getCouponsHistory = async () => {
     const customerId = await getData("customer_id");
     const response = await get_coupons(customerId)
-    console.log('response?.data of mycoupons=>', response?.data)
+    // console.log('response?.data of mycoupons=>', response?.data)
     // setActivesCoupon(response?.data?.active);
     // setExpiresCoupons(response?.data?.expired);
     // setDraftData(response?.data?.draft);
@@ -61,7 +61,9 @@ const MyCoupons = props => {
                   data={actives}
                   renderItem={({ item }) => (
                     <CouponItem
-                      onPaymentPress={() => { }}
+                      onPaymentPress={() => {
+                        props?.navigation?.navigate('SaleCoupon', { couponId: item?.couponId, businessId: item?.businessId })
+                      }}
                       address={item?.view?.address}
                       bussinessName={item?.business?.title}
                       expireTime={item?.conditions?.to}
@@ -89,7 +91,9 @@ const MyCoupons = props => {
                   data={draft}
                   renderItem={({ item }) => (
                     <CouponItem
-                      onPaymentPress={() => { }}
+                      onPaymentPress={() => {
+                        props?.navigation?.navigate('SaleCoupon', { couponId: item?.couponId, businessId: item?.businessId })
+                      }}
                       address={item?.view?.address}
                       bussinessName={item?.business?.title}
                       expireTime={item?.conditions?.to}
@@ -119,13 +123,18 @@ const MyCoupons = props => {
                   data={expires}
                   renderItem={({ item }) => (
                     <CouponItem
-                      onPaymentPress={() => { }}
+                      onPaymentPress={() => {
+                        props?.navigation?.navigate('SaleCoupon', { couponId: item?.couponId, businessId: item?.businessId })
+                      }}
                       address={item?.view?.address}
                       bussinessName={item?.business?.title}
                       expireTime={item?.conditions?.to}
                       discount={item?.coupon?.discountValue}
                       status={item?.status}
                       AED={item?.coupon?.price}
+                      onViewPress={() =>
+                        props?.navigation?.navigate('CouponDetails', { id: item?.couponId, bId: item?.businessId })
+                      }
                       progress={0.4}
                       image={{ uri: item?.cover }}
                       price={item?.coupon?.price}

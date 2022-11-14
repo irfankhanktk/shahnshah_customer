@@ -70,9 +70,9 @@ const ActivityItem = ({
                 <Regular label={'No Show'} style={{ ...styles.BUTTONTEXT, color: colors.lightgrey1 }} />
               </View> :
               status == "Booked" ?
-                <View style={{ ...styles.BUTTON, backgroundColor: colors.gray }} onPress={onPress}>
+                <TouchableOpacity style={{ ...styles.BUTTON, backgroundColor: colors.gray }} onPress={onResumePress}>
                   <Regular label={'Make Payment'} style={{ ...styles.BUTTONTEXT, color: colors.lightgrey1 }} />
-                </View> :
+                </TouchableOpacity> :
                 section === 'schedule' && status === 'Completed' && !rating ?
                   <TouchableOpacity style={{ ...styles.BUTTON, marginLeft: mvs(4) }} onPress={onLikePress}>
                     {isLiked == false ? <SVG.Like style={{ marginRight: mvs(5) }} /> : <SVG.Liked style={{ marginRight: mvs(5) }} />}

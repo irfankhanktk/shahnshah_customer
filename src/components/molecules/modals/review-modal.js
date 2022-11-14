@@ -19,24 +19,25 @@ const ReviewModal = ({
     items = [],
     setItems = (items) => { },
     setRating = (rating) => { },
+    onUploadImage = (image) => { },
     onTextChange
 }) => {
-    const [rate,setRate]=React.useState(4);
-    const onGallery= async()=>{
-      try {
-        const res = await SERVICES._returnImageGallery();
-        console.log('res::',res);
-        if(!res){
-            return;
+    const [rate, setRate] = React.useState(4);
+    const onGallery = async () => {
+        try {
+            const res = await SERVICES._returnImageGallery();
+            console.log('res::', res);
+            if (!res) {
+                return;
+            }
+            const copy = [...items];
+            onUploadImage(res);
+            copy.push(res);
+            setItems(copy);
+        } catch (error) {
+            console.log('error in image ', error);
         }
-        const copy= [...items];
-        copy.push(res);
-        setItems(copy);
-      } catch (error) {
-        
-      }
     }
-    console.log('items:',items);
     return (
         <ReactNativeModal
             propagateSwipe
@@ -48,20 +49,20 @@ const ReviewModal = ({
             <View style={styles.container}>
                 <Row style={{ marginBottom: mvs(30), }}>
                     <TouchableOpacity onPress={setVisible}>
-                    <Regular label={'Cancel'} />
+                        <Regular label={'Cancel'} />
                     </TouchableOpacity>
                     <Bold label={'Write your review'} />
                     <TouchableOpacity onPress={setVisible}>
-                    <Bold style={{ color: colors.primary }} label={'Done'} />
+                        <Bold style={{ color: colors.primary }} label={'Done'} />
                     </TouchableOpacity>
                 </Row>
                 <View style={{ alignItems: 'center', marginBottom: mvs(22) }}>
-                <Rating
-                    style={{alignItems:'flex-start',marginTop:mvs(-13)}}
-                    ratingCount={5}
-                    imageSize={20}
-                    onFinishRating={setRating}/>
-                    </View>
+                    <Rating
+                        style={{ alignItems: 'flex-start', marginTop: mvs(-13) }}
+                        ratingCount={5}
+                        imageSize={20}
+                        onFinishRating={setRating} />
+                </View>
                 {items?.length > 0 ? <Row justifyContent={'flex-start'}>
                     {
                         items?.map((item, index) => (
@@ -76,16 +77,19 @@ const ReviewModal = ({
                         ))
                     }
                 </Row> :
-                    <TouchableOpacity onPress={onGallery} style={{ borderWidth: 1, borderStyle: 'dashed', borderRadius: mvs(10), height: mvs(48),backgroundColor:colors.F9F9F9, justifyContent: 'center', alignItems: 'center' }}>
+                    <TouchableOpacity onPress={onGallery} style={{ borderWidth: 1, borderStyle: 'dashed', borderRadius: mvs(10), height: mvs(48), backgroundColor: colors.F9F9F9, justifyContent: 'center', alignItems: 'center' }}>
                         <Row>
                             <Cam />
                             <Regular color={colors.B3B3B3B} size={mvs(16)} label={' Upload Photo'} />
                         </Row>
                     </TouchableOpacity>
                 }
-                <TextInput multiline 
-                style={{height:mvs(231),backgroundColor:colors.F9F9F9,textAlignVertical:'top',borderRadius: mvs(15),padding:mvs(10),marginTop:mvs(5),}} 
-                placeholder={`Don't be shy, tell us more !`} onChangeText={onTextChange}/>
+                <TextInput
+                    multiline
+                    style={{ height: mvs(231), backgroundColor: colors.F9F9F9, textAlignVertical: 'top', borderRadius: mvs(15), padding: mvs(10), marginTop: mvs(5), }}
+                    placeholder={`Don't be shy, tell us more !`}
+                    onChangeText={onTextChange}
+                />
             </View>
         </ReactNativeModal>
     );

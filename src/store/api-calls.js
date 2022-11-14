@@ -1,7 +1,7 @@
 import alertService from '../services/alert.service';
 import SERVICES from '../services/common-services';
 import API_REQUESTS from './api-requests';
-import {URLS} from './api-urls';
+import { URLS } from './api-urls';
 
 const book_slot = (id, payload) => {
   return async (dispatch, getState) => {
@@ -86,19 +86,19 @@ const get_coupons_details = (id, bussinessId, cid) => {
     try {
       console.log(
         URLS.coupon.get_coupon_details +
-          bussinessId +
-          '/coupons/' +
-          id +
-          '?customerId=' +
-          cid,
+        bussinessId +
+        '/coupons/' +
+        id +
+        '?customerId=' +
+        cid,
       );
       const response = await API_REQUESTS.getData(
         URLS.coupon.get_coupon_details +
-          bussinessId +
-          '/coupons/' +
-          id +
-          '?customerId=' +
-          cid,
+        bussinessId +
+        '/coupons/' +
+        id +
+        '?customerId=' +
+        cid,
       );
       return response;
     } catch (error) {
@@ -117,8 +117,8 @@ const get_bussiness_coupons = bussinessId => {
       );
       const response = await API_REQUESTS.getData(
         URLS.coupon.get_coupon_details +
-          bussinessId +
-          `/services/${bussinessId}/coupons`,
+        bussinessId +
+        `/services/${bussinessId}/coupons`,
       );
       return response;
     } catch (error) {
@@ -143,10 +143,10 @@ const rate_booking = (customerId, bookingId) => {
     try {
       const response = await API_REQUESTS.postData(
         URLS.review.rate_booking +
-          customerId +
-          '/bookings/' +
-          bookingId +
-          '/rate',
+        customerId +
+        '/bookings/' +
+        bookingId +
+        '/rate',
       );
       return response;
     } catch (error) {
@@ -159,11 +159,11 @@ const update_review_rating = (customerId, reviewId, rating) => {
     try {
       const response = await API_REQUESTS.putData(
         URLS.review.rate_booking +
-          customerId +
-          '/reviews/' +
-          reviewId +
-          '/rate/' +
-          rating,
+        customerId +
+        '/reviews/' +
+        reviewId +
+        '/rate/' +
+        rating,
       );
       return response;
     } catch (error) {
@@ -171,15 +171,15 @@ const update_review_rating = (customerId, reviewId, rating) => {
     }
   };
 };
-const update_review_remarks = (customerId, reviewId, payload) => {
+const update_review_remarks = (customerId, bookingId, payload) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putData(
         URLS.review.rate_booking +
-          customerId +
-          '/reviews/' +
-          reviewId +
-          '/remark',
+        customerId +
+        '/bookings/' +
+        bookingId +
+        '/remark',
         payload,
       );
       return response;
@@ -188,15 +188,15 @@ const update_review_remarks = (customerId, reviewId, payload) => {
     }
   };
 };
-const upload_review_picture = (customerId, reviewId, payload) => {
+const upload_review_picture = (customerId, bookingId, payload) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.postData(
         URLS.review.rate_booking +
-          customerId +
-          '/reviews/' +
-          reviewId +
-          '/picture',
+        customerId +
+        '/bookings/' +
+        bookingId +
+        '/picture',
         payload,
       );
       return response;
@@ -210,10 +210,10 @@ const remove_review_picture = (customerId, reviewId, payload) => {
     try {
       const response = await API_REQUESTS.deleteData(
         URLS.review.rate_booking +
-          customerId +
-          '/reviews/' +
-          reviewId +
-          '/picture',
+        customerId +
+        '/reviews/' +
+        reviewId +
+        '/picture',
         payload,
       );
       return response;
@@ -227,10 +227,10 @@ const get_available_booking_coupons = (cid, bid) => {
     try {
       const response = await API_REQUESTS.getData(
         URLS.coupon.get_available_coupons +
-          cid +
-          '/bookings/' +
-          bid +
-          '/coupons',
+        cid +
+        '/bookings/' +
+        bid +
+        '/coupons',
       );
       return response;
     } catch (error) {
@@ -287,7 +287,7 @@ const get_booking = (bookingId, businessId) => {
   };
 };
 const get_available_slots = (bookingId, date) => {
-  const payLoad = {date: date};
+  const payLoad = { date: date };
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.postData(
@@ -402,7 +402,7 @@ const update_booking_payment = (bookingId, paymentMethod, reference) => {
   };
 };
 const update_slot = (bookingId, slotId) => {
-  var slotData = {slotId: slotId};
+  var slotData = { slotId: slotId };
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putData(
@@ -464,7 +464,7 @@ const get_coupon_sale = (couponId, businessId, customerId) => {
   };
 };
 const update_payment_coupon = (couponId, customerId, method) => {
-  var payLoad = {method: method, reference: '123'};
+  var payLoad = { method: method, reference: '123' };
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putData(

@@ -8,13 +8,14 @@ const createShareLink = refId => {
   let shareLink = '';
   try {
     shareLink = `${IP}/${refId}`;
-  } catch (err) {}
+  } catch (err) { }
   return shareLink;
 };
 // import Geocoder from "react-native-geocoding";
 // import Geolocation from "react-native-geolocation-service";
 // import GetLocation from "react-native-get-location";
 // import SERVICES from "../api/SERVICES";
+import Toast from 'react-native-toast-message';
 
 // const hasPermissionIOS = async () => {
 //   const status = await Geolocation.requestAuthorization("whenInUse");
@@ -39,22 +40,32 @@ const SERVICES = {
     Object.keys(object).forEach((key) => formData.append(key, object[key]));
     return formData;
   },
+  showToast: (type, text1, text2) => {
+    Toast.show({
+      type: type,
+      text1: text1,
+      text2: text2,
+      position: 'top',
+      autoHide: true,
+      visibilityTime: 3000,
+    });
+  },
   _returnError: error => {
-    if(error.status===404){
+    if (error.status === 404) {
       return 'Record not found'
     }
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      console.log('error.response.data',error.response.data);
-      console.log('error.response.status',error.response.status);
-      console.log('error.response.headers',error.response.headers);
+      console.log('error.response.data', error.response.data);
+      console.log('error.response.status', error.response.status);
+      console.log('error.response.headers', error.response.headers);
       if (error?.response?.request) {
-      let { _response } = error?.response?.request;
-      console.log('_response',_response);
-      return JSON.parse(_response)?.message
-        ? JSON.parse(_response)?.message.toString()
-        : error.message?.toString();
+        let { _response } = error?.response?.request;
+        console.log('_response', _response);
+        return JSON.parse(_response)?.message
+          ? JSON.parse(_response)?.message.toString()
+          : error.message?.toString();
       }
       return error.response.data;
     } else if (error.request) {
@@ -66,7 +77,7 @@ const SERVICES = {
     } else {
       // Something happened in setting up the request that triggered an Error
       console.log('Error', error);
-      
+
       return error.message;
     }
     // if (error?.response?.request) {
@@ -89,7 +100,7 @@ const SERVICES = {
     //   }
     // }
   },
-  _get_current_location :async() => {
+  _get_current_location: async () => {
     try {
       await requestLocationPermission()
       return new Promise((res, rej) => {
@@ -99,28 +110,28 @@ const SERVICES = {
       throw new Error(error);
     }
   },
-  _get_distance:(lattitude1,longitude1,lattitude2,longitude2)=>{
+  _get_distance: (lattitude1, longitude1, lattitude2, longitude2) => {
     const toRadian = n => (n * Math.PI) / 180
-      let lat2 = lattitude2
-      let lon2 = longitude2
-      let lat1 = lattitude1
-      let lon1 = longitude1
-      let R = 6371 // km
-      let x1 = lat2 - lat1
-      let dLat = toRadian(x1)
-      let x2 = lon2 - lon1
-      let dLon = toRadian(x2)
-      let a =Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadian(lat1)) * Math.cos(toRadian(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
-      let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-      let d = R * c
-      return d.toFixed(2)
+    let lat2 = lattitude2
+    let lon2 = longitude2
+    let lat1 = lattitude1
+    let lon1 = longitude1
+    let R = 6371 // km
+    let x1 = lat2 - lat1
+    let dLat = toRadian(x1)
+    let x2 = lon2 - lon1
+    let dLon = toRadian(x2)
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRadian(lat1)) * Math.cos(toRadian(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    let d = R * c
+    return d.toFixed(2)
   },
-  _capitalizeFirst:(str)=>(str.charAt(0).toUpperCase() + str.slice(1)),
+  _capitalizeFirst: (str) => (str.charAt(0).toUpperCase() + str.slice(1)),
   _returnStringify: (data) => JSON.stringify(data),
-  
-  _share:async (description = '',url) => {
+
+  _share: async (description = '', url) => {
     try {
-      console.log('url::',url);
+      console.log('url::', url);
       const result = await Share.share({
         // message:description?description:url,
         // url: url,
@@ -287,10 +298,10 @@ const SERVICES = {
       throw new Error(error);
     }
   },
-  findOnlineUser:(users={},user_id)=>{
-    console.log('usersssss:::',users);
-   return Object.keys(users)?.find((key, index)=>
-   users[key]?.user_id===user_id
+  findOnlineUser: (users = {}, user_id) => {
+    console.log('usersssss:::', users);
+    return Object.keys(users)?.find((key, index) =>
+      users[key]?.user_id === user_id
     );
   }
 };

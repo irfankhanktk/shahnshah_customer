@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, SafeAreaView, ScrollView, View} from 'react-native';
-import {connect} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { FlatList, SafeAreaView, ScrollView, View } from 'react-native';
+import { connect } from 'react-redux';
 import Row from '../../components/atoms/row';
-import {CustomAppHeader} from '../../components/molecules/header/custom-header';
+import { CustomAppHeader } from '../../components/molecules/header/custom-header';
 // import ActionButton from "../../components/review-schedule-items/action-button";
 import moment from 'moment';
 import Buttons from '../../components/atoms/Button';
@@ -21,9 +21,9 @@ import WorkerItem from '../../components/service-offering/woker-item';
 import Medium from '../../presentation/typography/medium-text';
 import Regular from '../../presentation/typography/regular-text';
 import colors from '../../services/colors';
-import {mvs} from '../../services/metrices';
+import { mvs } from '../../services/metrices';
 import DIVIY_API from '../../store/api-calls';
-import {Styles as styles} from './style';
+import { Styles as styles } from './style';
 const ReviewAndSchedule = props => {
   const {
     get_booking,
@@ -42,11 +42,11 @@ const ReviewAndSchedule = props => {
     apply_coupon,
     route,
   } = props;
-  // const { bookingID, selected } = route.params;
-  const bussinessId = 3333;
-  const bookingId = 273;
+  const { bookingId = 273, businessId = 3333, } = route.params;
+  // const bookingId = 273;
   const customerId = 3333; //selected;
-  console.log('Customer id ', customerId);
+  console.log('bookingId id ', bookingId);
+  console.log('businessId id ', businessId);
   const date = moment(new Date()).format('YYYY-MM-DD');
   const [couponPickerVisible, setCouponPickerVisible] = useState(false);
   const [slotVisible, setSlotVisible] = useState(false);
@@ -66,7 +66,7 @@ const ReviewAndSchedule = props => {
   }, [isRefresh]);
   const inIt = async () => {
     console.log('Booking id is====> ', bookingId);
-    const bookingResponse = await get_booking(bussinessId, bookingId);
+    const bookingResponse = await get_booking(businessId, bookingId);
     if (bookingResponse?.data) {
       setBooking(bookingResponse?.data);
       console.log('Booking information===>', bookingResponse?.data);
@@ -85,7 +85,7 @@ const ReviewAndSchedule = props => {
     }
   };
   const getWorkers = async () => {
-    const workersReponse = await get_workers(bussinessId, bookingId);
+    const workersReponse = await get_workers(businessId, bookingId);
     console.log('Workers information===>', workersReponse?.data);
     if (workersReponse?.data) {
       setWorkers(workersReponse?.data);
@@ -109,23 +109,23 @@ const ReviewAndSchedule = props => {
     }
   };
   const checkin_booking = async () => {
-    await checkin(bussinessId, bookingId);
+    await checkin(businessId, bookingId);
     setRefresh(!isRefresh);
   };
   const complete_booking = async () => {
-    await complete_job(bussinessId, bookingId);
+    await complete_job(businessId, bookingId);
     setRefresh(!isRefresh);
   };
   const start_booking = async () => {
-    await start(bussinessId, bookingId);
+    await start(businessId, bookingId);
     setRefresh(!isRefresh);
   };
   const no_show_booking = async () => {
-    await no_show(bussinessId, bookingId);
+    await no_show(businessId, bookingId);
     setRefresh(!isRefresh);
   };
   const assign_booking_worker = async id => {
-    await assign_worker(bussinessId, bookingId, id);
+    await assign_worker(businessId, bookingId, id);
     setWorkerVisible(false);
     setRefresh(!isRefresh);
   };
@@ -145,7 +145,7 @@ const ReviewAndSchedule = props => {
     setRefresh(!isRefresh);
   };
   const remove_booking_discount = async () => {
-    await remove_discount(bookingId, bussinessId);
+    await remove_discount(bookingId, businessId);
     console.log('Discount is Removed');
     setRefresh(!isRefresh);
   };
@@ -156,7 +156,7 @@ const ReviewAndSchedule = props => {
   return (
     <SafeAreaView style={styles.conntainer}>
       <CustomAppHeader
-        style={{paddingTop: mvs(25)}}
+        style={{ paddingTop: mvs(25) }}
         title={'Review & Schedule'}
         color={colors?.lightgrey2}
       />
@@ -187,7 +187,7 @@ const ReviewAndSchedule = props => {
             label={coupon?.view?.caption}
             color={colors.black}
             size={16}
-            style={{marginBottom: mvs(10)}}
+            style={{ marginBottom: mvs(10) }}
           />
           <Row style={styles.coupon_row}>
             <NewCouponItem
@@ -203,10 +203,10 @@ const ReviewAndSchedule = props => {
               style={{
                 alignSelf:
                   coupon?.view?.remove &&
-                  !coupon?.view?.applyCoupon &&
-                  !coupon?.view?.applyDiscount &&
-                  !coupon?.view?.changeCoupon &&
-                  !coupon?.view?.changeDiscount
+                    !coupon?.view?.applyCoupon &&
+                    !coupon?.view?.applyDiscount &&
+                    !coupon?.view?.changeCoupon &&
+                    !coupon?.view?.changeDiscount
                     ? 'flex-end'
                     : 'flex-start',
               }}>
@@ -217,7 +217,7 @@ const ReviewAndSchedule = props => {
                   borderColor={colors.primary}
                   titleColor={colors.primary}
                   onClick={() => getCoupons()}
-                  style={{alignSelf: 'flex-end'}}
+                  style={{ alignSelf: 'flex-end' }}
                 />
               ) : null}
               {coupon?.view?.remove ? (
@@ -226,7 +226,7 @@ const ReviewAndSchedule = props => {
                   bgColor={colors.lightPink1}
                   borderColor={colors.red}
                   titleColor={colors.red}
-                  style={{alignSelf: 'flex-end'}}
+                  style={{ alignSelf: 'flex-end' }}
                   onClick={() => remove_booking_discount()}
                 />
               ) : null}
@@ -236,13 +236,13 @@ const ReviewAndSchedule = props => {
             label={'Payment Method'}
             color={colors.black}
             size={16}
-            style={{marginVertical: mvs(15)}}
+            style={{ marginVertical: mvs(15) }}
           />
           <FlatList
             horizontal
-            contentContainerStyle={{paddingVertical: mvs(12)}}
+            contentContainerStyle={{ paddingVertical: mvs(12) }}
             data={booking?.paymentOptions}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <PaymentCard
                 key={index}
                 title={item?.title}
@@ -271,7 +271,7 @@ const ReviewAndSchedule = props => {
             label={'Booking Lifecycle'}
             color={colors.black}
             size={16}
-            style={{marginVertical: mvs(15)}}
+            style={{ marginVertical: mvs(15) }}
           />
           {booking?.lifecycle?.booked && (
             <LifeCycleItem
@@ -326,23 +326,23 @@ const ReviewAndSchedule = props => {
                 booking?.view?.message?.color == 'green'
                   ? colors.lightGreen1
                   : booking?.view?.message?.color == 'red'
-                  ? colors.lightPink1
-                  : booking?.view?.message?.color == 'blue'
-                  ? colors.lightBlue
-                  : booking?.view?.message?.color == 'grey'
-                  ? colors.lightgrey
-                  : null
+                    ? colors.lightPink1
+                    : booking?.view?.message?.color == 'blue'
+                      ? colors.lightBlue
+                      : booking?.view?.message?.color == 'grey'
+                        ? colors.lightgrey
+                        : null
               }
               fillColor={
                 booking?.view?.message?.color == 'green'
                   ? colors.green
                   : booking?.view?.message?.color == 'red'
-                  ? colors.red
-                  : booking?.view?.message?.color == 'blue'
-                  ? colors.blue
-                  : booking?.view?.message?.color == 'grey'
-                  ? colors.lightgrey1
-                  : null
+                    ? colors.red
+                    : booking?.view?.message?.color == 'blue'
+                      ? colors.blue
+                      : booking?.view?.message?.color == 'grey'
+                        ? colors.lightgrey1
+                        : null
               }
             />
           )}
@@ -391,29 +391,29 @@ const ReviewAndSchedule = props => {
 const mapStateToProps = store => ({});
 
 const mapDispatchToProps = {
-  get_booking: (bussinessId, bookingId) =>
-    DIVIY_API.get_booking(bookingId, bussinessId),
+  get_booking: (businessId, bookingId) =>
+    DIVIY_API.get_booking(bookingId, businessId),
   get_available_slots: (bookingId, date) =>
     DIVIY_API.get_available_slots(bookingId, date),
   get_booking_coupons: (bookingId, customerId) =>
     DIVIY_API.get_booking_coupons(bookingId, customerId),
-  checkin: (bussinessId, bookingId) =>
-    DIVIY_API.checkin(bussinessId, bookingId),
-  no_show: (bussinessId, bookingId) =>
-    DIVIY_API.no_show(bussinessId, bookingId),
-  complete_job: (bussinessId, bookingId) =>
-    DIVIY_API.complete_job(bussinessId, bookingId),
-  start: (bussinessId, bookingId) => DIVIY_API.start(bussinessId, bookingId),
-  get_workers: (bussinessId, bookingId) =>
-    DIVIY_API.get_workers(bussinessId, bookingId),
-  assign_worker: (bussinessId, bookingId, workerId) =>
-    DIVIY_API.assign_worker(bussinessId, bookingId, workerId),
+  checkin: (businessId, bookingId) =>
+    DIVIY_API.checkin(businessId, bookingId),
+  no_show: (businessId, bookingId) =>
+    DIVIY_API.no_show(businessId, bookingId),
+  complete_job: (businessId, bookingId) =>
+    DIVIY_API.complete_job(businessId, bookingId),
+  start: (businessId, bookingId) => DIVIY_API.start(businessId, bookingId),
+  get_workers: (businessId, bookingId) =>
+    DIVIY_API.get_workers(businessId, bookingId),
+  assign_worker: (businessId, bookingId, workerId) =>
+    DIVIY_API.assign_worker(businessId, bookingId, workerId),
   update_booking_payment: (bookingId, method, reference) =>
     DIVIY_API.update_booking_payment(bookingId, method, reference),
   update_slot: (bookingId, slotId) => DIVIY_API.update_slot(bookingId, slotId),
   remove_slot: bookingId => DIVIY_API.remove_slot(bookingId),
-  remove_discount: (bookingId, bussinessId) =>
-    DIVIY_API.remove_discount(bookingId, bussinessId),
+  remove_discount: (bookingId, businessId) =>
+    DIVIY_API.remove_discount(bookingId, businessId),
   apply_coupon: (bookingId, couponId, customerId) =>
     DIVIY_API.apply_coupon(bookingId, couponId, customerId),
 };
