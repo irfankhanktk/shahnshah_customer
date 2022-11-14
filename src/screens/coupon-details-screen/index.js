@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import {connect} from 'react-redux';
-import {CustomHeader} from '../../components/molecules/header/header-1x';
+import React, { useEffect, useState } from 'react';
+import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { connect } from 'react-redux';
+import { CustomHeader } from '../../components/molecules/header/header-1x';
 import HeadingTitle from '../../components/molecules/heading-title';
 import LabelValue from '../../components/molecules/label-value-row';
 import TotalRateMap from '../../components/molecules/total-rate-map/index';
 import Regular from '../../presentation/typography/regular-text';
 import colors from '../../services/colors';
-import {mvs} from '../../services/metrices';
+import { mvs } from '../../services/metrices';
 import CouponCard from './../../components/molecules/coupon-card/index';
-import {Styles as styles} from './styles';
-import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import { Styles as styles } from './styles';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
 import ServiceOffering from './../../components/service-offering/index';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
-import {getData} from '../../localStorage';
+import { getData } from '../../localStorage';
 import DIVIY_API from '../../store/api-calls';
 import Buttons from '../../components/atoms/Button';
 import SemiBold from '../../presentation/typography/semibold-text';
@@ -24,10 +24,10 @@ import AboutTextBtn from '../../components/AboutTextBtn';
 import Row from '../../components/atoms/row';
 import Medium from '../../presentation/typography/medium-text';
 import CouponDetailsOfferingCard from '../../components/CouponDetailsOfferingCard';
-import {color} from 'react-native-elements/dist/helpers';
+import { color } from 'react-native-elements/dist/helpers';
 
 const CouponDetails = props => {
-  const {route, navigation, get_details, avail_coupon} = props;
+  const { route, navigation, get_details, avail_coupon } = props;
   const [isMoreBtn, setIsMoreBtn] = React.useState(true);
   const [loading, setLoading] = React.useState(true);
   const [coupon, setCoupon] = useState({});
@@ -38,7 +38,6 @@ const CouponDetails = props => {
   console.log('coupon?.view:', coupon?.view);
   const getCouponDetails = async () => {
     var id = await getData('customer_id');
-    id = 1;
     const response = await get_details(route.params?.id, route.params.bId, id);
 
     if (response?.data) {
@@ -52,11 +51,6 @@ const CouponDetails = props => {
   const availCoupon = async () => {
     console.log('availCoupon func :');
     var id = await getData('customer_id');
-    console.log(':from func id:', id);
-    id = 1;
-    console.log('id new :', id);
-    console.log('Customer id is ', id);
-    console.log('Coupon id is ', coupon?.id);
     const availResponse = await avail_coupon(id, coupon?.id);
     console.log('Avail Response', availResponse?.data);
     setRefresh(!refresh);
@@ -94,7 +88,7 @@ const CouponDetails = props => {
 
           <TotalRateMap
             loading={loading}
-            data={{businessReviews: coupon?.business}}
+            data={{ businessReviews: coupon?.business }}
             address={coupon?.business?.view?.address}
           />
 
@@ -135,7 +129,7 @@ const CouponDetails = props => {
                   showsHorizontalScrollIndicator={false}
                   horizontal
                   data={coupon?.offerings || []}
-                  renderItem={({item, index}) => {
+                  renderItem={({ item, index }) => {
                     return (
                       <CouponDetailsOfferingCard
                         navigation={navigation}
@@ -215,12 +209,12 @@ const CouponDetails = props => {
           {coupon?.otherConditions && (
             <HeadingTitle
               marginVertical={0}
-              style={{backgroundColor: colors.white, color: colors.black}}
+              style={{ backgroundColor: colors.white, color: colors.black }}
               title="Other Conditions"
             />
           )}
           <ShimmerPlaceholder
-            style={{width: '100%', backgroundColor: colors.white}}
+            style={{ width: '100%', backgroundColor: colors.white }}
             visible={loading}>
             <View
               style={{
@@ -258,7 +252,7 @@ const CouponDetails = props => {
           </ShimmerPlaceholder>
 
           {coupon?.view?.resume && (
-            <View style={{marginTop: mvs(10), alignItems: 'center'}}>
+            <View style={{ marginTop: mvs(10), alignItems: 'center' }}>
               <SemiBold
                 label={coupon?.view?.resumeMessage}
                 size={14}
@@ -279,7 +273,7 @@ const CouponDetails = props => {
               onClick={() => {
                 coupon?.saleId == null
                   ? availCoupon()
-                  : navigation.navigate('SaleCoupon', {saleId: coupon?.saleId});
+                  : navigation.navigate('SaleCoupon', { saleId: coupon?.saleId });
               }}
             />
           </View>

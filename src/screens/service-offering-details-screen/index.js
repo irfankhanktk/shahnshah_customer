@@ -1,75 +1,52 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  ScrollView,
-  View,
-  TouchableOpacity,
-  FlatList,
-  Pressable,
-  ImageBackground,
-  StatusBar,
-  Text,
+  FlatList, ImageBackground, ScrollView, StatusBar, TouchableOpacity, View
 } from 'react-native';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useDispatch, useSelector } from 'react-redux';
+import { BaseURL } from '../../ApiServices';
 import ImagePlaceholder from '../../components/atoms/Placeholder';
 import Row from '../../components/atoms/row';
-import {CustomHeader} from '../../components/molecules/header/header-1x';
+import CouponPromo from '../../components/coupon-promo/index';
 import HeadingTitle from '../../components/molecules/heading-title';
+import { getData } from '../../localStorage';
 import Bold from '../../presentation/typography/bold-text';
 import Medium from '../../presentation/typography/medium-text';
 import Regular from '../../presentation/typography/regular-text';
 import colors from '../../services/colors';
-import {mvs, height, width} from '../../services/metrices';
-import {Styles as styles} from './styles';
-import CouponPromo from '../../components/coupon-promo/index';
-import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
-import LinearGradient from 'react-native-linear-gradient';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { height, mvs, width } from '../../services/metrices';
+import { Styles as styles } from './styles';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
-import {getData} from '../../localStorage';
-import {BaseURL} from '../../ApiServices';
-import SERVICES from '../../services/common-services';
 
+import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 import {
-  CarWash,
-  Map,
-  Percent,
-  Ratings,
-  RightArrow,
-  Icon,
-  DiscountIcon,
-  SpeedometerPrimary,
-  SettingIcon,
-  Total,
+  DiscountIcon, SettingIcon, SpeedometerPrimary
 } from '../../assets/common-icons';
 import Buttons from '../../components/atoms/Button';
-import ServiceCard from '../../components/molecules/service-card';
-import TotalRateMap from './../../components/molecules/total-rate-map/index';
 import ReviewsRaing from '../../components/molecules/reviews-rating';
-import Toast from 'react-native-toast-message';
-import {addBookingID, addOfferingID} from '../../Redux/Reducers';
-import {useNavigation} from '@react-navigation/native';
+import { addBookingID, addOfferingID } from '../../Redux/Reducers';
 
-import LabelValue from '../../components/molecules/label-value-row';
-import SemiBold from '../../presentation/typography/semibold-text';
-import RatingStar from '../../components/molecules/rating-star';
-import {Avatar} from 'react-native-elements';
-import {useServicesOfferingProps} from './useServicesOfferingProps';
+import { Avatar } from 'react-native-elements';
 import LinedColoredCard from '../../components/linedColoredCard';
-import {color} from 'react-native-elements/dist/helpers';
-import GeneralStatusBarColor from '../../components/GeneralStatusBarColor';
+import RatingStar from '../../components/molecules/rating-star';
+import SemiBold from '../../presentation/typography/semibold-text';
+import { useServicesOfferingProps } from './useServicesOfferingProps';
 const about =
   'Gresasy Elbo Auto Repair has been the leader in automotive repair in the Triad area for twenty years.Gresasy Elbo Auto Repair has been the leader in automotive repair in the Triad area for twenty years  continuing the outstanding level of service Triad area residents expect from our';
 const services = [
-  {icon: 'Services', title: '2.5K Reviews', value: '5 Services'},
-  {icon: 'Schedule', title: 'Book Service', value: 'Availability'},
-  {icon: 'Discount', title: 'Discounts', value: 'View Promos'},
+  { icon: 'Services', title: '2.5K Reviews', value: '5 Services' },
+  { icon: 'Schedule', title: 'Book Service', value: 'Availability' },
+  { icon: 'Discount', title: 'Discounts', value: 'View Promos' },
 ];
 const ServiceOfferingDetails = props => {
-  const {route} = props;
+  const { route } = props;
   const navigation = useNavigation();
-  const {joinTwoArrays, isObjectEmpty, isDiscountEmpty} =
+  const { joinTwoArrays, isObjectEmpty, isDiscountEmpty } =
     useServicesOfferingProps(navigation);
-  const {id, distance} = route.params;
+  const { id, distance } = route.params;
   console.log('route.params:', route.params);
   const dispatch = useDispatch();
   const state = useSelector(state => state.businessReviews);
@@ -95,16 +72,15 @@ const ServiceOfferingDetails = props => {
     });
   };
   const delayAPI = (responseID, businessID) => {
-      navigation.navigate('ReviewAndSchedule', {
-        bookingID: responseID,
-        businessID: businessID,
-      });
+    navigation.navigate('ReviewAndSchedule', {
+      bookingID: responseID,
+      businessID: businessID,
+    });
   };
   const BookNow = async () => {
-    setpayload({...payload, bookNowStart: true});
+    setpayload({ ...payload, bookNowStart: true });
     const token = await getData('token');
     const customerID = await getData('customer_id');
-    console.log(customerID);
     // console.log('Booking=======', token, customerID, route.params.id);
     var requestOptions = {
       method: 'POST',
@@ -113,7 +89,7 @@ const ServiceOfferingDetails = props => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        customerId: 1,
+        customerId: customerID,
         offeringId: id,
         byCustomer: 0,
       }),
@@ -124,7 +100,7 @@ const ServiceOfferingDetails = props => {
       .then(response => response.json())
       .then(result => {
         if (result != null) {
-          setpayload({...payload, bookNowStart: false});
+          setpayload({ ...payload, bookNowStart: false });
           showToast('success', 'Booking confirmed');
           dispatch(addBookingID(result));
           dispatch(addOfferingID(id));
@@ -133,14 +109,13 @@ const ServiceOfferingDetails = props => {
         }
       })
       .catch(error => {
-        setpayload({...payload, bookNowStart: false});
+        setpayload({ ...payload, bookNowStart: false });
         console.log('error', error);
       });
   };
 
   const getServiceDetails = async () => {
     const customerID = await getData('customer_id');
-    console.log('customerID::', customerID);
     const token = await getData('token');
     if (token != null) {
       var requestOptions = {
@@ -212,7 +187,7 @@ const ServiceOfferingDetails = props => {
           barStyle="dark-content"
           translucent
           backgroundColor={'transparent'}
-          // backgroundColor={'rgba(255, 255, 255, 0.5)'}
+        // backgroundColor={'rgba(255, 255, 255, 0.5)'}
         />
 
         <ScrollView
@@ -238,7 +213,7 @@ const ServiceOfferingDetails = props => {
                 width: width,
               }}>
               <ShimmerPlaceholder
-                style={{width: width, height: mvs(240)}}
+                style={{ width: width, height: mvs(240) }}
                 visible={loading}>
                 <ImageBackground
                   imageStyle={{
@@ -252,7 +227,7 @@ const ServiceOfferingDetails = props => {
                   <View style={styles.imgBgHeader}>
                     <TouchableOpacity
                       onPress={() => props?.navigation?.goBack()}
-                      style={{top: mvs(7)}}>
+                      style={{ top: mvs(7) }}>
                       <FontAwesome
                         size={mvs(30)}
                         color={colors.black}
@@ -289,7 +264,7 @@ const ServiceOfferingDetails = props => {
                   size={mvs(32)}
                   // style={{backgroundColor: 'transparent'}}
                   rounded
-                  source={{uri: serviceDetails?.service?.icon}}
+                  source={{ uri: serviceDetails?.service?.icon }}
                   key={serviceDetails?.service?.id}
                 />
                 {serviceDetails?.discount?.highlight !== undefined && (
@@ -306,7 +281,7 @@ const ServiceOfferingDetails = props => {
                     <DiscountIcon />
 
                     <Medium
-                      style={{marginLeft: 5}}
+                      style={{ marginLeft: 5 }}
                       color={colors.black}
                       label={serviceDetails?.discount?.highlight}
                     />
@@ -315,7 +290,7 @@ const ServiceOfferingDetails = props => {
               </View>
 
               <View style={styles.detailsInnerCard}>
-                <View style={{height: mvs(55)}}>
+                <View style={{ height: mvs(55) }}>
                   <ShimmerPlaceholder visible={loading}>
                     <Medium
                       numberOfLines={2}
@@ -364,15 +339,14 @@ const ServiceOfferingDetails = props => {
                           size={mvs(8)}
                           color={colors.G9B9B9B}
                           label={`AED`}
-                          style={{marginTop: 10}}
+                          style={{ marginTop: 10 }}
                         />
                         <Medium
                           size={mvs(19)}
                           color={colors.primary}
-                          label={`${
-                            serviceDetails?.newPrice || serviceDetails.price
-                          }`}
-                          style={{marginLeft: 4}}
+                          label={`${serviceDetails?.newPrice || serviceDetails.price
+                            }`}
+                          style={{ marginLeft: 4 }}
                         />
                       </View>
                     </View>
@@ -403,7 +377,7 @@ const ServiceOfferingDetails = props => {
                       visible={loading}>
                       <ImagePlaceholder
                         borderRadius={mvs(18)}
-                        uri={{uri: serviceDetails?.business?.logo}}
+                        uri={{ uri: serviceDetails?.business?.logo }}
                         containerStyle={{
                           width: mvs(45),
                           height: mvs(45),
@@ -423,7 +397,7 @@ const ServiceOfferingDetails = props => {
                         <Regular
                           numberOfLines={2}
                           color={colors.black}
-                          style={{flex: 1}}
+                          style={{ flex: 1 }}
                           label={
                             'Prismatic technology'.length > 20
                               ? `${'Prismatic technology'.slice(0, 15)}...`
@@ -447,9 +421,9 @@ const ServiceOfferingDetails = props => {
                                 serviceDetails?.business?.view?.address
                                   ?.length > 25
                                   ? `${serviceDetails?.business?.view?.address?.slice(
-                                      0,
-                                      18,
-                                    )}...`
+                                    0,
+                                    18,
+                                  )}...`
                                   : serviceDetails?.business?.view?.address
                               }
                             />
@@ -526,7 +500,7 @@ const ServiceOfferingDetails = props => {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={tagsList || []}
-                renderItem={({item, index}) => {
+                renderItem={({ item, index }) => {
                   return (
                     <View style={styles.tagsView}>
                       <Regular
@@ -597,8 +571,8 @@ const ServiceOfferingDetails = props => {
             paddingTop={mvs(22)}
           />
 
-          <View style={{paddingHorizontal: mvs(18)}}>
-            <ShimmerPlaceholder style={{width: '90%'}} visible={loading}>
+          <View style={{ paddingHorizontal: mvs(18) }}>
+            <ShimmerPlaceholder style={{ width: '90%' }} visible={loading}>
               <Regular
                 numberOfLines={null}
                 label={
@@ -639,21 +613,21 @@ const ServiceOfferingDetails = props => {
             paddingTop={mvs(22)}
             title="Rating & Reviews"
           />
-          <View style={{paddingHorizontal: mvs(18)}}>
+          <View style={{ paddingHorizontal: mvs(18) }}>
             <Row justifyContent={'space-between'}>
-              <ShimmerPlaceholder style={{width: mvs(110)}} visible={loading}>
+              <ShimmerPlaceholder style={{ width: mvs(110) }} visible={loading}>
                 <Bold
                   color={colors.ratingg}
-                  style={{transform: [{translateY: -mvs(12)}]}}
+                  style={{ transform: [{ translateY: -mvs(12) }] }}
                   size={mvs(48)}
                   label={ratingg?.length > 0 ? ratingg[7] : 0}
                 />
               </ShimmerPlaceholder>
               <ShimmerPlaceholder
-                style={{flex: 1, height: mvs(60)}}
+                style={{ flex: 1, height: mvs(60) }}
                 visible={loading}>
                 <Row justifyContent="flex-start" alignItems="center">
-                  <View style={{justifyContent: 'space-between'}}>
+                  <View style={{ justifyContent: 'space-between' }}>
                     <RatingStar
                       ratingUnSelectedColor={colors.ratingLine}
                       ratingSelectedColor={colors.primary}
@@ -661,7 +635,7 @@ const ServiceOfferingDetails = props => {
                       size={mvs(10)}
                       list={[1, 2, 3, 4, 5]}
                       width={mvs(40)}
-                      style={{alignSelf: 'flex-end'}}
+                      style={{ alignSelf: 'flex-end' }}
                     />
                     <RatingStar
                       ratingSelectedColor={colors.primary}
@@ -671,7 +645,7 @@ const ServiceOfferingDetails = props => {
                       ratingCount={4}
                       list={[1, 2, 3, 4]}
                       width={mvs(32)}
-                      style={{alignSelf: 'flex-end', marginTop: mvs(2.4)}}
+                      style={{ alignSelf: 'flex-end', marginTop: mvs(2.4) }}
                     />
                     <RatingStar
                       ratingUnSelectedColor={colors.ratingLine}
@@ -681,7 +655,7 @@ const ServiceOfferingDetails = props => {
                       list={[1, 2, 3]}
                       width={mvs(24)}
                       ratingCount={3}
-                      style={{alignSelf: 'flex-end', marginTop: mvs(2.4)}}
+                      style={{ alignSelf: 'flex-end', marginTop: mvs(2.4) }}
                     />
                     <RatingStar
                       ratingSelectedColor={colors.primary}
@@ -691,7 +665,7 @@ const ServiceOfferingDetails = props => {
                       size={mvs(10)}
                       list={[1, 2]}
                       width={mvs(16)}
-                      style={{alignSelf: 'flex-end', marginTop: mvs(2.4)}}
+                      style={{ alignSelf: 'flex-end', marginTop: mvs(2.4) }}
                     />
                     <RatingStar
                       ratingSelectedColor={colors.primary}
@@ -701,7 +675,7 @@ const ServiceOfferingDetails = props => {
                       size={mvs(10)}
                       list={[1]}
                       width={mvs(16)}
-                      style={{alignSelf: 'flex-end'}}
+                      style={{ alignSelf: 'flex-end' }}
                     />
                   </View>
                   <View
@@ -710,7 +684,7 @@ const ServiceOfferingDetails = props => {
                       flex: 1,
                       justifyContent: 'space-between',
                     }}>
-                    <View style={{...styles.ratingBar, marginTop: mvs(0)}}>
+                    <View style={{ ...styles.ratingBar, marginTop: mvs(0) }}>
                       <View
                         style={{
                           ...styles.ratingPercentage,
@@ -757,7 +731,7 @@ const ServiceOfferingDetails = props => {
             </Row>
             <Row>
               <Regular
-                style={{left: mvs(5), bottom: mvs(20)}}
+                style={{ left: mvs(5), bottom: mvs(20) }}
                 color={colors.black}
                 size={mvs(16)}
                 label={'Out of 5'}
@@ -890,7 +864,7 @@ const ServiceOfferingDetails = props => {
               picsArray={payload?.picsArrayReviews}
               data={getBusinessReviews?.map(item => item)}
               loading={loading}
-              style={{marginBottom: mvs(15), paddingTop: mvs(17)}}
+              style={{ marginBottom: mvs(15), paddingTop: mvs(17) }}
             />
           </ShimmerPlaceholder>
 
@@ -921,9 +895,9 @@ const ServiceOfferingDetails = props => {
             onClick={() =>
               serviceDetails?.bookingId != null
                 ? navigation.navigate('ReviewAndSchedule', {
-                    bookingID: serviceDetails?.bookingId,
-                    businessID: bookingState?.serviceBooking?.offeringID,
-                  })
+                  bookingID: serviceDetails?.bookingId,
+                  businessID: bookingState?.serviceBooking?.offeringID,
+                })
                 : BookNow()
             }
             disabled={payload.bookNowStart}
