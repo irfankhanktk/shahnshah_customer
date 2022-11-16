@@ -134,6 +134,7 @@ const ServiceOfferingDetails = props => {
       .then(response => response.json())
       .then(result => {
         if (result != null) {
+          console.log('result getServiceDetails=>', result);
           setserviceDetails(result);
           getTags(result?.options, result.specs);
           setRatingg(result?.business?.rating);

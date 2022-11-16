@@ -10,6 +10,7 @@ export const URLS = {
   booking: {
     complete_booking: 'p/public/bookings/',
     //new
+    get_booking_customer: 'c/cus/customers/',
     create_booking: 'p/public/bookings',
     get_booking: 'b/om/businesses/', //attach booking id at end
     get_available_slots: 'p/public/bookings/',

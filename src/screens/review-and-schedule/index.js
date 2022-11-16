@@ -42,9 +42,8 @@ const ReviewAndSchedule = props => {
     apply_coupon,
     route,
   } = props;
-  const { bookingId = 273, businessId = 3333, } = route.params;
-  // const bookingId = 273;
-  const customerId = 3333; //selected;
+  const { bookingId, businessId, } = route.params;
+  // const customerId = 3333; //selected;
   console.log('bookingId id ', bookingId);
   console.log('businessId id ', businessId);
   const date = moment(new Date()).format('YYYY-MM-DD');

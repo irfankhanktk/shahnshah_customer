@@ -37,9 +37,9 @@ const Bookings = props => {
   const [completed, setCompletedData] = useState(BOOKING?.completed || []);
   const [cancelled, setCancelledData] = useState(BOOKING?.cancelled);
   useEffect(() => {
-    // getBookings();
+    getBookings();
     // onLikePress(273);
-    onUploadImage(273)
+    // onUploadImage(273)
   }, [])
 
   const onLikePress = async (bookingId) => {
@@ -74,10 +74,10 @@ const Bookings = props => {
   const getBookings = async () => {
     const customerId = await getData("customer_id");
     const response = await get_bookings(customerId);
-    // console.log('response=>> of bookings', response?.data);
-    // setCancelledData(response?.data?.cancelled)
-    // setCompletedData(response?.data?.completed)
-    // setScheduleData(response?.data?.scheduled)
+    console.log('response=>> of bookings', response?.data);
+    setCancelledData(response?.data?.cancelled)
+    setCompletedData(response?.data?.completed)
+    setScheduleData(response?.data?.scheduled)
     //response?.data?.draft
     //response?.data?.history
     //response?.data?.cancelled

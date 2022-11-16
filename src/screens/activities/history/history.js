@@ -37,8 +37,8 @@ const History = props => {
   const getBookings = async () => {
     const customerId = await getData("customer_id");
     const response = await get_bookings(customerId);
-    // console.log('response of history=>', response?.data?.history);
-    // setHistoryData(response?.data?.history)
+    console.log('response of history=>', response?.data?.history);
+    setHistoryData(response?.data?.history)
     // setCancelledData(response?.data?.cancelled)
     // setCompletedData(response?.data?.completed)
     // setScheduleData(response?.data?.scheduled)

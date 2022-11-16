@@ -211,12 +211,14 @@ const SaleCoupon = props => {
   const {
     route,
     get_coupon_sale,
+    get_coupon_sale_details,
     update_payment_coupon,
     complete_purchase_coupon,
   } = props;
   const navigation = useNavigation();
   // const customerId = 3333;
-  const { couponId = 1, businessId = 3333, } = route?.params;
+  const { couponId, businessId = 3333, saleId } = route?.params;
+  console.log('couponId====>', couponId);
   const showToast = (type, text1, text2) => {
     Toast.show({
       type: type,
@@ -237,9 +239,8 @@ const SaleCoupon = props => {
   }, [refresh]);
   const getSaledetails = async () => {
     const customerId = await getData('customer_id');
-    //var saleId = route.params?.saleId;
-    //const response = await get_coupon_sale_details(1, 8);
-    const response = await get_coupon_sale(couponId, businessId, customerId);
+    const response = await get_coupon_sale_details(customerId, saleId);
+    // const response = await get_coupon_sale(couponId, businessId, customerId);
     console.log('Coupon Sale Data ===> ', response?.data);
     setSaleData(response?.data);
   };
@@ -249,9 +250,14 @@ const SaleCoupon = props => {
     setRefresh(!refresh);
   };
   const purchaseCoupon = async () => {
-    const customerId = await getData('customer_id');
-    await complete_purchase_coupon(couponId, customerId);
-    setRefresh(!refresh);
+    try {
+      const customerId = await getData('customer_id');
+      const res = await complete_purchase_coupon(couponId, customerId);
+      console.log('res=>', res);
+      setRefresh(!refresh);
+    } catch (error) {
+      console.log('error=>', error);
+    }
   };
   return (
     <View style={{ ...styles.container, backgroundColor: colors.white }}>
@@ -296,38 +302,38 @@ const SaleCoupon = props => {
           <BillView invoice={booking?.invoice} />
           <AlertMessage
             view={booking?.view}
-            color={booking?.view?.statusLine?.color}
-            title={booking?.view?.statusLine?.resumeMessage}
+            color={booking?.view?.message?.color}
+            title={booking?.view?.message?.message}
             bgColor={
-              booking?.view?.statusLine?.color == 'green'
+              booking?.view?.message?.color == 'green'
                 ? colors.lightGreen1
-                : booking?.view?.statusLine?.color == 'red'
+                : booking?.view?.message?.color == 'red'
                   ? colors.lightPink1
-                  : booking?.view?.statusLine?.color == 'blue'
+                  : booking?.view?.message?.color == 'blue'
                     ? colors.lightBlue
-                    : booking?.view?.statusLine?.color == 'grey'
+                    : booking?.view?.message?.color == 'grey'
                       ? colors.lightgrey
                       : null
             }
             fillColor={
-              booking?.view?.statusLine?.color == 'green'
+              booking?.view?.message?.color == 'green'
                 ? colors.green
-                : booking?.view?.statusLine?.color == 'red'
+                : booking?.view?.message?.color == 'red'
                   ? colors.red
-                  : booking?.view?.statusLine?.color == 'blue'
+                  : booking?.view?.message?.color == 'blue'
                     ? colors.blue
-                    : booking?.view?.statusLine?.color == 'grey'
+                    : booking?.view?.message?.color == 'grey'
                       ? colors.lightgrey1
                       : null
             }
           />
           <View style={styles.paymentView}>
-            <Buttons.ButtonPrimary
-              title={booking?.view?.buttonTitle}
+            {booking?.view?.continue && <Buttons.ButtonPrimary
+              title={'Confirm'}
               style={styles.button}
               onClick={() => purchaseCoupon()}
               loading={payload.updateStart}
-            />
+            />}
           </View>
         </View>
       </ScrollView>

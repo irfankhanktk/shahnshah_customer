@@ -279,6 +279,7 @@ const get_booking = (bookingId, businessId) => {
     try {
       const response = await API_REQUESTS.getData(
         `${URLS.booking.get_booking}${businessId}/bookings/${bookingId}/byBusiness`,
+        // http://124.29.208.60:8080/api/c/cus/customers/3333/bookings/297
       );
       return response;
     } catch (error) {
@@ -480,12 +481,14 @@ const update_payment_coupon = (couponId, customerId, method) => {
 const complete_purchase_coupon = (couponId, customerId) => {
   return async (dispatch, getState) => {
     try {
-      const response = await API_REQUESTS.putDataWithoutBody(
+      const response = await API_REQUESTS.getData(
         `${URLS.coupon.update_coupon_payment}${customerId}/coupons/${couponId}/complete`,
       );
+      console.log('response=>=>>>>> of pur', response);
       return response;
     } catch (error) {
-      console.log(error?.response?.data);
+      console.log('error=>>>>>>>', error);
+      throw error;
     }
   };
 };

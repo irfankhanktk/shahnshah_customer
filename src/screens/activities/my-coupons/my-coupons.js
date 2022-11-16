@@ -62,7 +62,7 @@ const MyCoupons = props => {
                   renderItem={({ item }) => (
                     <CouponItem
                       onPaymentPress={() => {
-                        props?.navigation?.navigate('SaleCoupon', { couponId: item?.couponId, businessId: item?.businessId })
+                        props?.navigation?.navigate('SaleCoupon', { saleId: item?.id, couponId: item?.couponId, businessId: item?.businessId })
                       }}
                       address={item?.view?.address}
                       bussinessName={item?.business?.title}
@@ -92,7 +92,7 @@ const MyCoupons = props => {
                   renderItem={({ item }) => (
                     <CouponItem
                       onPaymentPress={() => {
-                        props?.navigation?.navigate('SaleCoupon', { couponId: item?.couponId, businessId: item?.businessId })
+                        props?.navigation?.navigate('SaleCoupon', { saleId: item?.id, couponId: item?.couponId, businessId: item?.businessId })
                       }}
                       address={item?.view?.address}
                       bussinessName={item?.business?.title}
@@ -124,7 +124,7 @@ const MyCoupons = props => {
                   renderItem={({ item }) => (
                     <CouponItem
                       onPaymentPress={() => {
-                        props?.navigation?.navigate('SaleCoupon', { couponId: item?.couponId, businessId: item?.businessId })
+                        props?.navigation?.navigate('SaleCoupon', { saleId: item?.id, couponId: item?.couponId, businessId: item?.businessId })
                       }}
                       address={item?.view?.address}
                       bussinessName={item?.business?.title}
