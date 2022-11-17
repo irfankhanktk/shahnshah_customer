@@ -73,8 +73,8 @@ const ServiceOfferingDetails = props => {
   };
   const delayAPI = (responseID, businessID) => {
     navigation.navigate('ReviewAndSchedule', {
-      bookingID: responseID,
-      businessID: businessID,
+      bookingId: responseID,
+      businessId: businessID,
     });
   };
   const BookNow = async () => {
@@ -104,6 +104,7 @@ const ServiceOfferingDetails = props => {
           showToast('success', 'Booking confirmed');
           dispatch(addBookingID(result));
           dispatch(addOfferingID(id));
+          getServiceDetails();
           delayAPI(result, id);
           console.log('booking Confirmed=====', result);
         }

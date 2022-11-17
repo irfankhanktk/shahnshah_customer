@@ -13,7 +13,7 @@ import Home from './../../screens/tab-screens/home-tab/home-tab';
 const BottomTab = createBottomTabNavigator();
 
 const TabNavigator = (props) => {
-  const { id } = props?.route?.params;
+  const { id } = props?.route?.params || { id: 1 };
   return (
     <View style={{ flex: 1, backgroundColor: colors.white }}>
       <BottomTab.Navigator

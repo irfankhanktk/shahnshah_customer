@@ -1,16 +1,16 @@
-import {useNavigation, useTheme} from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import React from 'react';
-import {ScrollView, View} from 'react-native';
-import {connect, useDispatch} from 'react-redux';
+import { ScrollView, View } from 'react-native';
+import { connect, useDispatch } from 'react-redux';
 import Buttons from '../../components/atoms/Button';
-import {mvs} from '../../services/metrices';
+import { mvs } from '../../services/metrices';
 import DIVIY_API from '../../store/api-calls';
-import {Congrates} from '../../assets/common-icons';
-import {Congratulation_Styles as styles} from './congratulation-styles';
+import { Congrates } from '../../assets/common-icons';
+import { Congratulation_Styles as styles } from './congratulation-styles';
 import Bold from '../../presentation/typography/bold-text';
 import Regular from '../../presentation/typography/regular-text';
 import allColors from '../../services/colors';
-import {addUser} from '../../Redux/Reducers';
+import { addUser } from '../../Redux/Reducers';
 
 const Congratulation = props => {
   const navigation = useNavigation();
@@ -23,12 +23,12 @@ const Congratulation = props => {
     name: '',
     confirmPassword: '',
   });
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
-  const onSigin = async () => {};
+  const onSigin = async () => { };
 
   return (
-    <View style={{...styles.container, backgroundColor: colors.background}}>
+    <View style={{ ...styles.container, backgroundColor: colors.background }}>
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
@@ -37,7 +37,7 @@ const Congratulation = props => {
         }}>
         <View style={styles.body}>
           <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Congrates />
             <Bold label={'Congratulations!'} style={styles.welcomeText} />
             <Regular
@@ -46,13 +46,13 @@ const Congratulation = props => {
             />
             <Regular label={'account'} style={styles.welcomeSubText} />
           </View>
-          <View style={{flex: 1, justifyContent: 'flex-end', width: '100%'}}>
+          <View style={{ flex: 1, justifyContent: 'flex-end', width: '100%' }}>
             <Buttons.ButtonPrimary
               disabled={loading}
               loading={loading}
-              onClick={() => navigation.navigate('BottomTab')}
-              textStyle={{...styles.buttonText, color: colors.white}}
-              style={{...styles.button}}
+              onClick={() => navigation.navigate('BottomTab', { id: 1 })}
+              textStyle={{ ...styles.buttonText, color: colors.white }}
+              style={{ ...styles.button }}
               title={"Let's Explore Services"}
             />
             <Buttons.ButtonPrimary

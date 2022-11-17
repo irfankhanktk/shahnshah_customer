@@ -31,7 +31,7 @@ import SERVICES from '../../services/common-services';
 
 const Otp = ({ navigation, route }, props) => {
   // const navigation = useNavigation();
-  const { phone } = route.params
+  const { phone, registration } = route.params
   const dispatch = useDispatch();
   const [value, setValue] = React.useState('786576');
   const [isMatch, setIsMatch] = React.useState(true);
@@ -48,15 +48,20 @@ const Otp = ({ navigation, route }, props) => {
     });
   };
 
-  const delayAPI = (user, id) => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [
-          { name: user ? 'BottomTab' : 'About', params: { id, phone: route.params?.phone } },
-        ],
-      })
-    );
+  const delayAPI = (id) => {
+    if (registration) {
+      navigation?.navigate('About', { id, phone: route.params?.phone })
+    } else {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: 'BottomTab', params: { id, phone: route.params?.phone } },
+          ],
+        })
+      );
+    }
+
   };
   const verifyOTP = async () => {
     if (value.length <= 0) {
@@ -69,11 +74,15 @@ const Otp = ({ navigation, route }, props) => {
           code: value,
         })
         console.log('result data=>', result?.data);
-        storeData('token', result.data[0].token);
-        storeData('user', JSON.stringify(result.data[0]));
-        storeData('customer_id', result.data[0]?.id?.toString());
-        dispatch(customerData(result.data[0]));
-        delayAPI(result.data[0], result.data[0].customer_id);
+        if (result?.data?.length) {
+          storeData('token', result.data[0].token);
+          storeData('user', JSON.stringify(result?.data[0]));
+          storeData('customer_id', result.data[0]?.customer_id?.toString());
+          dispatch(customerData(result.data[0]));
+          delayAPI(result.data[0].customer_id);
+        } else {
+          delayAPI();
+        }
 
       } catch (error) {
         console.log('error=>', error);

@@ -209,7 +209,7 @@ const ReviewAndSchedule = props => {
           {console.log('coupon data=>>>>', coupon)}
           <Row style={styles.coupon_row}>
             <NewCouponItem
-              cover={coupon?.view?.cover}
+              cover={coupon?.id ? coupon?.cover : null}
               // showCoupon={!coupon?.view?.applyCoupon}
               title={coupon?.title}
               subTitle={coupon?.subTitle}

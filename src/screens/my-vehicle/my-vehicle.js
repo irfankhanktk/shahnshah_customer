@@ -1,26 +1,26 @@
-import {useNavigation, useTheme} from '@react-navigation/native';
-import React, {useState, useEffect} from 'react';
+import { useNavigation, useTheme } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
 import {
   ScrollView,
   View,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import {connect, useSelector, useDispatch} from 'react-redux';
-import {CustomHeader} from '../../components/molecules/header/header-1x';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { CustomHeader } from '../../components/molecules/header/header-1x';
 import Buttons from '../../components/atoms/Button';
 import allColors from '../../services/colors';
-import {mvs} from '../../services/metrices';
+import { mvs } from '../../services/metrices';
 import DIVIY_API from '../../store/api-calls';
-import {INPUT_FIELD} from '../../components/atoms';
-import {Vehicle_Styles as styles} from './my-vehicle-styles';
+import { INPUT_FIELD } from '../../components/atoms';
+import { Vehicle_Styles as styles } from './my-vehicle-styles';
 import Bold from '../../presentation/typography/bold-text';
 import Regular from '../../presentation/typography/regular-text';
 import Row from '../../components/atoms/row';
 import PickerModal from '../../components/molecules/modals/picker-modal';
 import Toast from 'react-native-toast-message';
-import {BaseURL} from '../../ApiServices';
-import {getData} from '../../localStorage';
+import { BaseURL } from '../../ApiServices';
+import { getData } from '../../localStorage';
 
 const MyVehicle = props => {
   const navigation = useNavigation();
@@ -44,62 +44,70 @@ const MyVehicle = props => {
     color: '',
     vin: '',
   });
-  const [VehicleName, setVehicleName] = React.useState([]);
+  const [VehicleName, setVehicleName] = React.useState([
+    { name: 'Toyota' },
+    { name: 'Nissan' },
+    { name: 'Toyota' }
+  ]);
   const [VehicleType, setVehicleType] = React.useState([]);
-  const [VehicleModel, setVehicleModel] = React.useState([]);
-  const {colors} = useTheme();
+  const [VehicleModel, setVehicleModel] = React.useState([
+    { name: 'Corolla' }, { name: 'Micra' }, { name: 'Altima' }, { name: 'Corolla' }
+  ]);
+  const { colors } = useTheme();
   const [userToken, setuserToken] = useState('');
-  let [fetchingData, setfetchingData] = useState(true);
+  let [fetchingData, setfetchingData] = useState(false);
 
-  const fetchingDataApi = async () => {
-    const token = await getData('token');
-    if (token != null) {
-      setuserToken(token);
-      console.log('token Vehicle=======', userToken);
-    }
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    };
+  // const fetchingDataApi = async () => {
+  //   const token = await getData('token');
+  //   if (token != null) {
+  //     setuserToken(token);
+  //     console.log('token Vehicle=======', userToken);
+  //   }
+  //   var requestOptions = {
+  //     method: 'GET',
+  //     redirect: 'follow',
+  //   };
 
-    await fetch(BaseURL + 'auth/vehicle_types', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        if (result != null) {
-          setVehicleName(result);
-          console.log('setVehicleName======', result);
-        }
-      })
-      .catch(error => {
-        console.log('error', error);
-      });
-    await fetch(BaseURL + 'auth/vehicle_model', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        if (result != null) {
-          setVehicleModel(result);
-          console.log(' setVehicleModel========', result);
-        }
-      })
-      .catch(error => {
-        console.log('error', error);
-      });
-    await fetch(BaseURL + 'auth/vehicle_make', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        if (result != null) {
-          setVehicleType(result);
-          setfetchingData(false);
-          console.log(' setVehicleType=====', result);
-        }
-      })
-      .catch(error => {
-        console.log('error', error);
-      });
-  };
+  //   await fetch(BaseURL + 'auth/vehicle_types', requestOptions)
+  //     .then(response => {
+  //       response.json();
+  //     })
+  //     .then(result => {
+  //       if (result != null) {
+  //         setVehicleName(result);
+  //         console.log('setVehicleName======', result);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log('error', error);
+  //     });
+  //   await fetch(BaseURL + 'auth/vehicle_model', requestOptions)
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       if (result != null) {
+  //         setVehicleModel(result);
+  //         console.log(' setVehicleModel========', result);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log('error', error);
+  //     });
+  //   await fetch(BaseURL + 'auth/vehicle_make', requestOptions)
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       if (result != null) {
+  //         setVehicleType(result);
+  //         setfetchingData(false);
+  //         console.log(' setVehicleType=====', result);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.log('error', error);
+  //     });
+  // };
 
   useEffect(() => {
-    fetchingDataApi();
+    // fetchingDataApi();
   }, [fetchingData]);
   const showToast = (type, text1, text2) => {
     Toast.show({
@@ -112,13 +120,11 @@ const MyVehicle = props => {
     });
   };
   const delayAPI = () => {
-    setTimeout(() => {
-      navigation.navigate('Congratulation');
-    }, 4000);
+    navigation.navigate('Congratulation');
   };
 
   const addVehicle = async () => {
-    var customer_id=await getData("customer_id");
+    var customer_id = await getData("customer_id");
     if (payload.vehical === '') {
       return showToast('error', 'Please select vehicle');
     } else if (payload.registration === '') {
@@ -188,7 +194,7 @@ const MyVehicle = props => {
           <ActivityIndicator size={'large'} />
         </View>
       ) : (
-        <View style={{...styles.container, backgroundColor: colors.background}}>
+        <View style={{ ...styles.container, backgroundColor: colors.background }}>
           <CustomHeader colors={colors} title="" allowBackBtn />
           <ScrollView
             contentContainerStyle={{
@@ -197,23 +203,23 @@ const MyVehicle = props => {
               paddingBottom: mvs(30),
             }}>
             <View style={styles.body}>
-              <Bold label={'My Vehicle'} style={{fontSize: 24}} />
+              <Bold label={'My Vehicle'} style={{ fontSize: 24 }} />
               <Regular
                 label={'Add your vehicle to use our services'}
-                style={{fontSize: 18}}
+                style={{ fontSize: 18 }}
               />
               <View style={styles.input_container}>
                 <INPUT_FIELD.InputDropDown
                   title={'Vehical'}
                   items={VehicleName?.map(item => item.name)}
                   value={payload.vehical}
-                  onChangeText={t => setPayload({...payload, vehical: t})}
+                  onChangeText={t => setPayload({ ...payload, vehical: t })}
                   label="VEHICLE"
                   placeholder="Select your vehicle"
                 />
                 <INPUT_FIELD.InputView
                   value={payload.registration}
-                  onChangeText={t => setPayload({...payload, registration: t})}
+                  onChangeText={t => setPayload({ ...payload, registration: t })}
                   label="REGISTRATION NUMBER"
                   placeholder="Enter you Registration"
                 />
@@ -221,7 +227,7 @@ const MyVehicle = props => {
                 <INPUT_FIELD.InputDropDown
                   items={['Sudan', 'Suzuki']}
                   value={payload.type}
-                  onChangeText={t => setPayload({...payload, type: t})}
+                  onChangeText={t => setPayload({ ...payload, type: t })}
                   label="TYPE"
                   placeholder="Select Type"
                 />
@@ -229,11 +235,11 @@ const MyVehicle = props => {
                 <INPUT_FIELD.InputDropDown
                   items={VehicleModel?.map(item => item.name)}
                   value={payload.model}
-                  onChangeText={t => setPayload({...payload, model: t})}
+                  onChangeText={t => setPayload({ ...payload, model: t })}
                   label="VEHICLE MODEL"
                   placeholder="Select Model"
                 />
-                <Row style={{justifyContent: 'space-between'}}>
+                <Row style={{ justifyContent: 'space-between' }}>
                   <INPUT_FIELD.InputDropDown
                     items={[
                       '2000',
@@ -252,8 +258,8 @@ const MyVehicle = props => {
                       '2013',
                     ]}
                     value={payload.year}
-                    style={{width: '46%'}}
-                    onChangeText={t => setPayload({...payload, year: t})}
+                    style={{ width: '46%' }}
+                    onChangeText={t => setPayload({ ...payload, year: t })}
                     label="YEAR"
                     placeholder="Select"
                   />
@@ -275,16 +281,16 @@ const MyVehicle = props => {
                       'Purple',
                     ]}
                     value={payload.color}
-                    style={{width: '46%'}}
-                    dropdownStyle={{flex: 1}}
-                    onChangeText={t => setPayload({...payload, color: t})}
+                    style={{ width: '46%' }}
+                    dropdownStyle={{ flex: 1 }}
+                    onChangeText={t => setPayload({ ...payload, color: t })}
                     label="COLOR"
                     placeholder="Select"
                   />
                 </Row>
                 <INPUT_FIELD.InputView
                   value={payload.vin}
-                  onChangeText={t => setPayload({...payload, vin: t})}
+                  onChangeText={t => setPayload({ ...payload, vin: t })}
                   label="VIN"
                   placeholder="Enter VIN number"
                 />
@@ -294,8 +300,8 @@ const MyVehicle = props => {
                 loading={loading}
                 onClick={addVehicle}
                 //onClick={() => navigation.navigate('Congratulation')}
-                textStyle={{...styles.buttonText, color: colors.white}}
-                style={{...styles.button}}
+                textStyle={{ ...styles.buttonText, color: colors.white }}
+                style={{ ...styles.button }}
                 title={'Proceed'}
               />
             </View>

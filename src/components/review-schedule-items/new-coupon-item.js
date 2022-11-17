@@ -20,9 +20,10 @@ const NewCouponItem =
     showHighLighted = false,
     cover,
   }) => {
+    console.log('covercovercovercover=>>>', cover);
     return (
       <Row style={{ marginVertical: mvs(10) }}>
-        <ImagePlaceholder containerStyle={styles.image} uri={{ uri: cover }} />
+        <ImagePlaceholder containerStyle={styles.image} uri={cover ? { uri: cover } : NoCouponIcon} />
         <View style={{ marginLeft: mvs(10), }}>
           <Medium size={mvs(15)} label={title} color={colors.black} />
           <Regular color={colors.lightgrey1} size={mvs(13)} label={subTitle} />
