@@ -24,11 +24,11 @@ import Medium from '../../../presentation/typography/medium-text';
 // create a component
 const History = props => {
   const { get_bookings, rate_booking } = props;
-  const [schedule, setScheduleData] = useState(BOOKING?.scheduled || []);
-  const [draft, setDrafteData] = useState(BOOKING?.draft || []);
-  const [completed, setCompletedData] = useState(BOOKING?.completed || []);
-  const [cancelled, setCancelledData] = useState(BOOKING?.cancelled);
-  const [history, setHistoryData] = useState(BOOKING?.history || []);
+  const [schedule, setScheduleData] = useState([]);
+  const [draft, setDrafteData] = useState([]);
+  const [completed, setCompletedData] = useState([]);
+  const [cancelled, setCancelledData] = useState([]);
+  const [history, setHistoryData] = useState([]);
   useEffect(() => {
     getBookings();
   }, []);

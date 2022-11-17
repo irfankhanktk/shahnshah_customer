@@ -12,6 +12,10 @@ const putData = async (url, data) => {
   const response = await client.put(url, data);
   return response;
 };
+const putDataWithoutBody = async (url) => {
+  const response = await client.put(url);
+  return response;
+};
 const postFormData = async (url, data) => {
   data = SERVICES.getFormData(data);
   console.log('data', data);
@@ -28,6 +32,7 @@ const API_REQUESTS = {
   postFormData,
   getData,
   putData,
+  putDataWithoutBody,
   deleteData
 };
 

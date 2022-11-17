@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import alertService from '../services/alert.service';
 import SERVICES from '../services/common-services';
 import API_REQUESTS from './api-requests';
@@ -278,7 +279,7 @@ const get_booking = (bookingId, businessId) => {
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.getData(
-        `${URLS.booking.get_booking}${businessId}/bookings/${bookingId}/byBusiness`,
+        `${URLS.booking.get_booking}${businessId}/bookings/${bookingId}`,
         // http://124.29.208.60:8080/api/c/cus/customers/3333/bookings/297
       );
       return response;
@@ -464,12 +465,12 @@ const get_coupon_sale = (couponId, businessId, customerId) => {
     }
   };
 };
-const update_payment_coupon = (couponId, customerId, method) => {
+const update_payment_coupon = (saleId, customerId, method) => {
   var payLoad = { method: method, reference: '123' };
   return async (dispatch, getState) => {
     try {
       const response = await API_REQUESTS.putData(
-        `${URLS.coupon.update_coupon_payment}${customerId}/coupons/${couponId}/payment`,
+        `${URLS.coupon.update_coupon_payment}${customerId}/coupons/${saleId}/payment`,
         payLoad,
       );
       return response;
@@ -481,10 +482,10 @@ const update_payment_coupon = (couponId, customerId, method) => {
 const complete_purchase_coupon = (couponId, customerId) => {
   return async (dispatch, getState) => {
     try {
-      const response = await API_REQUESTS.getData(
-        `${URLS.coupon.update_coupon_payment}${customerId}/coupons/${couponId}/complete`,
+      console.log('couponId, customerId=>>>', couponId, customerId);
+      const response = await API_REQUESTS.putDataWithoutBody(
+        `${URLS.coupon.update_coupon_payment}${customerId}/coupons/${couponId}/complete`
       );
-      console.log('response=>=>>>>> of pur', response);
       return response;
     } catch (error) {
       console.log('error=>>>>>>>', error);

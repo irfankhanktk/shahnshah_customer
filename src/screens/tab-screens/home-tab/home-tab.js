@@ -58,9 +58,16 @@ const Home = props => {
           ))} */}
         <Buttons.ButtonPrimary
           onClick={() =>
-            props?.navigation?.navigate('BusinessProfile', { id: businessId })
+            props?.navigation?.navigate('BusinessProfile', { id: 3333 })
           }
-          title={'Business Name'}
+          title={'Business Name 3333'}
+        />
+        <Buttons.ButtonPrimary
+          style={{ marginTop: mvs(10) }}
+          onClick={() =>
+            props?.navigation?.navigate('BusinessProfile', { id: 1 })
+          }
+          title={'Business Name 01'}
         />
       </ScrollView>
     </View>

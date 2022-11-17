@@ -11,6 +11,7 @@ import PaymentCard from '../../components/review-schedule-items/payment-card';
 import SaleCouponBusinessCustomer from '../../components/review-schedule-items/sale-coupon-business-customer';
 import { getData } from '../../localStorage';
 import Medium from '../../presentation/typography/medium-text';
+import Regular from '../../presentation/typography/regular-text';
 import colors from '../../services/colors';
 import { mvs } from '../../services/metrices';
 import DIVIY_API from '../../store/api-calls';
@@ -245,15 +246,20 @@ const SaleCoupon = props => {
     setSaleData(response?.data);
   };
   const updatePayment = async method => {
-    const customerId = await getData('customer_id');
-    await update_payment_coupon(couponId, customerId, method);
-    setRefresh(!refresh);
+    try {
+      const customerId = await getData('customer_id');
+      await update_payment_coupon(saleId, customerId, method);
+      setRefresh(!refresh);
+    } catch (error) {
+      console.log('error=>>> updatePayment', error);
+    }
+
   };
   const purchaseCoupon = async () => {
     try {
       const customerId = await getData('customer_id');
-      const res = await complete_purchase_coupon(couponId, customerId);
-      console.log('res=>', res);
+      const res = await complete_purchase_coupon(saleId, customerId);
+      console.log('res=> purchaseCoupon', res?.data);
       setRefresh(!refresh);
     } catch (error) {
       console.log('error=>', error);
@@ -278,6 +284,7 @@ const SaleCoupon = props => {
             size={16}
             style={{ marginVertical: mvs(15) }}
           />
+          {console.log('booking?.paymentOptions=>', booking?.paymentOptions)}
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -299,41 +306,50 @@ const SaleCoupon = props => {
               />
             )}
           />
-          <BillView invoice={booking?.invoice} />
-          <AlertMessage
-            view={booking?.view}
-            color={booking?.view?.message?.color}
-            title={booking?.view?.message?.message}
-            bgColor={
-              booking?.view?.message?.color == 'green'
-                ? colors.lightGreen1
-                : booking?.view?.message?.color == 'red'
-                  ? colors.lightPink1
-                  : booking?.view?.message?.color == 'blue'
-                    ? colors.lightBlue
-                    : booking?.view?.message?.color == 'grey'
-                      ? colors.lightgrey
-                      : null
+          <Regular
+            label={booking?.payment?.view?.message}
+            color={
+              booking?.payment?.view?.error ? colors.red : colors.lightgrey1
             }
-            fillColor={
-              booking?.view?.message?.color == 'green'
-                ? colors.green
-                : booking?.view?.message?.color == 'red'
-                  ? colors.red
-                  : booking?.view?.message?.color == 'blue'
-                    ? colors.blue
-                    : booking?.view?.message?.color == 'grey'
-                      ? colors.lightgrey1
-                      : null
-            }
+            size={14}
           />
+          <BillView invoice={booking?.invoice} />
+          {console.log('booking?.view=>>>', booking?.view)}
           <View style={styles.paymentView}>
-            {booking?.view?.continue && <Buttons.ButtonPrimary
+            {booking?.view?.continue ? <Buttons.ButtonPrimary
               title={'Confirm'}
               style={styles.button}
               onClick={() => purchaseCoupon()}
               loading={payload.updateStart}
-            />}
+            /> :
+              <AlertMessage
+                view={booking?.view}
+                color={booking?.view?.message?.color}
+                title={booking?.view?.message?.message}
+                bgColor={
+                  booking?.view?.message?.color == 'green'
+                    ? colors.lightGreen1
+                    : booking?.view?.message?.color == 'red'
+                      ? colors.lightPink1
+                      : booking?.view?.message?.color == 'blue'
+                        ? colors.lightBlue
+                        : booking?.view?.message?.color == 'grey'
+                          ? colors.lightgrey
+                          : null
+                }
+                fillColor={
+                  booking?.view?.message?.color == 'green'
+                    ? colors.green
+                    : booking?.view?.message?.color == 'red'
+                      ? colors.red
+                      : booking?.view?.message?.color == 'blue'
+                        ? colors.blue
+                        : booking?.view?.message?.color == 'grey'
+                          ? colors.lightgrey1
+                          : null
+                }
+              />
+            }
           </View>
         </View>
       </ScrollView>

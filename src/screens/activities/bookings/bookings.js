@@ -32,10 +32,10 @@ const Bookings = props => {
   const [remarks, setRemarks] = useState(' ')
   const [ratingValue, setRatingValue] = useState(0)
   // console.log('BOOKING=>>>', BOOKING);
-  const [schedule, setScheduleData] = useState(BOOKING?.scheduled || []);
-  const [draft, setDrafteData] = useState(BOOKING?.draft || []);
-  const [completed, setCompletedData] = useState(BOOKING?.completed || []);
-  const [cancelled, setCancelledData] = useState(BOOKING?.cancelled);
+  const [schedule, setScheduleData] = useState([]);
+  const [draft, setDrafteData] = useState([]);
+  const [completed, setCompletedData] = useState([]);
+  const [cancelled, setCancelledData] = useState([]);
   useEffect(() => {
     getBookings();
     // onLikePress(273);
@@ -78,6 +78,7 @@ const Bookings = props => {
     setCancelledData(response?.data?.cancelled)
     setCompletedData(response?.data?.completed)
     setScheduleData(response?.data?.scheduled)
+    setDrafteData(response?.data?.draft)
     //response?.data?.draft
     //response?.data?.history
     //response?.data?.cancelled
@@ -110,7 +111,7 @@ const Bookings = props => {
               paddingTop: mvs(10),
               backgroundColor: allColors.tabBackground,
             }}>
-            {/* {schedule.length > 0 ? (
+            {schedule.length > 0 ? (
               <>
                 <Medium
                   label={'Draft'}
@@ -130,27 +131,25 @@ const Bookings = props => {
                       onPress={() => { }}
                       onResumePress={() => navigation?.navigate('ReviewAndSchedule',
                         {
-                          bookingID: item?.id,
-                          businessID: item?.businessId,
+                          bookingId: item?.id,
+                          businessId: item?.businessId,
                         })}
                       progress={item?.view?.progress?.minutes}
                       isLiked={false}
                       price={item?.offering?.price}
                       onLikePress={() => onLikePress(item?.id)}
                       rating={item?.rate}
-                      onPaymentPress={
-                            navigation.navigate('ReviewAndSchedule', {
-                      }
                     />
                   )}
                 />
               </>
-            ) : null} */}
+            ) : null}
+
             {schedule.length > 0 ? (
               <>
                 <Medium
                   label={'Scheduled'}
-                  style={{ ...styles.title, marginTop: 0 }}
+                  style={{ ...styles.title, marginTop: mvs(10) }}
                 />
                 <FlatList
                   data={schedule}

@@ -24,13 +24,15 @@ const SaleCouponBusinessCustomer = ({
 
         <Row style={{ ...styles.UPPERROW, ...styles.TIMETOPVIEW }}>
           <NewCouponItem
+            cover={item?.coupon?.cover}
             showCoupon={true}
-            title={item?.title}
-            subTitle={item?.subTitle}
-            highlightedText={'highleted text'}
-            statusLine={item?.about}
-            isExpiring={false}
-            showHighLighted={false}
+            title={item?.coupon?.title}
+            subTitle={item?.coupon?.subTitle}
+            highlightedText={item?.coupon?.hihlight}
+            showHighLighted={true}
+          // statusLine={item?.about}
+          // isExpiring={false}
+          // showHighLighted={false}
           />
         </Row>
         <Row style={{ ...styles.UPPERROW, ...styles.TIMETOPVIEW }}>

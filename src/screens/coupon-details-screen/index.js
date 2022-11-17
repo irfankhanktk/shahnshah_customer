@@ -39,7 +39,6 @@ const CouponDetails = props => {
   const getCouponDetails = async () => {
     var id = await getData('customer_id');
     const response = await get_details(route.params?.id, route.params.bId, id);
-
     if (response?.data) {
       console.log(response?.data);
       setCoupon(response?.data);
@@ -49,14 +48,18 @@ const CouponDetails = props => {
     console.log(list.tos);
   }
   const availCoupon = async () => {
-    console.log('availCoupon func :');
-    var id = await getData('customer_id');
-    const availResponse = await avail_coupon(id, coupon?.id);
-    console.log('Avail Response', availResponse?.data);
-    setRefresh(!refresh);
+    try {
+      console.log('availCoupon func :');
+      var id = await getData('customer_id');
+      const availResponse = await avail_coupon(id, coupon?.id);
+      console.log('Avail Response', availResponse?.data);
+      setRefresh(!refresh);
+      navigation.navigate('SaleCoupon', { saleId: availResponse?.data });
+    } catch (error) {
+      console.log('error availCoupon', error);
+    }
+
   };
-  console.log('coupon?.saleId:::', coupon?.saleId);
-  console.log('coupon?.otherConditions::::::>', coupon?.otherConditions);
   return (
     <View style={styles.conntainer}>
       <GeneralStatusBarColor
@@ -221,29 +224,29 @@ const CouponDetails = props => {
                 paddingHorizontal: mvs(20),
                 paddingBottom: mvs(10),
               }}>
-              {/* {coupon?.otherConditions?.map((item, index) => {
-                  console.log('item:', item);
-                  return (
-                    <Row
-                      alignItems="center"
-                      style={styles.salesConditionView}
-                      justifyContent="flex-start">
+              {coupon?.otherConditions?.map((item, index) => {
+                console.log('item:', item);
+                return (
+                  <Row
+                    alignItems="center"
+                    style={styles.salesConditionView}
+                    justifyContent="flex-start">
+                    <Regular
+                      size={mvs(8)}
+                      color={colors.black}
+                      label={'\u2B24'}
+                    />
+                    <Row style={{ flex: 1 }} justifyContent="flex-start">
                       <Regular
-                        size={mvs(8)}
-                        color={colors.black}
-                        label={'\u2B24'}
+                        style={{ marginLeft: mvs(10) }}
+                        size={mvs(11)}
+                        label={item}
+                        color={colors.B323232}
                       />
-                      <Row style={{flex: 1}} justifyContent="flex-start">
-                        <Regular
-                          style={{marginLeft: mvs(10)}}
-                          size={mvs(11)}
-                          label={item}
-                          color={colors.B323232}
-                        />
-                      </Row>
                     </Row>
-                  );
-                })} */}
+                  </Row>
+                );
+              })}
 
               {/* {coupon?.saleConditions?.map((item, index) => {
                 return;

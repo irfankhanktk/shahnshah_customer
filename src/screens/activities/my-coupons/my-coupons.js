@@ -18,9 +18,9 @@ import COUPONS from '../../../constants/customer coupons.json';
 const MyCoupons = props => {
 
   const { navigation, get_coupons } = props;
-  const [actives, setActivesCoupon] = useState(COUPONS?.active || []);
-  const [expires, setExpiresCoupons] = useState(COUPONS?.expired || []);
-  const [draft, setDraftData] = useState(COUPONS?.draft || []);
+  const [actives, setActivesCoupon] = useState([]);
+  const [expires, setExpiresCoupons] = useState([]);
+  const [draft, setDraftData] = useState([]);
 
   useEffect(() => {
     getCouponsHistory();
@@ -28,10 +28,10 @@ const MyCoupons = props => {
   const getCouponsHistory = async () => {
     const customerId = await getData("customer_id");
     const response = await get_coupons(customerId)
-    // console.log('response?.data of mycoupons=>', response?.data)
-    // setActivesCoupon(response?.data?.active);
-    // setExpiresCoupons(response?.data?.expired);
-    // setDraftData(response?.data?.draft);
+    console.log('response?.data of mycoupons=>=>>', response?.data)
+    setActivesCoupon(response?.data?.active);
+    setExpiresCoupons(response?.data?.expired);
+    setDraftData(response?.data?.draft);
     //response?.data?.draft 
   }
   return (
@@ -51,41 +51,11 @@ const MyCoupons = props => {
               paddingTop: mvs(10),
               backgroundColor: allColors.tabBackground,
             }}>
-            {actives.length > 0 ? (
-              <>
-                <Medium
-                  label={'Active Coupons'}
-                  style={{ ...styles.title, marginTop: 0 }}
-                />
-                <FlatList
-                  data={actives}
-                  renderItem={({ item }) => (
-                    <CouponItem
-                      onPaymentPress={() => {
-                        props?.navigation?.navigate('SaleCoupon', { saleId: item?.id, couponId: item?.couponId, businessId: item?.businessId })
-                      }}
-                      address={item?.view?.address}
-                      bussinessName={item?.business?.title}
-                      expireTime={item?.conditions?.to}
-                      discount={item?.coupon?.discountValue}
-                      status={item?.status}
-                      AED={item?.coupon?.price}
-                      onViewPress={() =>
-                        props?.navigation?.navigate('CouponDetails', { id: item?.couponId, bId: item?.businessId })
-                      }
-                      progress={0.4}
-                      image={{ uri: item?.cover }}
-                      price={item?.coupon?.price}
-                    />
-                  )}
-                />
-              </>
-            ) : null}
             {draft.length > 0 ? (
               <>
                 <Medium
                   label={'Draft Coupons'}
-                  style={{ ...styles.title, marginTop: mvs(10) }}
+                  style={{ ...styles.title, marginTop: 0 }}
                 />
                 <FlatList
                   data={draft}
@@ -106,12 +76,44 @@ const MyCoupons = props => {
                       progress={0.4}
                       image={{ uri: item?.cover }}
                       price={item?.coupon?.price}
-
+                      item={item}
                     />
                   )}
                 />
               </>
             ) : null}
+            {actives.length > 0 ? (
+              <>
+                <Medium
+                  label={'Active Coupons'}
+                  style={{ ...styles.title, marginTop: mvs(10) }}
+                />
+                <FlatList
+                  data={actives}
+                  renderItem={({ item }) => (
+                    <CouponItem
+                      onPaymentPress={() => {
+                        props?.navigation?.navigate('SaleCoupon', { saleId: item?.id, couponId: item?.couponId, businessId: item?.businessId })
+                      }}
+                      address={item?.view?.address}
+                      bussinessName={item?.business?.title}
+                      expireTime={item?.conditions?.to}
+                      discount={item?.coupon?.discountValue}
+                      status={item?.status}
+                      AED={item?.coupon?.price}
+                      onViewPress={() =>
+                        props?.navigation?.navigate('CouponDetails', { id: item?.couponId, bId: item?.businessId })
+                      }
+                      progress={0.4}
+                      image={{ uri: item?.cover }}
+                      price={item?.coupon?.price}
+                      item={item}
+                    />
+                  )}
+                />
+              </>
+            ) : null}
+
 
             {expires.length > 0 ? (
               <>
@@ -138,6 +140,7 @@ const MyCoupons = props => {
                       progress={0.4}
                       image={{ uri: item?.cover }}
                       price={item?.coupon?.price}
+                      item={item}
                     />
                   )}
                 />

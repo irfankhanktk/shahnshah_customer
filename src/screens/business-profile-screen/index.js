@@ -186,7 +186,7 @@ const BusinessProfile = props => {
       },
       redirect: 'follow',
     };
-
+    console.log('`${BaseURL}p/public/businesses/${id}/profile`=>', `${BaseURL}p/public/businesses/${id}/profile`);
     await fetch(`${BaseURL}p/public/businesses/${id}/profile`, requestOptions)
       .then(response => {
         if (!response?.ok)

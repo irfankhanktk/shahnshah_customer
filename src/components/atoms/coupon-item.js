@@ -26,6 +26,7 @@ const CouponItem = ({
     status = 'active',
     onViewPress,
     onPaymentPress,
+    item = {},
 }) => {
     return (
 
@@ -34,12 +35,19 @@ const CouponItem = ({
                 <ImagePlaceholder containerStyle={styles.IMAGE} uri={image} />
                 <View style={{ marginHorizontal: mvs(10), flex: 1 }}>
                     <Medium numberOfLines={2} label={discount + "% OFF Car Wash"} />
-                    <Regular label={AED + " AED"} style={{ fontSize: 12 }} />
-                    <Row style={{ justifyContent: 'flex-start' }}>
-                        {status == 'active' ? <SVG.PrimaryPercentage /> : <SVG.GrayPercentage />}
-                        <Regular label={"Cash Voucher"} style={{ fontSize: 12, marginHorizontal: mvs(3), color: status == "active" ? colors.primary : colors.lightgrey1 }} />
+                    <Regular label={item?.subTitle} style={{ fontSize: 12 }} />
+                    <Row alignItems='center' style={styles.highlighted}>
+                        <SVG.Percent />
+                        <Regular color={colors.black}
+                            size={mvs(13)} label={item?.highlight}
+                            style={{ marginLeft: mvs(6), }}
+                        />
                     </Row>
-                    <Regular label={"Expires On " + expireTime} style={{ fontSize: 13, color: colors.lightgrey1 }} />
+                    {/* <Row style={{ justifyContent: 'flex-start' }}>
+                        {status == 'active' ? <SVG.PrimaryPercentage /> : <SVG.GrayPercentage />}
+                        <Regular label={item?.highlight} style={{ fontSize: 12, marginHorizontal: mvs(3), color: status == "active" ? colors.primary : colors.lightgrey1 }} />
+                    </Row> */}
+                    {/* <Regular label={"Expires On " + expireTime} style={{ fontSize: 13, color: colors.lightgrey1 }} /> */}
                 </View>
                 {/* <View style={{ alignItems: 'center' }}>
                     {status == 'active' ?
@@ -58,8 +66,8 @@ const CouponItem = ({
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>
                     {
-                        status === 'draft' ?
-                            <TouchableOpacity style={{ ...styles.BUTTON }} onPress={onPress}>
+                        status === 'Draft' ?
+                            <TouchableOpacity style={{ ...styles.BUTTON }} onPress={onPaymentPress}>
                                 <Regular label={'Resume'} style={{ ...styles.BUTTONTEXT }} />
                             </TouchableOpacity>
                             : status === 'Booked' ?
@@ -88,6 +96,15 @@ const styles = StyleSheet.create({
         borderColor: colors.gray,
         marginTop: mvs(9.1)
 
+    },
+    highlighted: {
+        paddingHorizontal: mvs(9),
+        paddingVertical: mvs(4),
+        backgroundColor: colors.lightYellow,
+        borderRadius: 4,
+        marginTop: mvs(7),
+        alignSelf: 'flex-start',
+        // width: mvs(130),
     },
     IMAGE: {
         height: mvs(71),

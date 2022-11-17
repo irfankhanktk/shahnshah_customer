@@ -24,6 +24,7 @@ import colors from '../../services/colors';
 import { mvs } from '../../services/metrices';
 import DIVIY_API from '../../store/api-calls';
 import { Styles as styles } from './style';
+import { getData } from '../../localStorage';
 const ReviewAndSchedule = props => {
   const {
     get_booking,
@@ -41,6 +42,7 @@ const ReviewAndSchedule = props => {
     remove_slot,
     apply_coupon,
     route,
+    complete_booking,
   } = props;
   const { bookingId, businessId, } = route.params;
   // const customerId = 3333; //selected;
@@ -57,6 +59,8 @@ const ReviewAndSchedule = props => {
   const [booking, setBooking] = useState();
   const [selectedSlot, setSelectedSlot] = useState();
   const [worker, setWorker] = useState(null);
+
+
   const [isRefresh, setRefresh] = useState(false);
   useEffect(() => {
     inIt();
@@ -100,19 +104,26 @@ const ReviewAndSchedule = props => {
     }
   };
   const getCoupons = async () => {
-    const couponReponse = await get_booking_coupons(bookingId, customerId);
-    console.log('coupons information===>', couponReponse?.data);
-    if (couponReponse?.data) {
-      setCoupons(couponReponse?.data);
-      setCouponPickerVisible(true);
+    try {
+      const customerId = await getData("customer_id");
+      console.log('customerId=>>>', customerId);
+      const couponReponse = await get_booking_coupons(bookingId, customerId);
+      console.log('coupons information===>', couponReponse?.data);
+      if (couponReponse?.data) {
+        setCoupons(couponReponse?.data);
+        setCouponPickerVisible(true);
+      }
+    } catch (error) {
+      console.log('error getCoupons=>>>', error);
     }
+
   };
   const checkin_booking = async () => {
     await checkin(businessId, bookingId);
     setRefresh(!isRefresh);
   };
-  const complete_booking = async () => {
-    await complete_job(businessId, bookingId);
+  const finish_booking = async () => {
+    await complete_booking(bookingId);
     setRefresh(!isRefresh);
   };
   const start_booking = async () => {
@@ -149,6 +160,7 @@ const ReviewAndSchedule = props => {
     setRefresh(!isRefresh);
   };
   const apply_booking_discount = async couponId => {
+    const customerId = await getData("customer_id");
     await apply_coupon(bookingId, couponId, customerId);
     setRefresh(!isRefresh);
   };
@@ -181,16 +193,24 @@ const ReviewAndSchedule = props => {
             onFindClick={() => getSlots(date)}
             onRemoveClick={() => remove_booking_slot()}
           />
+          <Row style={{ marginBottom: mvs(10), alignItems: 'center', }}>
+            <Medium
+              label={coupon?.view?.caption}
+              color={colors.black}
+              size={16}
+            />
+            {coupon?.view?.applyCoupon && <ActionButton title="Apply Coupon"
+              onClick={getCoupons}
+              bgColor={colors.lightGreen1}
+              borderColor={colors.green}
+              titleColor={colors.green} />}
+          </Row>
 
-          <Medium
-            label={coupon?.view?.caption}
-            color={colors.black}
-            size={16}
-            style={{ marginBottom: mvs(10) }}
-          />
+          {console.log('coupon data=>>>>', coupon)}
           <Row style={styles.coupon_row}>
             <NewCouponItem
-              showCoupon={!coupon?.view?.applyCoupon}
+              cover={coupon?.view?.cover}
+              // showCoupon={!coupon?.view?.applyCoupon}
               title={coupon?.title}
               subTitle={coupon?.subTitle}
               highlightedText={coupon?.highlight}
@@ -314,8 +334,8 @@ const ReviewAndSchedule = props => {
         </ScrollView>
 
         <View style={styles.bottomView}>
-          {booking?.view?.conintue ? (
-            <Buttons.ButtonPrimary title="Confirm" />
+          {booking?.view?.continue ? (
+            <Buttons.ButtonPrimary title="Confirm" onClick={finish_booking} />
           ) : (
             <AlertMessage
               view={booking?.view}
@@ -346,14 +366,16 @@ const ReviewAndSchedule = props => {
             />
           )}
         </View>
+        {console.log('coupons=>>>', coupons)}
         <CouponModal
+          title={'Select Coupon'}
           value={coupon}
           visible={couponPickerVisible}
           onBackdropPress={() => setCouponPickerVisible(false)}
           items={coupons}
-          setValue={value => {
-            setCouponPickerVisible(false);
-            setCoupon(value);
+          setValue={(value) => {
+            setCoupon(value)
+            apply_booking_discount(value?.id)
           }}
         />
         <ScheduleModal
@@ -415,5 +437,6 @@ const mapDispatchToProps = {
     DIVIY_API.remove_discount(bookingId, businessId),
   apply_coupon: (bookingId, couponId, customerId) =>
     DIVIY_API.apply_coupon(bookingId, couponId, customerId),
+  complete_booking: (bookingId) => DIVIY_API.complete_booking(bookingId),
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewAndSchedule);

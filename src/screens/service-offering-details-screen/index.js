@@ -91,7 +91,7 @@ const ServiceOfferingDetails = props => {
       body: JSON.stringify({
         customerId: customerID,
         offeringId: id,
-        byCustomer: 0,
+        // byCustomer: 0,
       }),
       redirect: 'follow',
     };
