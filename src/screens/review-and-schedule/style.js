@@ -9,17 +9,17 @@ export const Styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    paddingBottom:mvs(10)
+    paddingBottom: mvs(10)
   },
-  bottomView:{
-    paddingVertical:mvs(14),
-    borderTopColor:colors.lightgrey1,
-    borderTopWidth:0.2,
-    paddingHorizontal:mvs(20)
+  bottomView: {
+    paddingVertical: mvs(14),
+    borderTopColor: colors.lightgrey1,
+    borderTopWidth: 0.2,
+    paddingHorizontal: mvs(20),
   },
-  coupon_row:{
-    borderBottomColor:colors.lightgrey1,
-    borderBottomWidth:0.2,
-    paddingBottom:mvs(13.6),
+  coupon_row: {
+    borderBottomColor: colors.lightgrey1,
+    borderBottomWidth: 0.2,
+    paddingBottom: mvs(13.6),
   }
 });

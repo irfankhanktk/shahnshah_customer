@@ -22,9 +22,16 @@ const PaymentCard = ({
       activeOpacity={selectable ? 0 : 1}
       style={{ ...styles.CONTAINER, borderColor: borderColor }} onPress={onClick}>
       <Regular label={title} color={colors.lightgrey1} size={14} style={{ marginBottom: mvs(5) }} />
-      {Icon && (
+      {/* {Icon && (
         <Icon />
-      )}
+      )} */}
+      {
+        title === 'Credit Card' ? <SVG.CreditCard width="30" height="28" />
+          : title === 'Pay at station' ?
+            <SVG.PayAtStation width="30" height="28" /> :
+            title === 'My Balance' ?
+              <SVG.MyBalance width="30" height="28" /> : null
+      }
       {selected &&
         (
           <View style={{ position: 'absolute', right: -10, top: -15 }}>
@@ -40,7 +47,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(10),
     paddingVertical: mvs(10),
     height: mvs(78),
-    width: mvs(130),
+    width: mvs(125),
     marginRight: mvs(16),
     borderRadius: 5,
     borderWidth: 1,

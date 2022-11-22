@@ -284,7 +284,6 @@ const SaleCoupon = props => {
             size={16}
             style={{ marginVertical: mvs(15) }}
           />
-          {console.log('booking?.paymentOptions=>', booking?.paymentOptions)}
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -314,14 +313,17 @@ const SaleCoupon = props => {
             size={14}
           />
           <BillView invoice={booking?.invoice} />
-          {console.log('booking?.view=>>>', booking?.view)}
           <View style={styles.paymentView}>
-            {booking?.view?.continue ? <Buttons.ButtonPrimary
-              title={'Confirm'}
-              style={styles.button}
-              onClick={() => purchaseCoupon()}
-              loading={payload.updateStart}
-            /> :
+            {booking?.view?.continue ?
+              <View style={{ height: mvs(70) }}>
+                <Buttons.ButtonPrimary
+                  title={'Confirm'}
+                  style={styles.button}
+                  onClick={() => purchaseCoupon()}
+                  loading={payload.updateStart}
+                />
+              </View>
+              :
               <AlertMessage
                 view={booking?.view}
                 color={booking?.view?.message?.color}

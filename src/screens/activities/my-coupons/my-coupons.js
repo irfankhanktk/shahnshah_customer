@@ -13,6 +13,7 @@ import Medium from '../../../presentation/typography/medium-text';
 import DIVIY_API from '../../../store/api-calls';
 import { getData } from '../../../localStorage';
 import COUPONS from '../../../constants/customer coupons.json';
+import { useIsFocused } from '@react-navigation/native';
 
 // create a component
 const MyCoupons = props => {
@@ -21,10 +22,13 @@ const MyCoupons = props => {
   const [actives, setActivesCoupon] = useState([]);
   const [expires, setExpiresCoupons] = useState([]);
   const [draft, setDraftData] = useState([]);
+  const isFocus = useIsFocused();
 
   useEffect(() => {
-    getCouponsHistory();
-  }, [])
+    if (isFocus) {
+      getCouponsHistory();
+    }
+  }, [isFocus])
   const getCouponsHistory = async () => {
     const customerId = await getData("customer_id");
     const response = await get_coupons(customerId)

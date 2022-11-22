@@ -1,64 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-  Text,
-  Image,
-  useWindowDimensions,
-  Dimensions,
-  LayoutAnimation,
-  Alert,
-  Share,
-  ImageBackground,
-  Pressable,
-  FlatList,
+  Alert, ImageBackground,
+  Pressable, ScrollView, Share, TouchableOpacity,
+  View
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Toast from 'react-native-toast-message';
 import { connect, useDispatch, useSelector } from 'react-redux';
+import { BaseURL } from '../../ApiServices';
 import {
-  HeartIcon,
-  HeartOutline,
-  Map,
-  Minute,
-  Ratings,
-  Share as ShareIcon,
-  ShareBlackIcon,
-  SpeedoMeter,
-  SpeedometerPrimary,
+  HeartIcon, ShareBlackIcon, SpeedometerPrimary
 } from '../../assets/common-icons';
 import ImagePlaceholder from '../../components/atoms/Placeholder';
 import Row from '../../components/atoms/row';
+import CouponPromo from '../../components/coupon-promo';
 import ServiceCard from '../../components/molecules/service-card';
-import ThemeContext from '../../context/theme-context';
+import { getData } from '../../localStorage';
 import Regular from '../../presentation/typography/regular-text';
+import { addReviews } from '../../Redux/Reducers/ReviewsReducer';
+import SERVICES from '../../services/common-services';
 import { height, mvs, width } from '../../services/metrices';
+import DIVIY_API from '../../store/api-calls';
 import HeadingTitle from './../../components/molecules/heading-title/index';
 import LabelValue from './../../components/molecules/label-value-row/index';
+import ReviewModal from './../../components/molecules/modals/review-modal';
+import RatingStar from './../../components/molecules/rating-star/index';
 import ReviewsRaing from './../../components/molecules/reviews-rating/index';
 import ServiceOffering from './../../components/service-offering/index';
 import Bold from './../../presentation/typography/bold-text';
 import colors from './../../services/colors';
 import { STYLES as styles } from './style';
-import RatingStar from './../../components/molecules/rating-star/index';
-import ReviewModal from './../../components/molecules/modals/review-modal';
-import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
-import LinearGradient from 'react-native-linear-gradient';
-import { getData } from '../../localStorage';
-import { BaseURL } from '../../ApiServices';
-import { addReviews } from '../../Redux/Reducers/ReviewsReducer';
-import { useNavigation } from '@react-navigation/native';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import SERVICES from '../../services/common-services';
-import CouponPromo from '../../components/coupon-promo';
-import DIVIY_API from '../../store/api-calls';
 import { useBusinessProfile } from './useBusinessProfile';
-import AboutTextBtn from '../../components/AboutTextBtn';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 
-// const about =
-//   'Gresasy Elbo Auto Repair has been the leader in automotive repair in the Triad area for twenty years.Gresasy Elbo Auto Repair has been the leader in automotive repair in the Triad area for twenty years  continuing the outstanding level of service Triad area residents expect from our';
 const BusinessProfile = props => {
   const { get_bussiness_coupons, route } = props;
   const { getUpdatedBusinessHours, handleGetBusinessesReviews } =
@@ -66,11 +41,9 @@ const BusinessProfile = props => {
 
 
   const [index, setindex] = useState(0);
-
-  const { user_info } = props;
+  //business-id is id here
   const { id } = route.params;
   console.log('business id=>>>>', id);
-  const navigation = useNavigation();
   const dispatch = useDispatch();
   const [images, setImages] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
@@ -81,7 +54,6 @@ const BusinessProfile = props => {
     rating: [],
     picsArrayReviews: [],
   });
-  const { showAlert } = React.useContext(ThemeContext);
   const [loading, setLoading] = React.useState(false);
   const [isMoreBtn, setIsMoreBtn] = React.useState(true);
   const ref = React.useRef(null);
@@ -104,77 +76,9 @@ const BusinessProfile = props => {
     serviceId: '',
   });
   const {
-    getBusinessReviewsLoading,
-    getBusinessReviewsSuccess,
     getBusinessReviews,
   } = useSelector(state => state?.businessReviews);
 
-
-  // const rendertabview = () => {
-  //   return (
-  //     <TabView
-  //       navigationState={{ index, routes }}
-  //       renderScene={renderScene}
-  //       onIndexChange={setindex}
-  //       renderTabBar={renderTabBar}
-  //       initialLayout={{ width: layout.width }}
-  //       activeColor={colors.primary}
-  //       inactiveColor={colors.black}
-  //     />
-  //   );
-  // };
-  // const renderTabBar = props => (
-  //   <TabBar
-  //     {...props}
-  //     scrollEnabled={true}
-  //     indicatorStyle={{ backgroundColor: colors.primary }}
-  //     // tabStyle={{width: mvs(120)}}
-  //     indicatorContainerStyle={{
-  //       shadowColor: '#000',
-  //       shadowOffset: {
-  //         width: 0,
-  //       },
-  //       backgroundColor: colors.white,
-  //     }}
-  //     renderLabel={({ route, focused, color }) => (
-  //       <Text
-  //         style={{
-  //           color: focused ? colors.black : colors.black,
-  //           fontSize: 15,
-  //         }}>
-  //         {route.title}
-  //       </Text>
-  //     )}
-  //     style={{ backgroundColor: 'transparent' }}
-  //   />
-  // );
-  // const layout = useWindowDimensions();
-  // const FirstRoute = () => (
-  //   <View
-  //     style={{
-  //       //padding: 5,
-  //       justifyContent: 'center',
-  //       alignItems: 'center',
-  //       overflow: 'hidden',
-  //       flex: 1,
-  //       backgroundColor: '#0e0',
-  //     }}></View>
-  // );
-  // const SecondRoute = () => (
-  //   <View style={{ flex: 1, backgroundColor: '#ef4f' }}></View>
-  // );
-  // const ThirdRoute = () => (
-  //   <View style={{ flex: 1, backgroundColor: '#000' }}></View>
-  // );
-  // const FourthRoute = () => (
-  //   <View style={{ flex: 1, backgroundColor: 'red' }}></View>
-  // );
-  // const renderScene = SceneMap({
-  //   first: FirstRoute,
-  //   second: SecondRoute,
-  //   third: ThirdRoute,
-  //   fourth: FourthRoute,
-  // });
 
 
   const getBusinessProfile = async () => {
@@ -186,7 +90,6 @@ const BusinessProfile = props => {
       },
       redirect: 'follow',
     };
-    console.log('`${BaseURL}p/public/businesses/${id}/profile`=>', `${BaseURL}p/public/businesses/${id}/profile`);
     await fetch(`${BaseURL}p/public/businesses/${id}/profile`, requestOptions)
       .then(response => {
         if (!response?.ok)
@@ -206,14 +109,9 @@ const BusinessProfile = props => {
           setservicesdata(result.services);
           getUserLocation(result?.lat, result?.lng);
           getBussinessCoupons(id);
-          // setPayload({
-          //   ...payload,
-          //   rating: result.rating,
-          // });
           setpayyload({
             ...payyload,
             services: result?.services,
-            // bill:result.bills
           });
         }
       })
@@ -388,16 +286,11 @@ const BusinessProfile = props => {
       }
     } catch (error) { }
   };
-  const [showMoreAddress, setShowMoreAddress] = useState(false);
   const updatedBusiness = getUpdatedBusinessHours(businessHourse);
-  console.log('businessProfile?.gallery:::', businessProfile?.gallery);
   return (
     <View style={styles.container}>
       <View style={{ ...styles.body }}>
         <ScrollView
-          // onScroll={e => {
-          //   console.log('this scrol Value', e?.nativeEvent?.contentOffset?.y);
-          // }}
           ref={ref}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scroll}>
@@ -467,11 +360,9 @@ const BusinessProfile = props => {
               />
             </TouchableOpacity>
           </View>
-
           <Row
             style={{
               paddingHorizontal: mvs(36),
-
               marginTop: mvs(25),
             }}>
             <View
@@ -483,7 +374,7 @@ const BusinessProfile = props => {
               <ShimmerPlaceholder
                 style={{
                   width: mvs(45),
-                  borderRadius: mvs(27),
+                  borderRadius: mvs(22.5),
                   height: mvs(45),
                 }}
                 visible={loading}>
@@ -500,74 +391,48 @@ const BusinessProfile = props => {
 
             <View
               style={{
-                width: '100%',
-                // backgroundColor: 'red',
+                flex: 1,
                 marginLeft: mvs(13),
               }}>
-              <ShimmerPlaceholder visible={loading}>
-                <Row>
-                  <Bold
-                    numberOfLines={2}
-                    style={{ flex: 1 }}
+              <ShimmerPlaceholder style={{ height: mvs(23) }} visible={loading}>
+                <Bold
+                  numberOfLines={2}
+                  label={
+                    businessProfile?.title?.length > 20
+                      ? `${businessProfile?.title?.slice(0, 15)}...`
+                      : businessProfile?.title
+                  }
+                  size={mvs(20)}
+                />
+              </ShimmerPlaceholder>
+              <Row style={{ marginTop: mvs(5), }} alignItems="center">
+                <ShimmerPlaceholder style={{ height: mvs(20) }} visible={loading}>
+                  <Regular
+                    color={colors.G9B9B9B}
+                    size={mvs(16)}
                     label={
-                      businessProfile?.title?.length > 20
-                        ? `${businessProfile?.title?.slice(0, 15)}...`
-                        : businessProfile?.title
+                      businessProfile?.view?.address?.length > 25
+                        ? `${businessProfile?.view?.address?.slice(0, 25)}...`
+                        : businessProfile?.view?.address
                     }
-                    size={mvs(20)}
                   />
-                  <Row
-                    justifyContent={'space-between'}
-                    style={{ width: mvs(60) }}>
-                    <TouchableOpacity onPress={() => onShare()}>
-                      {/* <ShareIcon /> */}
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => {
-                        setVisible(true);
-                      }}>
-                      {/* <HeartOutline /> */}
-                    </TouchableOpacity>
-                  </Row>
-                </Row>
-
-                <Row alignItems="center" justifyContent="flex-start">
-                  <Row
-                    style={
-                      {
-                        // justifyContent: 'flex-start',
-                        // alignItems: 'center',
-                        // width: mvs(190),
-                        // backgroundColor: 'red',
-                      }
-                    }>
-                    {/* <Map /> */}
-                    <Regular
-                      color={colors.G9B9B9B}
-                      size={mvs(16)}
-                      label={
-                        businessProfile?.view?.address?.length > 25
-                          ? `${businessProfile?.view?.address?.slice(0, 25)}...`
-                          : businessProfile?.view?.address
-                      }
-                    // label={`${businessProfile?.view?.address}`}
-                    />
-                  </Row>
-                  <Row
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    style={{
-                      marginLeft: mvs(6),
-                      width: mvs(250),
-                    }}>
-                    <View style={{}}>
-                      <SpeedometerPrimary width={mvs(22)} height={mvs(11.63)} />
-                    </View>
+                </ShimmerPlaceholder>
+                <Row
+                  justifyContent="flex-start"
+                  alignItems="center"
+                  style={{
+                    marginLeft: mvs(6),
+                    // width: mvs(250),
+                  }}>
+                  <View style={{ height: mvs(20), justifyContent: 'center' }}>
+                    <SpeedometerPrimary width={mvs(22)} height={mvs(11.63)} />
+                  </View>
+                  <ShimmerPlaceholder style={{ height: mvs(20), }} visible={loading}>
                     <Regular
                       style={{
-                        lineHeight: mvs(15),
-                        marginRight: mvs(5),
-                        transform: [{ translateY: mvs(2) }],
+                        // lineHeight: mvs(15),
+                        marginLeft: mvs(5),
+                        // transform: [{ translateY: mvs(2) }],
                       }}
                       color={colors.G9B9B9B}
                       size={mvs(14)}
@@ -577,9 +442,10 @@ const BusinessProfile = props => {
                           : totalDistance + 'KM'
                       }
                     />
-                  </Row>
+                  </ShimmerPlaceholder>
                 </Row>
-              </ShimmerPlaceholder>
+              </Row>
+
             </View>
           </Row>
           <View
@@ -645,7 +511,7 @@ const BusinessProfile = props => {
             trimLimit={183}
           /> */}
           <ShimmerPlaceholder
-            style={{ width: '95%', alignSelf: 'center' }}
+            style={{ width: '95%', alignSelf: 'center', minHeight: mvs(30), }}
             visible={loading}>
             <View style={{ paddingHorizontal: mvs(18) }}>
               <Regular
@@ -685,9 +551,9 @@ const BusinessProfile = props => {
               <ShimmerPlaceholder
                 style={{
                   marginRight: mvs(10),
-                  height: mvs(200),
-                  width: width - mvs(30),
+                  height: '100%',
                   borderRadius: mvs(8),
+                  width: width - mvs(30),
                 }}
                 visible={loading}>
                 <View
@@ -710,50 +576,63 @@ const BusinessProfile = props => {
               </ShimmerPlaceholder>
             </View>
           )}
-          {businessProfile?.gallery?.length > 1 && (
-            <ScrollView
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{
-                paddingHorizontal: mvs(18),
-                // paddingVertical: 4,
-              }}
-              horizontal>
-              {businessProfile?.gallery?.length > 1 &&
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingHorizontal: mvs(18),
+              // paddingVertical: 4,
+            }}
+            horizontal>
+            {
+              !loading ?
+                (<>
+                  <ShimmerPlaceholder
+                    style={{
+                      marginRight: mvs(10),
+                      height: 200,
+                      borderRadius: mvs(8),
+                      width: width - mvs(70),
+                    }}
+                    visible={loading} />
+                  <ShimmerPlaceholder
+                    style={{
+                      height: 200,
+                      marginRight: mvs(10),
+                      borderRadius: mvs(8),
+                      width: width - mvs(70),
+                    }}
+                    visible={loading} />
+                </>) :
+                businessProfile?.gallery?.length > 1 &&
                 businessProfile?.gallery?.map((ele, index) => {
                   console.log('GALEERY ELE :', ele);
                   return (
-                    <ShimmerPlaceholder
+
+                    <View
+                      key={index}
                       style={{
+                        // marginRight: mvs(4)
                         marginRight: mvs(10),
-                        height: mvs(200),
-                        width: width - mvs(70),
+                        height: 200,
                         borderRadius: mvs(8),
-                        // backgroundColor: 'orange',
-                      }}
-                      visible={loading}>
-                      <View
-                        key={index}
-                        style={{
-                          // marginRight: mvs(4),
+                        width: width - mvs(70),
+                      }}>
+
+                      <ImagePlaceholder
+                        resizeMode="cover"
+                        containerStyle={{
                           height: '100%',
+                          width: '100%',
                           borderRadius: mvs(8),
-                          width: width - mvs(70),
-                        }}>
-                        <ImagePlaceholder
-                          resizeMode="cover"
-                          containerStyle={{
-                            height: '100%',
-                            width: '100%',
-                            borderRadius: mvs(8),
-                          }}
-                          uri={{ uri: ele }}
-                        />
-                      </View>
-                    </ShimmerPlaceholder>
+                        }}
+                        uri={{ uri: ele }}
+                      />
+
+                    </View>
+
                   );
                 })}
-            </ScrollView>
-          )}
+          </ScrollView>
 
           <HeadingTitle
             size={mvs(18)}

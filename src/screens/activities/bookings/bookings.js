@@ -9,7 +9,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useIsFocused, useNavigation, useTheme } from '@react-navigation/native';
 import Bold from '../../../presentation/typography/bold-text';
 import styles from './booking-styles';
 import { mvs } from '../../../services/metrices';
@@ -36,11 +36,14 @@ const Bookings = props => {
   const [draft, setDrafteData] = useState([]);
   const [completed, setCompletedData] = useState([]);
   const [cancelled, setCancelledData] = useState([]);
+  const isFocus = useIsFocused();
   useEffect(() => {
-    getBookings();
+    if (isFocus) {
+      getBookings();
+    }
     // onLikePress(273);
     // onUploadImage(273)
-  }, [])
+  }, [isFocus])
 
   const onLikePress = async (bookingId) => {
     try {

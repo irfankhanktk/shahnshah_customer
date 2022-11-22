@@ -20,6 +20,7 @@ import BOOKING from '../../../constants/customer bookings.json';
 import SERVICES from '../../../services/common-services';
 import allColors from '../../../services/colors';
 import Medium from '../../../presentation/typography/medium-text';
+import { useIsFocused } from '@react-navigation/native';
 
 // create a component
 const History = props => {
@@ -29,9 +30,13 @@ const History = props => {
   const [completed, setCompletedData] = useState([]);
   const [cancelled, setCancelledData] = useState([]);
   const [history, setHistoryData] = useState([]);
+  const isFocus = useIsFocused();
+
   useEffect(() => {
-    getBookings();
-  }, []);
+    if (isFocus) {
+      getBookings();
+    }
+  }, [isFocus]);
 
 
   const getBookings = async () => {

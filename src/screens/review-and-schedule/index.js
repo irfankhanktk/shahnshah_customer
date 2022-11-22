@@ -199,7 +199,9 @@ const ReviewAndSchedule = props => {
               color={colors.black}
               size={16}
             />
-            {coupon?.view?.applyCoupon && <ActionButton title="Apply Coupon"
+            {coupon?.view?.applyCoupon && <ActionButton
+              style={{ marginTop: 0 }}
+              title="Apply Coupon"
               onClick={getCoupons}
               bgColor={colors.lightGreen1}
               borderColor={colors.green}
@@ -255,10 +257,11 @@ const ReviewAndSchedule = props => {
             label={'Payment Method'}
             color={colors.black}
             size={16}
-            style={{ marginVertical: mvs(15) }}
+            style={{ marginTop: mvs(15) }}
           />
           <FlatList
             horizontal
+            showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingVertical: mvs(12) }}
             data={booking?.paymentOptions}
             renderItem={({ item, index }) => (
@@ -335,7 +338,9 @@ const ReviewAndSchedule = props => {
 
         <View style={styles.bottomView}>
           {booking?.view?.continue ? (
-            <Buttons.ButtonPrimary title="Confirm" onClick={finish_booking} />
+            <View style={{ height: mvs(70) }}>
+              <Buttons.ButtonPrimary title="Confirm" onClick={finish_booking} />
+            </View>
           ) : (
             <AlertMessage
               view={booking?.view}

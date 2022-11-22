@@ -22,27 +22,26 @@ const NewCouponItem =
   }) => {
     console.log('covercovercovercover=>>>', cover);
     return (
-      <Row style={{ marginVertical: mvs(10) }}>
-        <ImagePlaceholder containerStyle={styles.image} uri={cover ? { uri: cover } : NoCouponIcon} />
-        <View style={{ marginLeft: mvs(10), }}>
-          <Medium size={mvs(15)} label={title} color={colors.black} />
-          <Regular color={colors.lightgrey1} size={mvs(13)} label={subTitle} />
-          {
-            showHighLighted ?
-              <Row alignItems='center' style={styles.highlighted}>
-                <Percent />
-                <Regular color={colors.black}
-                  size={mvs(13)} label={highlightedText}
-                  style={{ marginLeft: mvs(6), flex: 1, }}
-                />
-              </Row>
-              :
-              <Regular
-                color={showCoupon & !isExpiring ? colors.lightgrey1 : isExpiring ? colors.red : colors.primary}
-                size={mvs(13)} label={statusLine} numberOfLines={1} />
-          }
-        </View>
-      </Row>
+      <View>
+        <Row style={{ marginVertical: mvs(10) }}>
+          <ImagePlaceholder containerStyle={styles.image} uri={cover ? { uri: cover } : NoCouponIcon} />
+          <View style={{ marginLeft: mvs(10), }}>
+            <Medium size={mvs(15)} label={title} color={colors.black} />
+            <Regular color={colors.lightgrey1} size={mvs(13)} label={subTitle} />
+
+            {/* <Row alignItems='center' style={styles.highlighted}>
+              <Percent />
+              <Regular color={colors.black}
+                size={mvs(13)} label={highlightedText}
+                style={{ marginLeft: mvs(6), flex: 1, }}
+              />
+            </Row> */}
+          </View>
+        </Row>
+        <Regular
+          color={showCoupon & !isExpiring ? colors.lightgrey1 : isExpiring ? colors.red : colors.primary}
+          size={mvs(13)} label={statusLine} numberOfLines={1} />
+      </View>
     );
   };
 export default NewCouponItem;

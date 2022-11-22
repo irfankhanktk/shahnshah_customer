@@ -17,10 +17,9 @@ const TabNavigator = (props) => {
   return (
     <View style={{ flex: 1, backgroundColor: colors.white }}>
       <BottomTab.Navigator
-        // options={{tabBarHideOnKeyboard:true}}
         screenOptions={{
           headerShown: false,
-          tabBarHideOnKeyboard: true
+          tabBarHideOnKeyboard: true,
         }}
         tabBar={props => <BottomMenu {...props} colors={colors} />}>
         <BottomTab.Screen
