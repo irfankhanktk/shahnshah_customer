@@ -34,6 +34,7 @@ import LinedColoredCard from '../../components/linedColoredCard';
 import RatingStar from '../../components/molecules/rating-star';
 import SemiBold from '../../presentation/typography/semibold-text';
 import { useServicesOfferingProps } from './useServicesOfferingProps';
+import Shimmer from '../../components/shimmer';
 const about =
   'Gresasy Elbo Auto Repair has been the leader in automotive repair in the Triad area for twenty years.Gresasy Elbo Auto Repair has been the leader in automotive repair in the Triad area for twenty years  continuing the outstanding level of service Triad area residents expect from our';
 const services = [
@@ -81,7 +82,6 @@ const ServiceOfferingDetails = props => {
     setpayload({ ...payload, bookNowStart: true });
     const token = await getData('token');
     const customerID = await getData('customer_id');
-    // console.log('Booking=======', token, customerID, route.params.id);
     var requestOptions = {
       method: 'POST',
       headers: {
@@ -189,18 +189,13 @@ const ServiceOfferingDetails = props => {
           barStyle="dark-content"
           translucent
           backgroundColor={'transparent'}
-        // backgroundColor={'rgba(255, 255, 255, 0.5)'}
         />
 
         <ScrollView
           showsVerticalScrollIndicator={false}
-          // onScroll={e => {
-          //   console.log('this scrol Value', e?.nativeEvent?.contentOffset?.y);
-          // }}
           contentContainerStyle={{
             flexGrow: 1,
-            //  backgroundColor: colors.FBF8F8
-            // backgroundColor: 'red',
+            paddingBottom: mvs(20)
           }}>
           <View
             style={{
@@ -251,8 +246,6 @@ const ServiceOfferingDetails = props => {
                   </View>
                 </ImageBackground>
               </ShimmerPlaceholder>
-              {/* logo discount view  */}
-
               <View
                 style={{
                   flexDirection: 'row',
@@ -261,39 +254,39 @@ const ServiceOfferingDetails = props => {
                   width: mvs(300),
                   bottom: mvs(110),
                 }}>
-                {/* <Icon /> */}
-                <Avatar
-                  size={mvs(32)}
-                  // style={{backgroundColor: 'transparent'}}
-                  rounded
-                  source={{ uri: serviceDetails?.service?.icon }}
-                  key={serviceDetails?.service?.id}
-                />
-                {serviceDetails?.discount?.highlight !== undefined && (
-                  <View
-                    style={{
-                      backgroundColor: colors.GDFDFDF,
-                      borderRadius: mvs(2),
-                      padding: 5,
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      marginLeft: 10,
-                    }}>
-                    <DiscountIcon />
+                <Shimmer visible={loading} shimmerStyle={{ height: mvs(32), width: mvs(32), borderRadius: mvs(16) }}>
+                  <Avatar
+                    size={mvs(32)}
+                    rounded
+                    source={{ uri: serviceDetails?.service?.icon }}
+                    key={serviceDetails?.service?.id}
+                  />
+                </Shimmer>
 
-                    <Medium
-                      style={{ marginLeft: 5 }}
-                      color={colors.black}
-                      label={serviceDetails?.discount?.highlight}
-                    />
-                  </View>
-                )}
+                {/* {serviceDetails?.discount?.highlight !== undefined && ( */}
+                <View
+                  style={{
+                    backgroundColor: colors.GDFDFDF,
+                    borderRadius: mvs(2),
+                    padding: 5,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginLeft: 10,
+                  }}>
+                  <DiscountIcon />
+                  <Medium
+                    style={{ marginLeft: 5, minWidth: mvs(120), }}
+                    color={colors.black}
+                    label={serviceDetails?.discount?.highlight}
+                  />
+                </View>
+                {/* )} */}
               </View>
 
               <View style={styles.detailsInnerCard}>
                 <View style={{ height: mvs(55) }}>
-                  <ShimmerPlaceholder visible={loading}>
+                  <Shimmer visible={loading} shimmerStyle={{ height: mvs(23) }}>
                     <Medium
                       numberOfLines={2}
                       size={mvs(16)}
@@ -302,47 +295,51 @@ const ServiceOfferingDetails = props => {
                       }}
                       label={serviceDetails?.title}
                     />
-                    {/* time price view starts  */}
+                  </Shimmer>
+                  {/* time price view starts  */}
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}>
+                    {/* time view */}
                     <View
                       style={{
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                      }}>
-                      {/* time view */}
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          width: mvs(60),
+                        width: mvs(60),
 
-                          // marginVertical: 5,
-                        }}>
-                        <SettingIcon width={mvs(15)} height={mvs(15)} />
+                        // marginVertical: 5,
+                      }}>
+                      <SettingIcon width={mvs(15)} height={mvs(15)} />
+                      <Shimmer visible={loading} shimmerStyle={{ width: mvs(30) }}>
                         <Medium
                           size={mvs(11)}
                           color={colors.black}
                           label={`${serviceDetails?.leadTime} Min`}
                         />
-                      </View>
+                      </Shimmer>
+                    </View>
 
-                      {/* price view */}
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
+                    {/* price view */}
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
 
-                          marginRight: mvs(20),
-                          // marginVertical: 5,
-                        }}>
-                        <Regular
-                          size={mvs(8)}
-                          color={colors.G9B9B9B}
-                          label={`AED`}
-                          style={{ marginTop: 10 }}
-                        />
+                        marginRight: mvs(20),
+                        // marginVertical: 5,
+                      }}>
+                      <Regular
+                        size={mvs(8)}
+                        color={colors.G9B9B9B}
+                        label={`AED `}
+                        style={{ marginTop: 4 }}
+                      />
+                      <Shimmer visible={loading} shimmerStyle={{ width: mvs(30) }}>
                         <Medium
                           size={mvs(19)}
                           color={colors.primary}
@@ -350,10 +347,11 @@ const ServiceOfferingDetails = props => {
                             }`}
                           style={{ marginLeft: 4 }}
                         />
-                      </View>
+                      </Shimmer>
                     </View>
-                    {/* time price view ends  */}
-                  </ShimmerPlaceholder>
+                  </View>
+                  {/* time price view ends  */}
+
                 </View>
 
                 <View style={styles.yellowInnerLine} />
@@ -366,14 +364,13 @@ const ServiceOfferingDetails = props => {
                   }}>
                   <View
                     style={{
-                      // padding: mvs(2),
                       borderRadius: mvs(23),
                       borderColor: colors.GDFDFDF,
                     }}>
                     <ShimmerPlaceholder
                       style={{
                         width: mvs(45),
-                        borderRadius: mvs(27),
+                        borderRadius: mvs(22.5),
                         height: mvs(45),
                       }}
                       visible={loading}>
@@ -387,184 +384,145 @@ const ServiceOfferingDetails = props => {
                       />
                     </ShimmerPlaceholder>
                   </View>
-
                   <View
                     style={{
                       flex: 1,
-
                       marginLeft: mvs(13),
                     }}>
-                    <ShimmerPlaceholder visible={loading}>
-                      <Row>
-                        <Regular
-                          numberOfLines={2}
-                          color={colors.black}
-                          style={{ flex: 1 }}
-                          label={
-                            'Prismatic technology'.length > 20
-                              ? `${'Prismatic technology'.slice(0, 15)}...`
-                              : 'Prismatic technology'
-                          }
-                          size={mvs(13)}
-                        />
-                      </Row>
+                    <Shimmer shimmerStyle={{ height: mvs(23) }} visible={loading}>
+                      <Regular
+                        numberOfLines={2}
+                        color={colors.black}
+                        // style={{ flex: 1 }}
+                        label={
+                          serviceDetails?.business?.title?.length > 20
+                            ? `${serviceDetails?.business?.title?.slice(0, 20)}...`
+                            : serviceDetails?.business?.title
+                        }
+                        size={mvs(13)}
+                      />
+                    </Shimmer>
+                    <Row alignItems="center" justifyContent="flex-start">
+                      <Row
+                        justifyContent="flex-start"
+                        style={{
+                          flex: 1,
+                        }}>
+                        <View style={{}}>
 
-                      <Row alignItems="center" justifyContent="flex-start">
-                        <Row
-                          justifyContent="flex-start"
-                          style={{
-                            flex: 1,
-                          }}>
-                          <View style={{}}>
-                            <Regular
-                              color={colors.G9B9B9B}
-                              size={mvs(14)}
-                              label={
-                                serviceDetails?.business?.view?.address
-                                  ?.length > 25
-                                  ? `${serviceDetails?.business?.view?.address?.slice(
-                                    0,
-                                    18,
-                                  )}...`
-                                  : serviceDetails?.business?.view?.address
-                              }
-                            />
-
-                            {serviceDetails?.business?.rating?.length > 0 && (
-                              <RatingStar
-                                ratingSelectedColor={colors.primary}
-                                rate={
-                                  serviceDetails?.business?.rating[7]
-                                    ? serviceDetails?.business?.rating[7]
-                                    : 0
+                          <Shimmer shimmerStyle={{ height: mvs(20), marginTop: mvs(2) }} visible={loading}>
+                            <Row>
+                              <Regular
+                                color={colors.G9B9B9B}
+                                size={mvs(14)}
+                                label={
+                                  serviceDetails?.business?.view?.address
+                                    ?.length > 25
+                                    ? `${serviceDetails?.business?.view?.address?.slice(
+                                      0,
+                                      18,
+                                    )}...`
+                                    : serviceDetails?.business?.view?.address
                                 }
-                                ratingUnSelectedColor={colors.GDFDFDF}
-                                size={mvs(10)}
-                                list={[1, 2, 3, 4, 5]}
-                                width={mvs(40)}
+                              />
+                              <Row
+                                alignItems="center"
+                                justifyContent="flex-end"
                                 style={{
-                                  alignSelf: 'flex-start',
-                                  marginVertical: mvs(3),
-                                }}
-                              />
-                            )}
-                          </View>
-                          <Row
-                            alignItems="center"
-                            justifyContent="flex-end"
-                            style={{
-                              width: '25%',
-                              marginLeft: mvs(15),
-                              marginTop: mvs(3),
-
-                              // justifyContent: 'space-between',
-                            }}>
-                            <View style={{}}>
-                              <SpeedometerPrimary
-                                width={mvs(22)}
-                                color={colors.black}
-                                height={mvs(11.63)}
-                              />
-                            </View>
-                            <Regular
+                                  width: '25%',
+                                  marginLeft: mvs(15),
+                                  marginTop: mvs(3),
+                                }}>
+                                <View style={{}}>
+                                  <SpeedometerPrimary
+                                    width={mvs(22)}
+                                    color={colors.black}
+                                    height={mvs(11.63)}
+                                  />
+                                </View>
+                                <Regular
+                                  style={{
+                                    lineHeight: mvs(15),
+                                    marginLeft: mvs(8),
+                                  }}
+                                  color={colors.black}
+                                  size={mvs(11)}
+                                  label={`${distance} KM`}
+                                />
+                              </Row>
+                            </Row>
+                          </Shimmer>
+                          {serviceDetails?.business?.rating?.length > 0 && (
+                            <RatingStar
+                              ratingSelectedColor={colors.primary}
+                              rate={
+                                serviceDetails?.business?.rating[7]
+                                  ? serviceDetails?.business?.rating[7]
+                                  : 0
+                              }
+                              ratingUnSelectedColor={colors.GDFDFDF}
+                              size={mvs(10)}
+                              list={[1, 2, 3, 4, 5]}
+                              width={mvs(40)}
                               style={{
-                                lineHeight: mvs(15),
-                                marginLeft: mvs(8),
-                                //transform: [{translateY: mvs(2)}],
+                                alignSelf: 'flex-start',
+                                marginVertical: mvs(3),
                               }}
-                              color={colors.black}
-                              size={mvs(11)}
-                              // label={
-                              //   totalDistance.length > 3
-                              //     ? `${totalDistance.slice(0, 3)} KM`
-                              //     : totalDistance + 'KM'
-                              // }
-                              label={`${distance} KM`}
                             />
-                          </Row>
-                        </Row>
+                          )}
+                        </View>
+
                       </Row>
-                    </ShimmerPlaceholder>
+                    </Row>
+
                   </View>
                 </Row>
               </View>
             </View>
           </View>
 
-          {tagsList !== undefined && tagsList.length > 1 && (
+          <Shimmer visible={loading} shimmerStyle={{
+            alignSelf: 'center',
+            marginHorizontal: mvs(35),
+            height: mvs(32),
+          }}>
             <View
               style={{
                 alignItems: 'center',
-                // backgroundColor: 'red',
                 paddingHorizontal: mvs(35),
               }}>
-              <FlatList
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                data={tagsList || []}
-                renderItem={({ item, index }) => {
-                  return (
-                    <View style={styles.tagsView}>
-                      <Regular
-                        style={{
-                          lineHeight: mvs(15),
-                        }}
-                        color={colors.G777373}
-                        size={mvs(10)}
-                        // label={
-                        //   totalDistance.length > 3
-                        //     ? `${totalDistance.slice(0, 3)} KM`
-                        //     : totalDistance + 'KM'
-                        // }
-                        label={item}
-                      />
-                    </View>
-                  );
-                }}
-              />
+              {tagsList !== undefined && tagsList.length > 1 && (
+                <FlatList
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  data={tagsList || []}
+                  renderItem={({ item, index }) => {
+                    return (
+                      <View style={styles.tagsView}>
+                        <Regular
+                          style={{
+                            lineHeight: mvs(15),
+                          }}
+                          color={colors.G777373}
+                          size={mvs(10)}
+                          label={item}
+                        />
+                      </View>
+                    );
+                  }}
+                />)}
             </View>
-          )}
+          </Shimmer>
 
-          {isObjectEmpty(serviceDetails?.discount) && (
-            <LinedColoredCard
-              color={serviceDetails?.discount?.view?.statusLine?.color}
-              title={serviceDetails?.discount?.view?.statusLine?.shortLine}
-              subTitle={serviceDetails?.discount?.view?.statusLine?.line}
-            />
-            // <View style={styles.warningMainCard}>
-            //   <View style={styles.redLinedInnerView}>
-            //     <Medium
-            //       style={{
-            //         lineHeight: mvs(15),
-            //         marginRight: mvs(10),
-            //         //transform: [{translateY: mvs(2)}],
-            //       }}
-            //       color={colors.FF0000}
-            //       size={mvs(13)}
-            //       // label={
-            //       //   totalDistance.length > 3
-            //       //     ? `${totalDistance.slice(0, 3)} KM`
-            //       //     : totalDistance + 'KM'
-            //       // }
-            //       label={serviceDetails?.discount?.view?.statusLine?.shortLine}
-            //     />
-            //     <Regular
-            //       style={{
-            //         lineHeight: mvs(15),
-            //         marginVertical: mvs(5),
-            //       }}
-            //       color={colors.FF0000}
-            //       size={mvs(11)}
-            //       // label={
-            //       //   totalDistance.length > 3
-            //       //     ? `${totalDistance.slice(0, 3)} KM`
-            //       //     : totalDistance + 'KM'
-            //       // }
-            //       label={serviceDetails?.discount?.view?.statusLine?.line}
-            //     />
-            //   </View>
-            // </View>
-          )}
+          {loading ?
+            <Shimmer visible={loading} shimmerStyle={{ height: mvs(115), marginTop: mvs(15) }} /> :
+            isObjectEmpty(serviceDetails?.discount) && (
+              <LinedColoredCard
+                color={serviceDetails?.discount?.view?.statusLine?.color}
+                title={serviceDetails?.discount?.view?.statusLine?.shortLine}
+                subTitle={serviceDetails?.discount?.view?.statusLine?.line}
+              />
+            )}
 
           <HeadingTitle
             title="About"
@@ -574,7 +532,7 @@ const ServiceOfferingDetails = props => {
           />
 
           <View style={{ paddingHorizontal: mvs(18) }}>
-            <ShimmerPlaceholder style={{ width: '90%' }} visible={loading}>
+            <ShimmerPlaceholder style={{ width: '90%', minHeight: mvs(25) }} visible={loading}>
               <Regular
                 numberOfLines={null}
                 label={
@@ -599,14 +557,50 @@ const ServiceOfferingDetails = props => {
               flexGrow: 1,
               // paddingBottom: mvs(30),
             }}> */}
-          {serviceDetails?.coupons && (
-            <CouponPromo
-              {...props}
-              loading={loading}
-              coupons={serviceDetails?.coupons}
-              business={serviceDetails?.business}
-            />
-          )}
+          {
+            !loading ?
+              (
+                <>
+                  <HeadingTitle
+                    title="Coupons & Promos"
+                    marginVertical={0}
+                    size={mvs(18)}
+                  />
+                  <ScrollView
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{
+                      paddingHorizontal: mvs(18),
+                    }}
+                    horizontal>
+                    <ShimmerPlaceholder
+                      style={{
+                        marginTop: mvs(15),
+                        marginRight: mvs(10),
+                        height: mvs(240),
+                        borderRadius: mvs(8),
+                        width: width - mvs(70),
+                      }}
+                      visible={loading} />
+                    <ShimmerPlaceholder
+                      style={{
+                        marginTop: mvs(15),
+                        height: mvs(240),
+                        marginRight: mvs(10),
+                        borderRadius: mvs(8),
+                        width: width - mvs(70),
+                      }}
+                      visible={loading} />
+                  </ScrollView>
+                </>
+              ) :
+              serviceDetails?.coupons && (
+                <CouponPromo
+                  {...props}
+                  loading={loading}
+                  coupons={serviceDetails?.coupons}
+                  business={serviceDetails?.business}
+                />
+              )}
           {/* </View> */}
 
           <HeadingTitle
@@ -615,19 +609,15 @@ const ServiceOfferingDetails = props => {
             paddingTop={mvs(22)}
             title="Rating & Reviews"
           />
-          <View style={{ paddingHorizontal: mvs(18) }}>
-            <Row justifyContent={'space-between'}>
-              <ShimmerPlaceholder style={{ width: mvs(110) }} visible={loading}>
+          <View style={{ paddingHorizontal: mvs(18), }}>
+            <ShimmerPlaceholder style={{ width: '100%', height: mvs(60) }} visible={loading}>
+              <Row justifyContent={'space-between'}>
                 <Bold
                   color={colors.ratingg}
                   style={{ transform: [{ translateY: -mvs(12) }] }}
                   size={mvs(48)}
                   label={ratingg?.length > 0 ? ratingg[7] : 0}
                 />
-              </ShimmerPlaceholder>
-              <ShimmerPlaceholder
-                style={{ flex: 1, height: mvs(60) }}
-                visible={loading}>
                 <Row justifyContent="flex-start" alignItems="center">
                   <View style={{ justifyContent: 'space-between' }}>
                     <RatingStar
@@ -729,11 +719,12 @@ const ServiceOfferingDetails = props => {
                     </View>
                   </View>
                 </Row>
-              </ShimmerPlaceholder>
-            </Row>
+
+              </Row>
+            </ShimmerPlaceholder>
             <Row>
               <Regular
-                style={{ left: mvs(5), bottom: mvs(20) }}
+                // style={{ left: mvs(5), bottom: mvs(20) }}
                 color={colors.black}
                 size={mvs(16)}
                 label={'Out of 5'}
@@ -747,128 +738,14 @@ const ServiceOfferingDetails = props => {
               />
             </Row>
           </View>
-
-          {/* <View style={{paddingHorizontal: mvs(18)}}>
-            <Row justifyContent={'space-between'}>
-              <ShimmerPlaceholder style={{width: mvs(110)}} visible={loading}>
-                <Bold
-                  color={colors.black}
-                  style={{transform: [{translateY: -mvs(10)}]}}
-                  size={mvs(42)}
-                  label={ratingg.length > 0 ? ratingg[7] : 0}
-                />
-              </ShimmerPlaceholder>
-              <ShimmerPlaceholder
-                style={{flex: 1, height: mvs(60)}}
-                visible={loading}>
-                <Row justifyContent="flex-start">
-                  <View style={{}}>
-                    <RatingStar
-                      rate={5}
-                      ratingCount={5}
-                      size={mvs(10)}
-                      list={[1, 2, 3, 4, 5]}
-                      width={mvs(40)}
-                      style={{alignSelf: 'flex-end'}}
-                    />
-                    <RatingStar
-                      rate={4}
-                      ratingCount={4}
-                      size={mvs(10)}
-                      list={[1, 2, 3, 4]}
-                      width={mvs(32)}
-                      style={{alignSelf: 'flex-end'}}
-                    />
-                    <RatingStar
-                      rate={3}
-                      ratingCount={3}
-                      size={mvs(10)}
-                      list={[1, 2, 3]}
-                      width={mvs(24)}
-                      style={{alignSelf: 'flex-end'}}
-                    />
-                    <RatingStar
-                      rate={2}
-                      ratingCount={2}
-                      size={mvs(10)}
-                      list={[1, 2]}
-                      width={mvs(16)}
-                      style={{alignSelf: 'flex-end', marginTop: mvs(2.4)}}
-                    />
-                    <RatingStar
-                      rate={1}
-                      ratingCount={1}
-                      size={mvs(10)}
-                      list={[1]}
-                      width={mvs(8)}
-                      style={{
-                        alignSelf: 'flex-end',
-                      }}
-                    />
-                  </View>
-                  <View style={{marginLeft: mvs(5), flex: 1}}>
-                    <View style={{...styles.ratingBar, marginTop: mvs(0)}}>
-                      <View
-                        style={{
-                          ...styles.ratingPercentage,
-                          width: mvs(ratingg[0] ? (ratingg[0] / 5) * 100 : 0),
-                        }}
-                      />
-                    </View>
-                    <View style={styles.ratingBar}>
-                      <View
-                        style={{
-                          ...styles.ratingPercentage,
-                          width: mvs(ratingg[1] ? (ratingg[1] / 5) * 100 : 0),
-                        }}
-                      />
-                    </View>
-                    <View style={styles.ratingBar}>
-                      <View
-                        style={{
-                          ...styles.ratingPercentage,
-                          width: mvs(ratingg[2] ? (ratingg[2] / 5) * 100 : 0),
-                        }}
-                      />
-                    </View>
-                    <View style={styles.ratingBar}>
-                      <View
-                        style={{
-                          ...styles.ratingPercentage,
-                          width: mvs(ratingg[3] ? (ratingg[3] / 5) * 100 : 0),
-                        }}
-                      />
-                    </View>
-                    <View style={styles.ratingBar}>
-                      <View
-                        style={{
-                          ...styles.ratingPercentage,
-                          width: mvs(ratingg[4] ? (ratingg[4] / 5) * 100 : 0),
-                        }}
-                      />
-                    </View>
-                  </View>
-                </Row>
-              </ShimmerPlaceholder>
-            </Row>
-            <Row>
-              <Bold color={colors.black} size={mvs(12)} label={'out of 5'} />
-              <Bold
-                color={colors.black}
-                size={mvs(12)}
-                label={ratingg[5] ? ratingg[5] + '  ratings' : 0 + ' ratings'}
-              />
-            </Row>
-          </View> */}
-
-          <ShimmerPlaceholder visible={loading}>
-            <ReviewsRaing
+          {loading ? <Shimmer style={{ height: mvs(200), marginTop: mvs(20), backgroundColor: 'red' }} visible={loading} />
+            : <ReviewsRaing
               picsArray={payload?.picsArrayReviews}
               data={getBusinessReviews?.map(item => item)}
               loading={loading}
-              style={{ marginBottom: mvs(15), paddingTop: mvs(17) }}
-            />
-          </ShimmerPlaceholder>
+              style={{ paddingTop: mvs(17) }}
+            />}
+
 
           {serviceDetails?.view?.resume && (
             <View

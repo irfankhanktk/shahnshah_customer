@@ -52,6 +52,7 @@ const get_customer_bookings = id => {
       );
       return response;
     } catch (error) {
+      console.log('error=>>', error);
       throw new Error(SERVICES._returnError(error));
     }
   };

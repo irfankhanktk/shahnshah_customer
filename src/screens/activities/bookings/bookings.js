@@ -75,16 +75,21 @@ const Bookings = props => {
 
   }
   const getBookings = async () => {
-    const customerId = await getData("customer_id");
-    const response = await get_bookings(customerId);
-    console.log('response=>> of bookings', response?.data);
-    setCancelledData(response?.data?.cancelled)
-    setCompletedData(response?.data?.completed)
-    setScheduleData(response?.data?.scheduled)
-    setDrafteData(response?.data?.draft)
-    //response?.data?.draft
-    //response?.data?.history
-    //response?.data?.cancelled
+    try {
+
+      const customerId = await getData("customer_id");
+      const response = await get_bookings(customerId);
+      console.log('response=>> of bookings', response?.data);
+      setCancelledData(response?.data?.cancelled)
+      setCompletedData(response?.data?.completed)
+      setScheduleData(response?.data?.scheduled)
+      setDrafteData(response?.data?.draft)
+      //response?.data?.draft
+      //response?.data?.history
+      //response?.data?.cancelled
+    } catch (error) {
+      console.log('error in booking=>', error);
+    }
   }
   const submitReview = async () => {
     const customerId = await getData("customer_id");

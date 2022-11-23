@@ -17,7 +17,7 @@ const BillView = ({
       <Row alignItems="center">
         <Medium label={'Sub Total'} size={14} color={colors.black} />
         <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{ marginTop: mvs(8) }} />
+          <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{}} />
           <Medium label={invoice?.subTotal + ''} size={14} color={colors.black} />
         </Row>
       </Row>
@@ -28,28 +28,28 @@ const BillView = ({
           {/* <Medium size={14} label={'('+invoice?.discountTitle+')'} color={colors.lightgrey1}/> */}
         </View>
         <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{ marginTop: mvs(8) }} />
+          <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
           <Medium label={invoice?.discountValue + ''} size={14} color={colors.black} />
         </Row>
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
         <Medium label={`Total Before Vat`} size={14} color={colors.black} />
         <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{ marginTop: mvs(8) }} />
+          <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
           <Medium label={invoice?.totalBeforeVat + ''} size={14} color={colors.black} />
         </Row>
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
         <Medium label={`VAT(${invoice?.vatRate}%)`} size={14} color={colors.lightgrey1} />
         <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{ marginTop: mvs(8) }} />
+          <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
           <Medium label={invoice?.vat + ''} size={14} color={colors.lightgrey1} />
         </Row>
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
         <Medium label={`Grand Total`} size={14} color={colors.black} />
         <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{ marginTop: mvs(8) }} />
+          <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
           <Medium label={invoice?.total + ''} size={14} color={colors.black} />
         </Row>
       </Row>

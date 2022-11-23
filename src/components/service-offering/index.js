@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
   Image,
   Platform,
@@ -16,20 +16,20 @@ import {
   LeftBlackArrow,
   Percent,
 } from '../../assets/common-icons';
-import {Bg} from '../../assets/images';
+import { Bg } from '../../assets/images';
 import Regular from '../../presentation/typography/regular-text';
 import colors from '../../services/colors';
-import {mvs, width} from '../../services/metrices';
+import { mvs, width } from '../../services/metrices';
 import Buttons from '../atoms/Button';
 import ImagePlaceholder from '../atoms/Placeholder';
 import Row from '../atoms/row';
-import {Avatar, Text} from 'react-native-elements';
+import { Avatar, Text } from 'react-native-elements';
 import Bold from './../../presentation/typography/bold-text';
 
-import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
-import {useBusinessProfile} from '../../screens/business-profile-screen/useBusinessProfile';
-import {globalStyles} from '../../styles/globalStyles';
+import { useBusinessProfile } from '../../screens/business-profile-screen/useBusinessProfile';
+import { globalStyles } from '../../styles/globalStyles';
 import Medium from '../../presentation/typography/medium-text';
 
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
@@ -42,252 +42,281 @@ const ServiceOffering = ({
   isCouponOffering = false,
   moveTo = 'ServiceOfferingDetails',
 }) => {
-  const {isObjectEmpty} = useBusinessProfile();
+  const { isObjectEmpty } = useBusinessProfile();
   const navigation = useNavigation();
 
   return (
     // <View style={{backgroundColor: colors.white}}>
     <>
-      {data?.length === 1 && (
-        <View
-          style={{
-            paddingHorizontal: mvs(18),
-            paddingVertical: mvs(20),
-            backgroundColor: colors.white,
-            // overflow: 'visible',
-          }}>
-          {data
-            ?.map((ele, index) => {
-              const {discount} = ele;
-              console.log(ele?.discount?.view?.statusLine?.color);
-              return (
-                <Pressable
-                  // style={globalStyles.boxShadow}
-                  style={[
-                    globalStyles.boxShadow,
-                    {
-                      backgroundColor: colors.white,
-                      width:
-                        data?.length === 1 ? width - mvs(30) : width - mvs(70),
-                      height: mvs(242),
-                      marginRight: mvs(10),
-                      borderRadius: mvs(8),
-                      // backgroundColor: 'red',
-                      // overflow: 'hidden',
-                    },
-                  ]}
-                  key={index}
-                  onPress={() =>
-                    navigation.navigate(moveTo, {
-                      id: ele?.id,
-                      distance: totalDistance,
-                    })
-                  }>
-                  <ShimmerPlaceholder
-                    contentStyle={{
-                      // height: mvs(152),
-                      width: '100%',
-                    }}
-                    visible={loading}>
-                    <ImagePlaceholder
-                      containerStyle={{
-                        height: mvs(150),
-                        width: '100%',
-                        borderTopRightRadius: mvs(8),
-                        borderTopLeftRadius: mvs(8),
-                      }}
-                      uri={{uri: ele?.cover}}
-                    />
-                    <View style={styles.roundedView}>
-                      <Avatar
-                        size={mvs(32)}
-                        // style={{backgroundColor: 'transparent'}}
-                        rounded
-                        source={{uri: ele?.service?.icon}}
-                        key={ele?.service?.id}
-                      />
-                    </View>
-                    {ele?.discount?.highlight && (
-                      <View style={styles.discountImgView}>
-                        <CashVoucher width={mvs(20)} height={mvs(20)} />
-                        <Regular
-                          size={mvs(12)}
-                          color={colors.black}
-                          numberOfLines={2}
-                          label={ele?.discount?.highlight}
-                        />
-                      </View>
-                    )}
-                  </ShimmerPlaceholder>
-                  <View
-                    style={{
-                      padding: mvs(5),
-                      paddingHorizontal: mvs(15),
-
-                      // ...colors.shadow,
-
-                      backgroundColor: colors.white,
-                      // backgroundColor: 'red',
-                      // height: '100%',
-                    }}>
-                    <View
+      {
+        !loading ?
+          (
+            <>
+              <ScrollView
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{
+                  paddingHorizontal: mvs(18),
+                }}
+                horizontal>
+                <ShimmerPlaceholder
+                  style={{
+                    marginRight: mvs(10),
+                    height: mvs(242),
+                    borderRadius: mvs(8),
+                    width: width - mvs(70),
+                  }}
+                  visible={loading} />
+                <ShimmerPlaceholder
+                  style={{
+                    height: mvs(242),
+                    marginRight: mvs(10),
+                    borderRadius: mvs(8),
+                    width: width - mvs(70),
+                  }}
+                  visible={loading} />
+              </ScrollView>
+            </>
+          ) :
+          data?.length === 1 && (
+            <View
+              style={{
+                paddingHorizontal: mvs(18),
+                paddingVertical: mvs(20),
+                backgroundColor: colors.white,
+                // overflow: 'visible',
+              }}>
+              {data
+                ?.map((ele, index) => {
+                  const { discount } = ele;
+                  console.log(ele?.discount?.view?.statusLine?.color);
+                  return (
+                    <Pressable
+                      // style={globalStyles.boxShadow}
                       style={[
-                        styles.rowItem,
+                        globalStyles.boxShadow,
                         {
-                          justifyContent: 'space-between',
+                          backgroundColor: colors.white,
+                          width:
+                            data?.length === 1 ? width - mvs(30) : width - mvs(70),
+                          height: mvs(242),
+                          marginRight: mvs(10),
+                          borderRadius: mvs(8),
+                          // backgroundColor: 'red',
+                          // overflow: 'hidden',
                         },
-                      ]}>
-                      <View>
-                        <ShimmerPlaceholder
-                          style={{
-                            // height: mvs(24),
-                            width: mvs(220),
-                          }}
-                          visible={loading}>
-                          <Medium
-                            size={mvs(16)}
-                            color={colors.black}
-                            numberOfLines={2}
-                            label={ele?.title}
-                          />
-                        </ShimmerPlaceholder>
-
-                        <ShimmerPlaceholder
-                          style={{
-                            marginTop: mvs(2),
-                          }}
-                          visible={loading}>
-                          <Regular
-                            size={mvs(14)}
-                            color={colors.serviceSubHeading}
-                            numberOfLines={2}
-                            label={ele?.subTitle}
-                          />
-                        </ShimmerPlaceholder>
-                      </View>
-                      <View
-                        style={{
-                          alignSelf: 'center',
-                          paddingRight: mvs(50),
-                        }}>
-                        {ele?.discount && (
-                          <View style={styles.rowItem}>
-                            <Regular
-                              textDecoration={'line-through'}
-                              size={mvs(8)}
-                              style={{top: 4}}
-                              color={colors.G9B9B9B}
-                              label={'AED'}
-                            />
-                            <Medium
-                              textDecoration={'line-through'}
-                              size={mvs(20)}
-                              color={colors.B2E3036}
-                              label={' ' + ele?.price}
-                            />
-                          </View>
-                        )}
-                        {ele?.discount?.rate && (
-                          <Regular
-                            style={{
-                              bottom: mvs(5),
-                              // top: mvs(15),
-                              left: mvs(20),
-                            }}
-                            size={mvs(12)}
-                            color={colors.primary}
-                            label={' ' + ele?.discount?.rate + '% Off'}
-                          />
-                        )}
-                      </View>
-                    </View>
-                    {!isCouponOffering && (
+                      ]}
+                      key={index}
+                      onPress={() =>
+                        navigation.navigate(moveTo, {
+                          id: ele?.id,
+                          distance: totalDistance,
+                        })
+                      }>
                       <ShimmerPlaceholder
-                        style={{
-                          // height: mvs(100),
-                          marginTop: mvs(2),
+                        contentStyle={{
+                          // height: mvs(152),
                           width: '100%',
                         }}
                         visible={loading}>
-                        <Row
-                          justifyContent={
-                            ele?.discount &&
-                            ele?.discount.view !== undefined &&
-                            ele?.discount?.view?.statusLine?.shortLine
-                              ? 'space-between'
-                              : 'flex-end'
-                          }>
-                          {isObjectEmpty(ele?.discount) && (
-                            <Row>
-                              <DiscountExpiring
-                                style={{
-                                  colors: `${ele?.discount?.view?.statusLine?.color}`,
-                                }}
-                                width={mvs(20)}
-                                height={mvs(20)}
-                                // stroke={
-                                //   ele?.discount?.view?.statusLine?.color
-                                // }
-                                fill={ele?.discount?.view?.statusLine?.color}
-                                fillColor={
-                                  ele?.discount?.view?.statusLine?.color
-                                }
+                        <ImagePlaceholder
+                          containerStyle={{
+                            height: mvs(150),
+                            width: '100%',
+                            borderTopRightRadius: mvs(8),
+                            borderTopLeftRadius: mvs(8),
+                          }}
+                          uri={{ uri: ele?.cover }}
+                        />
+                        <View style={styles.roundedView}>
+                          <Avatar
+                            size={mvs(32)}
+                            // style={{backgroundColor: 'transparent'}}
+                            rounded
+                            source={{ uri: ele?.service?.icon }}
+                            key={ele?.service?.id}
+                          />
+                        </View>
+                        {ele?.discount?.highlight && (
+                          <View style={styles.discountImgView}>
+                            <CashVoucher width={mvs(20)} height={mvs(20)} />
+                            <Regular
+                              size={mvs(12)}
+                              color={colors.black}
+                              numberOfLines={2}
+                              label={ele?.discount?.highlight}
+                            />
+                          </View>
+                        )}
+                      </ShimmerPlaceholder>
+                      <View
+                        style={{
+                          padding: mvs(5),
+                          paddingHorizontal: mvs(15),
+
+                          // ...colors.shadow,
+
+                          backgroundColor: colors.white,
+                          // backgroundColor: 'red',
+                          // height: '100%',
+                        }}>
+                        <View
+                          style={[
+                            styles.rowItem,
+                            {
+                              justifyContent: 'space-between',
+                            },
+                          ]}>
+                          <View>
+                            <ShimmerPlaceholder
+                              style={{
+                                // height: mvs(24),
+                                width: mvs(220),
+                              }}
+                              visible={loading}>
+                              <Medium
+                                size={mvs(16)}
+                                color={colors.black}
+                                numberOfLines={2}
+                                label={ele?.title}
                               />
+                            </ShimmerPlaceholder>
+
+                            <ShimmerPlaceholder
+                              style={{
+                                marginTop: mvs(2),
+                              }}
+                              visible={loading}>
                               <Regular
                                 size={mvs(14)}
-                                color={ele?.discount?.view?.statusLine?.color}
-                                label={
-                                  ' ' +
-                                  ele?.discount?.view?.statusLine?.shortLine
-                                }
+                                color={colors.serviceSubHeading}
+                                numberOfLines={2}
+                                label={ele?.subTitle}
                               />
+                            </ShimmerPlaceholder>
+                          </View>
+                          <View
+                            style={{
+                              alignSelf: 'center',
+                              paddingRight: mvs(50),
+                            }}>
+                            {ele?.discount && (
+                              <View style={styles.rowItem}>
+                                <Regular
+                                  textDecoration={'line-through'}
+                                  size={mvs(8)}
+                                  style={{ top: 4 }}
+                                  color={colors.G9B9B9B}
+                                  label={'AED'}
+                                />
+                                <Medium
+                                  textDecoration={'line-through'}
+                                  size={mvs(20)}
+                                  color={colors.B2E3036}
+                                  label={' ' + ele?.price}
+                                />
+                              </View>
+                            )}
+                            {ele?.discount?.rate && (
+                              <Regular
+                                style={{
+                                  bottom: mvs(5),
+                                  // top: mvs(15),
+                                  left: mvs(20),
+                                }}
+                                size={mvs(12)}
+                                color={colors.primary}
+                                label={' ' + ele?.discount?.rate + '% Off'}
+                              />
+                            )}
+                          </View>
+                        </View>
+                        {!isCouponOffering && (
+                          <ShimmerPlaceholder
+                            style={{
+                              // height: mvs(100),
+                              marginTop: mvs(2),
+                              width: '100%',
+                            }}
+                            visible={loading}>
+                            <Row
+                              justifyContent={
+                                ele?.discount &&
+                                  ele?.discount.view !== undefined &&
+                                  ele?.discount?.view?.statusLine?.shortLine
+                                  ? 'space-between'
+                                  : 'flex-end'
+                              }>
+                              {isObjectEmpty(ele?.discount) && (
+                                <Row>
+                                  <DiscountExpiring
+                                    style={{
+                                      colors: `${ele?.discount?.view?.statusLine?.color}`,
+                                    }}
+                                    width={mvs(20)}
+                                    height={mvs(20)}
+                                    // stroke={
+                                    //   ele?.discount?.view?.statusLine?.color
+                                    // }
+                                    fill={ele?.discount?.view?.statusLine?.color}
+                                    fillColor={
+                                      ele?.discount?.view?.statusLine?.color
+                                    }
+                                  />
+                                  <Regular
+                                    size={mvs(14)}
+                                    color={ele?.discount?.view?.statusLine?.color}
+                                    label={
+                                      ' ' +
+                                      ele?.discount?.view?.statusLine?.shortLine
+                                    }
+                                  />
+                                </Row>
+                              )}
+                              <Row alignItems="center">
+                                <Regular
+                                  style={{
+                                    position: 'absolute',
+                                    top: mvs(13),
+                                    left: mvs(25),
+                                  }}
+                                  size={mvs(7)}
+                                  color={colors.G9B9B9B}
+                                  label={'AED'}
+                                />
+                                <Buttons.ButtonPrimary
+                                  title={ele?.newPrice ? ele?.newPrice : ele?.price}
+                                  textStyle={
+                                    ele?.discount
+                                      ? {
+                                        fontSize: mvs(12),
+                                        color: colors.primary,
+                                        // textDecorationLine: 'line-through',
+                                        // textDecorationStyle: 'solid',
+                                      }
+                                      : {
+                                        fontSize: mvs(12),
+                                        color: colors.primary,
+                                      }
+                                  }
+                                  style={{
+                                    width: mvs(100),
+                                    borderRadius: mvs(5),
+                                    //  marginBottom: 20,
+                                    height: mvs(30),
+                                    backgroundColor: `${colors.primary}30`,
+                                  }}
+                                />
+                              </Row>
                             </Row>
-                          )}
-                          <Row alignItems="center">
-                            <Regular
-                              style={{
-                                position: 'absolute',
-                                top: mvs(13),
-                                left: mvs(25),
-                              }}
-                              size={mvs(7)}
-                              color={colors.G9B9B9B}
-                              label={'AED'}
-                            />
-                            <Buttons.ButtonPrimary
-                              title={ele?.newPrice ? ele?.newPrice : ele?.price}
-                              textStyle={
-                                ele?.discount
-                                  ? {
-                                      fontSize: mvs(12),
-                                      color: colors.primary,
-                                      // textDecorationLine: 'line-through',
-                                      // textDecorationStyle: 'solid',
-                                    }
-                                  : {
-                                      fontSize: mvs(12),
-                                      color: colors.primary,
-                                    }
-                              }
-                              style={{
-                                width: mvs(100),
-                                borderRadius: mvs(5),
-                                //  marginBottom: 20,
-                                height: mvs(30),
-                                backgroundColor: `${colors.primary}30`,
-                              }}
-                            />
-                          </Row>
-                        </Row>
-                      </ShimmerPlaceholder>
-                    )}
-                  </View>
-                </Pressable>
-              );
-            })
-            .filter(Boolean)}
-        </View>
-      )}
+                          </ShimmerPlaceholder>
+                        )}
+                      </View>
+                    </Pressable>
+                  );
+                })
+                .filter(Boolean)}
+            </View>
+          )}
 
       {data?.length > 0 && data?.length !== 1 && (
         <ScrollView
@@ -301,7 +330,7 @@ const ServiceOffering = ({
           {data?.length > 1 &&
             data
               ?.map((ele, index) => {
-                const {discount} = ele;
+                const { discount } = ele;
                 console.log(ele?.discount?.view?.statusLine?.color);
                 return (
                   <TouchableOpacity
@@ -341,14 +370,14 @@ const ServiceOffering = ({
                           height: mvs(150),
                           width: '100%',
                         }}
-                        uri={{uri: ele?.cover}}
+                        uri={{ uri: ele?.cover }}
                       />
                       <View style={styles.roundedView}>
                         <Avatar
                           size={mvs(32)}
                           // style={{backgroundColor: 'transparent'}}
                           rounded
-                          source={{uri: ele?.service?.icon}}
+                          source={{ uri: ele?.service?.icon }}
                           key={ele?.service?.id}
                         />
                       </View>
@@ -421,7 +450,7 @@ const ServiceOffering = ({
                               <Regular
                                 textDecoration={'line-through'}
                                 size={mvs(8)}
-                                style={{top: 4}}
+                                style={{ top: 4 }}
                                 color={colors.G9B9B9B}
                                 label={'AED'}
                               />
@@ -458,8 +487,8 @@ const ServiceOffering = ({
                           <Row
                             justifyContent={
                               ele?.discount &&
-                              ele?.discount.view !== undefined &&
-                              ele?.discount?.view?.statusLine?.shortLine
+                                ele?.discount.view !== undefined &&
+                                ele?.discount?.view?.statusLine?.shortLine
                                 ? 'space-between'
                                 : 'flex-end'
                             }>
@@ -507,15 +536,15 @@ const ServiceOffering = ({
                                 textStyle={
                                   ele?.discount
                                     ? {
-                                        fontSize: mvs(12),
-                                        color: colors.primary,
-                                        // textDecorationLine: 'line-through',
-                                        // textDecorationStyle: 'solid',
-                                      }
+                                      fontSize: mvs(12),
+                                      color: colors.primary,
+                                      // textDecorationLine: 'line-through',
+                                      // textDecorationStyle: 'solid',
+                                    }
                                     : {
-                                        fontSize: mvs(12),
-                                        color: colors.primary,
-                                      }
+                                      fontSize: mvs(12),
+                                      color: colors.primary,
+                                    }
                                 }
                                 style={{
                                   width: mvs(100),

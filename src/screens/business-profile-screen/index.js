@@ -427,7 +427,7 @@ const BusinessProfile = props => {
                   <View style={{ height: mvs(20), justifyContent: 'center' }}>
                     <SpeedometerPrimary width={mvs(22)} height={mvs(11.63)} />
                   </View>
-                  <ShimmerPlaceholder style={{ height: mvs(20), }} visible={loading}>
+                  <ShimmerPlaceholder style={{ height: mvs(20), width: mvs(50), marginHorizontal: mvs(20), }} visible={loading}>
                     <Regular
                       style={{
                         // lineHeight: mvs(15),
@@ -494,7 +494,6 @@ const BusinessProfile = props => {
               />
             ))}
           </ScrollView>
-
           <HeadingTitle
             size={mvs(18)}
             paddingBottom={mvs(10)}
@@ -605,7 +604,6 @@ const BusinessProfile = props => {
                 </>) :
                 businessProfile?.gallery?.length > 1 &&
                 businessProfile?.gallery?.map((ele, index) => {
-                  console.log('GALEERY ELE :', ele);
                   return (
 
                     <View
@@ -641,113 +639,121 @@ const BusinessProfile = props => {
             title="Contact information"
           />
           <View>
-            <ShimmerPlaceholder
-              style={styles.contactInformation}
-              visible={loading}>
-              <LabelValue
-                label={'Address'}
-                value={businessProfile?.view?.contact?.Address}
-              />
-            </ShimmerPlaceholder>
-            <ShimmerPlaceholder
-              style={styles.contactInformation}
-              visible={loading}>
-              <LabelValue
-                label={'Website'}
-                value={businessProfile?.contact?.webiste}
-              />
-            </ShimmerPlaceholder>
-            <ShimmerPlaceholder
-              style={styles.contactInformation}
-              visible={loading}>
-              <LabelValue label={'Phone'} value={contact?.Phone} />
-            </ShimmerPlaceholder>
-            <ShimmerPlaceholder
-              style={styles.contactInformation}
-              visible={loading}>
-              <LabelValue
-                bw={0}
-                label={'Email Address'}
-                value={contact?.Email}
-              // bw={0}
-              />
-            </ShimmerPlaceholder>
-          </View>
-          {updatedBusiness && (
-            <>
-              <HeadingTitle
-                size={mvs(18)}
-                paddingBottom={mvs(10)}
-                paddingTop={mvs(22)}
-                // marginVertical={0}
-                // paddingVertical={mvs(12)}
-                title="Business Hours"
-              />
 
-              {updatedBusiness?.map((item, index) => {
-                return (
-                  <ShimmerPlaceholder
-                    style={[
-                      styles.contactInformationtime,
-                      {
-                        marginBottom: 0,
-                      },
-                    ]}
-                    visible={loading}>
-                    {item?.workingTime != 'Closed' ? (
-                      <>
-                        <LabelValue
-                          bw={index === 6 ? 0 : 1}
-                          // businessHoursCard={true}
-                          label={item?.day}
-                          value={item?.workingTime}
-                        />
-                      </>
-                    ) : (
+            <LabelValue
+              label={'Address'}
+              value={businessProfile?.view?.contact?.Address}
+              loading={loading}
+            />
+
+
+            <LabelValue
+              loading={loading}
+              label={'Website'}
+              value={businessProfile?.contact?.webiste}
+            />
+            <LabelValue
+              loading={loading}
+              label={'Phone'} value={contact?.Phone} />
+            <LabelValue
+              loading={loading}
+              bw={0}
+              label={'Email Address'}
+              value={contact?.Email}
+            />
+
+          </View>
+
+          <>
+            <HeadingTitle
+              size={mvs(18)}
+              paddingBottom={mvs(10)}
+              paddingTop={mvs(22)}
+              title="Business Hours"
+            />
+            {updatedBusiness?.map((item, index) => {
+              return (
+                <>
+                  {item?.workingTime != 'Closed' ? (
+                    <>
                       <LabelValue
-                        // bw={0}
-                        // businessHoursCard={true}
+                        bw={index === 6 ? 0 : 1}
+                        businessHoursCard={true}
                         label={item?.day}
-                        vColor={colors.red}
-                        value={'Closed'}
+                        value={item?.workingTime}
+                        loading={loading}
                       />
-                    )}
-                  </ShimmerPlaceholder>
-                );
-              })}
-            </>
-          )}
+                    </>
+                  ) : (
+                    <LabelValue
+                      label={item?.day}
+                      vColor={colors.red}
+                      value={'Closed'}
+                      loading={loading}
+                    />
+                  )}
+                </>
+              );
+            })}
+          </>
+
 
           <View
             style={{
-              // backgroundColor: colors.FBF8F8,
               flexGrow: 1,
-              // borderWidth: 1,
-              // paddingBottom: mvs(30),
-              // marginTop: mvs(20),
             }}>
-            {businessServices?.length > 0 && (
-              <HeadingTitle
-                marginVertical={0}
-                size={mvs(18)}
-                // paddingBottom={mvs(10)}
-                // paddingTop={mvs(22)}
-                title="Service offering"
-              />
-            )}
+            <HeadingTitle
+              marginVertical={0}
+              size={mvs(18)}
+              title="Service offering"
+            />
             <ServiceOffering
               totalDistance={totalDistance}
               data={businessServices}
               loading={loading}
               moveTo="ServiceOfferingDetails"
             />
-            {bussinessCoupons?.length > 0 && (
-              <CouponPromo
-                coupons={bussinessCoupons}
-                loading={loading}
-                business={businessProfile}
-              />
-            )}
+            {
+              !loading ?
+                (
+                  <>
+                    <HeadingTitle
+                      title="Coupons & Promos"
+                      marginVertical={0}
+                      size={mvs(18)}
+                    />
+                    <ScrollView
+                      showsHorizontalScrollIndicator={false}
+                      contentContainerStyle={{
+                        paddingHorizontal: mvs(18),
+                      }}
+                      horizontal>
+                      <ShimmerPlaceholder
+                        style={{
+                          marginRight: mvs(10),
+                          height: mvs(240),
+                          borderRadius: mvs(8),
+                          width: width - mvs(70),
+                        }}
+                        visible={loading} />
+                      <ShimmerPlaceholder
+                        style={{
+                          height: mvs(240),
+                          marginRight: mvs(10),
+                          borderRadius: mvs(8),
+                          width: width - mvs(70),
+                        }}
+                        visible={loading} />
+                    </ScrollView>
+                  </>
+                ) :
+                bussinessCoupons?.length > 0 && (
+                  <CouponPromo
+                    coupons={bussinessCoupons}
+                    loading={loading}
+                    business={businessProfile}
+                  />
+                )}
           </View>
           <HeadingTitle
             marginVertical={0}
@@ -761,10 +767,9 @@ const BusinessProfile = props => {
               paddingHorizontal: mvs(18),
               paddingVertical: mvs(20),
               backgroundColor: colors.white,
-              // backgroundColor: 'red',
             }}>
             <Row justifyContent={'space-between'}>
-              <ShimmerPlaceholder style={{ width: mvs(110) }} visible={loading}>
+              <ShimmerPlaceholder style={{ width: mvs(110), minHeight: mvs(60) }} visible={loading}>
                 <Bold
                   color={colors.ratingg}
                   style={{ transform: [{ translateY: -mvs(12) }] }}

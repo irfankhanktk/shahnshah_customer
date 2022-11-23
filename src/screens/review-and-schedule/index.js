@@ -207,12 +207,9 @@ const ReviewAndSchedule = props => {
               borderColor={colors.green}
               titleColor={colors.green} />}
           </Row>
-
-          {console.log('coupon data=>>>>', coupon)}
           <Row style={styles.coupon_row}>
             <NewCouponItem
               cover={coupon?.id ? coupon?.cover : null}
-              // showCoupon={!coupon?.view?.applyCoupon}
               title={coupon?.title}
               subTitle={coupon?.subTitle}
               highlightedText={coupon?.highlight}
