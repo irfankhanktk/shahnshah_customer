@@ -23,24 +23,24 @@ const BillView = ({
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
         <View style={{ flex: 1 }}>
-          <Medium label={'Discount'}
-            size={14} color={colors.black} />
-          {/* <Medium size={14} label={'('+invoice?.discountTitle+')'} color={colors.lightgrey1}/> */}
+          <Regular label={'Discount'}
+            size={14} color={colors.lightgrey1} />
+          <Medium size={14} label={'(' + invoice?.discountTitle + ')'} color={colors.lightgrey1} />
         </View>
         <Row alignItems="center">
           <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
-          <Medium label={invoice?.discountValue + ''} size={14} color={colors.black} />
+          <Medium label={invoice?.discountValue + ''} size={14} color={colors.lightgrey1} />
         </Row>
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
-        <Medium label={`Total Before Vat`} size={14} color={colors.black} />
+        <Regular label={`Total Before Vat`} size={14} color={colors.lightgrey1} />
         <Row alignItems="center">
           <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
-          <Medium label={invoice?.totalBeforeVat + ''} size={14} color={colors.black} />
+          <Medium label={invoice?.totalBeforeVat + ''} size={14} color={colors.lightgrey1} />
         </Row>
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
-        <Medium label={`VAT(${invoice?.vatRate}%)`} size={14} color={colors.lightgrey1} />
+        <Regular label={`VAT(${invoice?.vatRate}%)`} size={14} color={colors.lightgrey1} />
         <Row alignItems="center">
           <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
           <Medium label={invoice?.vat + ''} size={14} color={colors.lightgrey1} />
@@ -60,7 +60,7 @@ export default BillView;
 const styles = StyleSheet.create({
   container: {
     borderRadius: mvs(6),
-    marginTop: mvs(5),
+    marginTop: mvs(15),
     borderTopColor: colors.lightgrey1,
     borderTopWidth: 0.3,
     paddingVertical: mvs(15)

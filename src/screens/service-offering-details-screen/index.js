@@ -190,7 +190,29 @@ const ServiceOfferingDetails = props => {
           translucent
           backgroundColor={'transparent'}
         />
-
+        <Row style={{ padding: 20 }}>
+          <TouchableOpacity
+            onPress={() => props?.navigation?.goBack()}
+            style={{ top: mvs(7) }}>
+            <FontAwesome
+              size={mvs(30)}
+              color={colors.black}
+              name="angle-left"
+            />
+          </TouchableOpacity>
+          <Medium
+            numberOfLines={2}
+            size={mvs(16)}
+            style={{
+              alignSelf: 'center',
+              // fontFami
+              top: mvs(7),
+              color: colors.black,
+            }}
+            label={'Service Offering Details'}
+          />
+          <Regular />
+        </Row>
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
@@ -199,11 +221,14 @@ const ServiceOfferingDetails = props => {
           }}>
           <View
             style={{
+              flex: 1,
               overflow: 'hidden',
               width: width,
               paddingBottom: mvs(100),
               backgroundColor: colors.white,
+
             }}>
+
             <View
               style={{
                 height: mvs(210),
@@ -221,29 +246,6 @@ const ServiceOfferingDetails = props => {
                   source={{
                     uri: serviceDetails?.cover,
                   }}>
-                  <View style={styles.imgBgHeader}>
-                    <TouchableOpacity
-                      onPress={() => props?.navigation?.goBack()}
-                      style={{ top: mvs(7) }}>
-                      <FontAwesome
-                        size={mvs(30)}
-                        color={colors.black}
-                        name="angle-left"
-                      />
-                    </TouchableOpacity>
-                    <Medium
-                      numberOfLines={2}
-                      size={mvs(16)}
-                      style={{
-                        alignSelf: 'center',
-                        // fontFami
-                        top: mvs(7),
-                        color: colors.black,
-                      }}
-                      label={'Service Offering Details'}
-                    />
-                    <Regular />
-                  </View>
                 </ImageBackground>
               </ShimmerPlaceholder>
               <View

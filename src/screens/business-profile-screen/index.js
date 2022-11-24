@@ -884,7 +884,7 @@ const BusinessProfile = props => {
             </Row>
             <Row>
               <Regular
-                style={{ left: mvs(5), bottom: mvs(20) }}
+                // style={{ left: mvs(5), bottom: mvs(20) }}
                 color={colors.black}
                 size={mvs(16)}
                 label={'Out of 5'}

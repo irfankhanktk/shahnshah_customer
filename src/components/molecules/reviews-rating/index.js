@@ -1,19 +1,16 @@
+import moment from 'moment';
 import React from 'react';
-import { View, Text, ScrollView, FlatList } from 'react-native';
+import { FlatList, ScrollView, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
+import fonts from '../../../services/fonts';
 import { mvs, width } from '../../../services/metrices';
-import Row from './../../atoms/row';
+import Regular from './../../../presentation/typography/regular-text';
+import SemiBold from './../../../presentation/typography/semibold-text';
 import colors from './../../../services/colors';
 import ImagePlaceholder from './../../atoms/Placeholder';
-import SemiBold from './../../../presentation/typography/semibold-text';
+import Row from './../../atoms/row';
 import RatingStar from './../rating-star/index';
-import Regular from './../../../presentation/typography/regular-text';
-import { Bg } from '../../../assets/images';
-import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
-import LinearGradient from 'react-native-linear-gradient';
-import HumanizeDuration from 'humanize-duration';
-import moment from 'moment';
-import fonts from '../../../services/fonts';
-import { color } from 'react-native-elements/dist/helpers';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 
 const ReviewsRaing = ({ bg = '#ffedce', picsArray, data, loading, style }) => {
@@ -37,7 +34,6 @@ const ReviewsRaing = ({ bg = '#ffedce', picsArray, data, loading, style }) => {
               }}>
               <Row justifyContent="space-between" alignItems="flex-start">
                 <Row>
-
                   <ImagePlaceholder
                     containerStyle={{
                       height: mvs(33),

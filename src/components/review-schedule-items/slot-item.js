@@ -26,41 +26,48 @@ const SlotItem = ({
   return (
     <Row alignItems="center" style={styles.CONTAINER}>
       <View style={{ flex: 1 }}>
-        <Medium label={'Date & Time'} size={15} color={colors.black} />
+        <Row>
+          <Medium label={'Date & Time'} size={15} color={colors.black} />
+          {showAccept &&
+            (
+              <ActionButton style={styles.button} title="Accept" onClick={onAcceptClick} />
+            )}
+          {showFind &&
+            (
+              <ActionButton title="Find"
+                onClick={onFindClick}
+                style={styles.button} />
+            )}
+        </Row>
         <Regular label={slotText} color={!noSlot ? colors.lightgrey1 : colors.primary} size={13} />
-        <Row style={{ alignItems: 'center', backgroundColor: 'red' }}>
+        <Row style={{ alignItems: 'center', }}>
           <Regular label={details} color={!noMore ? colors.lightgrey1 : colors.red} size={13} />
           {showChange &&
             (
               <ActionButton
-                style={{ marginTop: 0 }}
+                style={styles.button}
                 title="Change"
                 onClick={onChangeClick}
                 bgColor={colors.lightGreen1}
                 borderColor={colors.green}
                 titleColor={colors.green} />
             )}
+
+          {showRemove &&
+            (
+              <ActionButton
+                style={styles.button}
+                title="Remove"
+                onClick={onRemoveClick}
+                bgColor={colors.lightPink1}
+                borderColor={colors.red}
+                titleColor={colors.red} />
+            )}
         </Row>
       </View>
       <View>
-        {showAccept &&
-          (
-            <ActionButton style={{ position: 'absolute', alignSelf: 'flex-end', }} title="Accept" onClick={onAcceptClick} />
-          )}
-        {showFind &&
-          (
-            <ActionButton title="Find"
-              onClick={onFindClick}
-              style={{ width: mvs(62), alignItems: 'center', justifyContent: 'center', }} />
-          )}
-        {showRemove &&
-          (
-            <ActionButton title="Remove"
-              onClick={onRemoveClick}
-              bgColor={colors.lightPink1}
-              borderColor={colors.red}
-              titleColor={colors.red} />
-          )}
+
+
       </View>
     </Row>
   );
@@ -68,6 +75,11 @@ const SlotItem = ({
 export default SlotItem;
 const styles = StyleSheet.create({
   CONTAINER: {
-    marginVertical: mvs(11),
+    marginVertical: mvs(15),
+    // borderBottomWidth: 0.7,
+    paddingBottom: mvs(15),
+    borderBottomColor: colors.lightgrey1,
+    borderBottomWidth: 0.2,
   },
+  button: { width: mvs(62), alignItems: 'center', justifyContent: 'center', marginTop: 0 }
 });

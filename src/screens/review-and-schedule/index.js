@@ -290,7 +290,7 @@ const ReviewAndSchedule = props => {
             label={'Booking Lifecycle'}
             color={colors.black}
             size={16}
-            style={{ marginVertical: mvs(15) }}
+            style={{ paddingTop: mvs(15), borderTopWidth: 0.2, borderColor: colors.lightgrey1 }}
           />
           {booking?.lifecycle?.booked && (
             <LifeCycleItem
