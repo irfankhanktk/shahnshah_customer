@@ -752,6 +752,7 @@ const BusinessProfile = props => {
                     coupons={bussinessCoupons}
                     loading={loading}
                     business={businessProfile}
+                    businessId={id}
                   />
                 )}
           </View>

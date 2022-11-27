@@ -9,6 +9,7 @@ import colors from '../../services/colors';
 import { mvs } from '../../services/metrices';
 import ImagePlaceholder from '../atoms/Placeholder';
 import Row from '../atoms/row';
+import Shimmer from '../shimmer';
 const NewCouponItem =
   ({
     title = 'No Discount is Applied',
@@ -19,15 +20,21 @@ const NewCouponItem =
     showCoupon = false,
     showHighLighted = false,
     cover,
+    loading,
   }) => {
-    console.log('covercovercovercover=>>>', cover);
     return (
       <View>
         <Row style={{ marginVertical: mvs(10) }}>
-          <ImagePlaceholder containerStyle={styles.image} uri={cover ? { uri: cover } : NoCouponIcon} />
+          <Shimmer visible={loading} shimmerStyle={styles.image}>
+            <ImagePlaceholder containerStyle={styles.image} uri={cover ? { uri: cover } : NoCouponIcon} />
+          </Shimmer>
           <View style={{ marginLeft: mvs(10), }}>
-            <Medium size={mvs(15)} label={title} color={colors.black} />
-            <Regular color={colors.lightgrey1} size={mvs(13)} label={subTitle} />
+            <Shimmer visible={loading}>
+              <Medium size={mvs(15)} label={title} color={colors.black} />
+            </Shimmer>
+            <Shimmer visible={loading}>
+              <Regular color={colors.lightgrey1} size={mvs(13)} label={subTitle} />
+            </Shimmer>
 
             {/* <Row alignItems='center' style={styles.highlighted}>
               <Percent />
@@ -38,9 +45,11 @@ const NewCouponItem =
             </Row> */}
           </View>
         </Row>
-        <Regular
-          color={showCoupon & !isExpiring ? colors.lightgrey1 : isExpiring ? colors.red : colors.primary}
-          size={mvs(13)} label={statusLine} numberOfLines={1} />
+        <Shimmer visible={loading}>
+          <Regular
+            color={showCoupon & !isExpiring ? colors.lightgrey1 : isExpiring ? colors.red : colors.primary}
+            size={mvs(13)} label={statusLine} numberOfLines={1} />
+        </Shimmer>
       </View>
     );
   };

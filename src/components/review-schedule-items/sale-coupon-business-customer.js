@@ -12,16 +12,16 @@ import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
 import LinearGradient from "react-native-linear-gradient";
 import { Gulf, Service, WaterIcon } from "../../assets/images";
 import NewCouponItem from "./new-coupon-item";
+import Shimmer from "../shimmer";
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 const SaleCouponBusinessCustomer = ({
   item,
   image = require("../../assets/images/car-owner.png"),
+  loading,
 }) => {
   return (
     <View style={styles.CONTAINER}>
       <View style={{ borderBottomColor: colors.gray, borderBottomWidth: 1, }}>
-
-
         <Row style={{ ...styles.UPPERROW, ...styles.TIMETOPVIEW }}>
           <NewCouponItem
             cover={item?.coupon?.cover}
@@ -30,37 +30,53 @@ const SaleCouponBusinessCustomer = ({
             subTitle={item?.coupon?.subTitle}
             highlightedText={item?.coupon?.hihlight}
             showHighLighted={true}
+            loading={loading}
           // statusLine={item?.about}
           // isExpiring={false}
           // showHighLighted={false}
           />
         </Row>
         <Row style={{ ...styles.UPPERROW, ...styles.TIMETOPVIEW }}>
-          <ImagePlaceholder containerStyle={styles.IMAGE} uri={Gulf} />
+          <Shimmer shimmerStyle={styles.IMAGE} visible={loading}>
+            <ImagePlaceholder containerStyle={styles.IMAGE} uri={Gulf} />
+          </Shimmer>
           <View style={{ marginHorizontal: mvs(10), flex: 1 }}>
-            <Medium label={item?.business?.title} size={16} />
-            <Regular label={item?.business?.view?.address} size={13} numberOfLines={2} />
+            <Shimmer visible={loading}>
+              <Medium label={item?.business?.title} size={16} />
+            </Shimmer>
+            <Shimmer visible={loading}>
+              <Regular label={item?.business?.view?.address} size={13} numberOfLines={2} />
+            </Shimmer>
           </View>
         </Row>
         <Row style={{ ...styles.UPPERROW, paddingTop: mvs(13), paddingBottom: mvs(19) }}>
-          <Row style={{ width: '50%' }} alignItems='center'>
-            <ImagePlaceholder
-              containerStyle={styles.IMAGE}
-              uri={image}
-              borderRadius={10} />
-
-            <View style={styles.bussinessView}>
-              <Medium label={'Customer name'} size={14} />
-              <Regular label={'customer mobile'} size={11} style={{ width: mvs(103) }}
-              />
+          <Row style={{ flex: 1, }} alignItems='center'>
+            <Shimmer shimmerStyle={styles.IMAGE} visible={loading}>
+              <ImagePlaceholder
+                containerStyle={styles.IMAGE}
+                uri={image}
+                borderRadius={10} />
+            </Shimmer>
+            <View style={{ ...styles.bussinessView }}>
+              <Shimmer shimmerStyle={{ width: mvs(105) }} visible={loading}>
+                <Medium label={item?.customer?.name} size={14} />
+              </Shimmer>
+              <Shimmer shimmerStyle={{ width: mvs(105) }} visible={loading}>
+                <Regular label={'customer mobile'} size={11} style={{ width: mvs(103) }}
+                />
+              </Shimmer>
             </View>
           </Row>
 
-          <Row style={{ paddingLeft: mvs(15), width: '50%', alignItems: "center" }}>
+          <Row style={{ paddingLeft: mvs(15), flex: 1, alignItems: "center" }}>
             <SVG.VehicleTwo />
             <View style={{ marginHorizontal: mvs(5), flex: 1 }}>
-              <Medium label={'make' + ' ' + 'model'} size={14} color={colors.black} />
-              <Regular label={'registeration'} size={12} numberOfLines={1} />
+              <Shimmer visible={loading} shimmerStyle={{ width: mvs(105) }} >
+                <Medium label={'make' + ' ' + 'model'} size={14} color={colors.black} />
+              </Shimmer>
+              <Shimmer visible={loading} shimmerStyle={{ width: mvs(105) }}>
+                <Regular label={'registeration'} size={12} numberOfLines={1} />
+              </Shimmer>
             </View>
           </Row>
         </Row>

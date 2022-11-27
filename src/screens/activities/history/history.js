@@ -29,7 +29,8 @@ const History = props => {
   const [draft, setDrafteData] = useState([]);
   const [completed, setCompletedData] = useState([]);
   const [cancelled, setCancelledData] = useState([]);
-  const [history, setHistoryData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [history, setHistoryData] = useState(BOOKING?.history || []);
   const isFocus = useIsFocused();
 
   useEffect(() => {
@@ -43,10 +44,12 @@ const History = props => {
     const customerId = await getData("customer_id");
     const response = await get_bookings(customerId);
     console.log('response of history=>', response?.data?.history);
-    setHistoryData(response?.data?.history)
+    // setHistoryData(response?.data?.history)
     // setCancelledData(response?.data?.cancelled)
     // setCompletedData(response?.data?.completed)
     // setScheduleData(response?.data?.scheduled)
+    setLoading(false);
+
   }
 
   const onLikePress = async (bookingId) => {
@@ -73,50 +76,72 @@ const History = props => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={'white'} barStyle="dark-content" />
-
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, paddingHorizontal: mvs(16) }}>
-        {draft.length > 0 || history.length > 0 || schedule.length > 0 || completed.length > 0 || cancelled.length > 0 ? (
-          <View
-            style={{
-              flex: 1,
-              paddingTop: mvs(10),
-              backgroundColor: allColors.tabBackground,
-            }}>
-            {history.length > 0 ? (
-              <>
-                {/* <Medium
+        {loading ?
+          <FlatList
+            data={[{}, {}, {}, {}]}
+            renderItem={({ item }) => (
+              <ActivityItem
+                address={item?.business?.view?.address || ''}
+                bussinessName={item?.business?.title}
+                bookingTime={item?.slot?.title}
+                details={item?.offering?.title}
+                status={item?.view?.status}
+                section=""
+                subDetails={item?.offering?.subTitle}
+                onPress={() => { }}
+                onResumePress={() => { }}
+                progress={item?.view?.progress?.minutes}
+                isLiked={false}
+                price={item?.offering?.price}
+                onLikePress={() => { }}
+                rating={item?.rate}
+              />
+            )}
+          /> :
+          draft.length > 0 || history.length > 0 || schedule.length > 0 || completed.length > 0 || cancelled.length > 0 ? (
+            <View
+              style={{
+                flex: 1,
+                paddingTop: mvs(10),
+                backgroundColor: allColors.tabBackground,
+              }}>
+              {history.length > 0 ? (
+                <>
+                  {/* <Medium
                   label={'Draft'}
                   style={{ ...styles.title, marginTop: 0 }}
                 /> */}
-                <FlatList
-                  data={history}
-                  renderItem={({ item }) => (
-                    <ActivityItem
-                      address={item?.business?.view?.address || ''}
-                      bussinessName={item?.business?.title}
-                      bookingTime={item?.slot?.title}
-                      details={item?.offering?.title}
-                      status={item?.view?.status}
-                      section="history"
-                      subDetails={item?.offering?.subTitle}
-                      onPress={() => { }}
-                      onResumePress={() => navigation?.navigate('ReviewAndSchedule',
-                        {
-                          bookingId: item?.id,
-                          businessId: item?.businessId,
-                        })}
-                      progress={item?.view?.progress?.minutes}
-                      isLiked={false}
-                      price={item?.offering?.price}
-                      onLikePress={() => onLikePress(item?.id)}
-                      rating={item?.rate}
-                    />
-                  )}
-                />
-              </>
-            ) : null}
-            {/* {draft.length > 0 ? (
+                  <FlatList
+                    data={history}
+                    renderItem={({ item }) => (
+                      <ActivityItem
+                        loading={!loading}
+                        address={item?.business?.view?.address || ''}
+                        bussinessName={item?.business?.title}
+                        bookingTime={item?.slot?.title}
+                        details={item?.offering?.title}
+                        status={item?.view?.status}
+                        section="history"
+                        subDetails={item?.offering?.subTitle}
+                        onPress={() => { }}
+                        onResumePress={() => navigation?.navigate('ReviewAndSchedule',
+                          {
+                            bookingId: item?.id,
+                            businessId: item?.businessId,
+                          })}
+                        progress={item?.view?.progress?.minutes}
+                        isLiked={false}
+                        price={item?.offering?.price}
+                        onLikePress={() => onLikePress(item?.id)}
+                        rating={item?.rate}
+                      />
+                    )}
+                  />
+                </>
+              ) : null}
+              {/* {draft.length > 0 ? (
               <>
                 <Medium
                   label={'Draft'}
@@ -235,18 +260,18 @@ const History = props => {
                 />
               </>
             ) : null} */}
-          </View>
-        ) : (
-          <View style={styles.body}>
-            <History1 />
-            <Bold label={'No History'} style={styles.welcomeText} />
-            <Regular
-              label={'Wait for the booking. Your all bookings will show here.'}
-              numberOfLines={2}
-              style={styles.welcomeSubText}
-            />
-          </View>
-        )}
+            </View>
+          ) : (
+            <View style={styles.body}>
+              <History1 />
+              <Bold label={'No History'} style={styles.welcomeText} />
+              <Regular
+                label={'Wait for the booking. Your all bookings will show here.'}
+                numberOfLines={2}
+                style={styles.welcomeSubText}
+              />
+            </View>
+          )}
       </ScrollView>
 
     </SafeAreaView>

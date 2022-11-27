@@ -40,7 +40,7 @@ const LabelValue = ({
         label={label}
         color={colors.B323232}
       />
-      <Shimmer visible={loading} shimmerStyle={{ height: 20, minWidth: '60%' }}>
+      <Shimmer visible={loading} shimmerStyle={{ height: 20, minWidth: '50%' }}>
         <Medium
           style={style}
           size={mvs(14)}

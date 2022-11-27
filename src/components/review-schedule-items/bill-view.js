@@ -7,19 +7,22 @@ import LinearGradient from "react-native-linear-gradient";
 import Regular from "../../presentation/typography/regular-text";
 import Row from "../atoms/row";
 import Medium from "../../presentation/typography/medium-text";
+import Shimmer from "../shimmer";
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 const BillView = ({
-  invoice
+  invoice,
+  loading,
 }) => {
-  console.log(invoice)
   return (
     <View style={styles.container}>
       <Row alignItems="center">
         <Medium label={'Sub Total'} size={14} color={colors.black} />
-        <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{}} />
-          <Medium label={invoice?.subTotal + ''} size={14} color={colors.black} />
-        </Row>
+        <Shimmer visible={loading}>
+          <Row alignItems="center">
+            <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{}} />
+            <Medium label={invoice?.subTotal + ''} size={14} color={colors.black} />
+          </Row>
+        </Shimmer>
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
         <View style={{ flex: 1 }}>
@@ -27,31 +30,39 @@ const BillView = ({
             size={14} color={colors.lightgrey1} />
           <Medium size={14} label={'(' + invoice?.discountTitle + ')'} color={colors.lightgrey1} />
         </View>
-        <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
-          <Medium label={invoice?.discountValue + ''} size={14} color={colors.lightgrey1} />
-        </Row>
+        <Shimmer visible={loading}>
+          <Row alignItems="center">
+            <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
+            <Medium label={invoice?.discountValue + ''} size={14} color={colors.lightgrey1} />
+          </Row>
+        </Shimmer>
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
         <Regular label={`Total Before Vat`} size={14} color={colors.lightgrey1} />
-        <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
-          <Medium label={invoice?.totalBeforeVat + ''} size={14} color={colors.lightgrey1} />
-        </Row>
+        <Shimmer visible={loading}>
+          <Row alignItems="center">
+            <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
+            <Medium label={invoice?.totalBeforeVat + ''} size={14} color={colors.lightgrey1} />
+          </Row>
+        </Shimmer>
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
         <Regular label={`VAT(${invoice?.vatRate}%)`} size={14} color={colors.lightgrey1} />
-        <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
-          <Medium label={invoice?.vat + ''} size={14} color={colors.lightgrey1} />
-        </Row>
+        <Shimmer visible={loading}>
+          <Row alignItems="center">
+            <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
+            <Medium label={invoice?.vat + ''} size={14} color={colors.lightgrey1} />
+          </Row>
+        </Shimmer>
       </Row>
       <Row alignItems="center" style={{ marginTop: mvs(13) }}>
         <Medium label={`Grand Total`} size={14} color={colors.black} />
-        <Row alignItems="center">
-          <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
-          <Medium label={invoice?.total + ''} size={14} color={colors.black} />
-        </Row>
+        <Shimmer visible={loading}>
+          <Row alignItems="center">
+            <Regular label={'AED  '} size={8} color={colors.lightgrey1} />
+            <Medium label={invoice?.total + ''} size={14} color={colors.black} />
+          </Row>
+        </Shimmer>
       </Row>
     </View>
   );

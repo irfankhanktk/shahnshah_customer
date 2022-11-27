@@ -36,6 +36,7 @@ const Bookings = props => {
   const [draft, setDrafteData] = useState([]);
   const [completed, setCompletedData] = useState([]);
   const [cancelled, setCancelledData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const isFocus = useIsFocused();
   useEffect(() => {
     if (isFocus) {
@@ -89,6 +90,8 @@ const Bookings = props => {
       //response?.data?.cancelled
     } catch (error) {
       console.log('error in booking=>', error);
+    } finally {
+      setLoading(false)
     }
   }
   const submitReview = async () => {
@@ -112,155 +115,186 @@ const Bookings = props => {
           paddingHorizontal: mvs(9),
           backgroundColor: allColors.tabBackground,
         }}>
-        {draft.length > 0 || schedule.length > 0 || completed.length > 0 || cancelled.length > 0 ? (
-          <View
-            style={{
-              flex: 1,
-              paddingTop: mvs(10),
-              backgroundColor: allColors.tabBackground,
-            }}>
-            {schedule.length > 0 ? (
-              <>
-                <Medium
-                  label={'Draft'}
-                  style={{ ...styles.title, marginTop: 0 }}
-                />
-                <FlatList
-                  data={draft}
-                  renderItem={({ item }) => (
-                    <ActivityItem
-                      address={item?.business?.view?.address || ''}
-                      bussinessName={item?.business?.title}
-                      bookingTime={item?.slot?.title}
-                      details={item?.offering?.title}
-                      status={item?.view?.status}
-                      section="draft"
-                      subDetails={item?.offering?.subTitle}
-                      onPress={() => { }}
-                      onResumePress={() => navigation?.navigate('ReviewAndSchedule',
-                        {
-                          bookingId: item?.id,
-                          businessId: item?.businessId,
-                        })}
-                      progress={item?.view?.progress?.minutes}
-                      isLiked={false}
-                      price={item?.offering?.price}
-                      onLikePress={() => onLikePress(item?.id)}
-                      rating={item?.rate}
-                    />
-                  )}
-                />
-              </>
-            ) : null}
+        <>
+          {
+            loading ?
+              <FlatList
+                data={[{}, {}, {}, {}]}
+                renderItem={({ item }) => (
+                  <ActivityItem
+                    address={item?.business?.view?.address || ''}
+                    bussinessName={item?.business?.title}
+                    bookingTime={item?.slot?.title}
+                    details={item?.offering?.title}
+                    status={item?.view?.status}
+                    section=""
+                    subDetails={item?.offering?.subTitle}
+                    onPress={() => { }}
+                    onResumePress={() => { }}
+                    progress={item?.view?.progress?.minutes}
+                    isLiked={false}
+                    price={item?.offering?.price}
+                    onLikePress={() => { }}
+                    rating={item?.rate}
+                  />
+                )}
+              /> :
+              draft.length > 0 || schedule.length > 0 || completed.length > 0 || cancelled.length > 0 ? (
+                <View
+                  style={{
+                    flex: 1,
+                    paddingTop: mvs(10),
+                    backgroundColor: allColors.tabBackground,
+                  }}>
+                  {schedule.length > 0 ? (
+                    <>
+                      <Medium
+                        label={'Draft'}
+                        style={{ ...styles.title, marginTop: 0 }}
+                      />
+                      <FlatList
+                        data={draft}
+                        renderItem={({ item }) => (
+                          <ActivityItem
+                            loading={!loading}
+                            address={item?.business?.view?.address || ''}
+                            bussinessName={item?.business?.title}
+                            bookingTime={item?.slot?.title}
+                            details={item?.offering?.title}
+                            status={item?.view?.status}
+                            section="draft"
+                            subDetails={item?.offering?.subTitle}
+                            onPress={() => { }}
+                            onResumePress={() => navigation?.navigate('ReviewAndSchedule',
+                              {
+                                bookingId: item?.id,
+                                businessId: item?.businessId,
+                              })}
+                            progress={item?.view?.progress?.minutes}
+                            isLiked={false}
+                            price={item?.offering?.price}
+                            onLikePress={() => onLikePress(item?.id)}
+                            rating={item?.rate}
+                          />
+                        )}
+                      />
+                    </>
+                  ) : null}
 
-            {schedule.length > 0 ? (
-              <>
-                <Medium
-                  label={'Scheduled'}
-                  style={{ ...styles.title, marginTop: mvs(10) }}
-                />
-                <FlatList
-                  data={schedule}
-                  renderItem={({ item }) => (
-                    <ActivityItem
-                      address={item?.business?.view?.address || ''}
-                      bussinessName={item?.business?.title}
-                      bookingTime={item?.slot?.title}
-                      details={item?.offering?.title}
-                      status={item?.view?.status}
-                      section="schedule"
-                      subDetails={item?.offering?.subTitle}
-                      onPress={() => { }}
-                      onResumePress={() => navigation?.navigate('ReviewAndSchedule',
-                        {
-                          bookingId: item?.id,
-                          businessId: item?.businessId,
-                        })}
-                      progress={item?.view?.progress?.minutes}
-                      isLiked={false}
-                      price={item?.offering?.price}
-                      onLikePress={() => onLikePress(item?.id)}
-                      rating={item?.rate}
-                    />
-                  )}
-                />
-              </>
-            ) : null}
-            {completed.length > 0 ? (
-              <>
-                <Medium label={'Completed'} style={styles.title} />
-                <FlatList
-                  data={completed}
-                  renderItem={({ item }) => (
-                    <ActivityItem
-                      address={item?.business?.view?.address || ''}
-                      bussinessName={item?.business?.title}
-                      bookingTime={item?.slot?.title}
-                      details={item?.offering?.title}
-                      status={item?.view?.status}
-                      section={'Completed'}
-                      subDetails={item?.offering?.subTitle}
-                      onPress={() => alert('Complete')}
-                      progress={item?.view?.progress?.minutes}
-                      isLiked={false}
-                      price={item?.offering?.price}
-                      onLikePress={() => onLikePress(item?.id)}
-                      rating={item?.rate}
-                      onResumePress={() => navigation?.navigate('ReviewAndSchedule',
-                        {
-                          bookingId: item?.id,
-                          businessId: item?.businessId,
-                        })}
+                  {schedule.length > 0 ? (
+                    <>
+                      <Medium
+                        label={'Scheduled'}
+                        style={{ ...styles.title, marginTop: mvs(10) }}
+                      />
+                      <FlatList
+                        data={schedule}
+                        renderItem={({ item }) => (
+                          <ActivityItem
+                            loading={!loading}
+                            address={item?.business?.view?.address || ''}
+                            bussinessName={item?.business?.title}
+                            bookingTime={item?.slot?.title}
+                            details={item?.offering?.title}
+                            status={item?.view?.status}
+                            section="schedule"
+                            subDetails={item?.offering?.subTitle}
+                            onPress={() => { }}
+                            onResumePress={() => navigation?.navigate('ReviewAndSchedule',
+                              {
+                                bookingId: item?.id,
+                                businessId: item?.businessId,
+                              })}
+                            progress={item?.view?.progress?.minutes}
+                            isLiked={false}
+                            price={item?.offering?.price}
+                            onLikePress={() => onLikePress(item?.id)}
+                            rating={item?.rate}
+                          />
+                        )}
+                      />
+                    </>
+                  ) : null}
+                  {completed.length > 0 ? (
+                    <>
+                      <Medium label={'Completed'} style={styles.title} />
+                      <FlatList
+                        data={completed}
+                        renderItem={({ item }) => (
+                          <ActivityItem
+                            loading={!loading}
 
-                    />
-                  )}
-                />
-              </>
-            ) : null}
-            {cancelled.length > 0 ? (
-              <>
-                <Medium
-                  label={'Cancelled'}
-                  style={{ ...styles.title, color: allColors.red }}
-                />
-                <FlatList
-                  data={cancelled}
-                  renderItem={({ item }) => (
-                    <ActivityItem
-                      address={item?.business?.view?.address || ''}
-                      bussinessName={item?.business?.title}
-                      bookingTime={item?.slot?.title}
-                      details={item?.offering?.title}
-                      status={item?.view?.status}
-                      section={'Cancelled'}
-                      subDetails={item?.offering?.subTitle}
-                      onPress={() => alert('cancel')}
-                      progress={item?.view?.progress?.minutes}
-                      isLiked={true}
-                      price={item?.offering?.price}
-                      rating={item?.rate}
-                      onResumePress={() => navigation?.navigate('ReviewAndSchedule',
-                        {
-                          bookingId: item?.id,
-                          businessId: item?.businessId,
-                        })}
-                    />
-                  )}
-                />
-              </>
-            ) : null}
-          </View>
-        ) : (
-          <View style={styles.body}>
-            <Booking />
-            <Bold label={'No Bookings'} style={styles.welcomeText} />
-            <Regular
-              label={'Wait for the booking. Your all bookings will show here.'}
-              numberOfLines={2}
-              style={styles.welcomeSubText}
-            />
-          </View>
-        )}
+                            address={item?.business?.view?.address || ''}
+                            bussinessName={item?.business?.title}
+                            bookingTime={item?.slot?.title}
+                            details={item?.offering?.title}
+                            status={item?.view?.status}
+                            section={'Completed'}
+                            subDetails={item?.offering?.subTitle}
+                            onPress={() => alert('Complete')}
+                            progress={item?.view?.progress?.minutes}
+                            isLiked={false}
+                            price={item?.offering?.price}
+                            onLikePress={() => onLikePress(item?.id)}
+                            rating={item?.rate}
+                            onResumePress={() => navigation?.navigate('ReviewAndSchedule',
+                              {
+                                bookingId: item?.id,
+                                businessId: item?.businessId,
+                              })}
+
+                          />
+                        )}
+                      />
+                    </>
+                  ) : null}
+                  {cancelled.length > 0 ? (
+                    <>
+                      <Medium
+                        label={'Cancelled'}
+                        style={{ ...styles.title, color: allColors.red }}
+                      />
+                      <FlatList
+                        data={cancelled}
+                        renderItem={({ item }) => (
+                          <ActivityItem
+                            loading={!loading}
+
+                            address={item?.business?.view?.address || ''}
+                            bussinessName={item?.business?.title}
+                            bookingTime={item?.slot?.title}
+                            details={item?.offering?.title}
+                            status={item?.view?.status}
+                            section={'Cancelled'}
+                            subDetails={item?.offering?.subTitle}
+                            onPress={() => alert('cancel')}
+                            progress={item?.view?.progress?.minutes}
+                            isLiked={true}
+                            price={item?.offering?.price}
+                            rating={item?.rate}
+                            onResumePress={() => navigation?.navigate('ReviewAndSchedule',
+                              {
+                                bookingId: item?.id,
+                                businessId: item?.businessId,
+                              })}
+                          />
+                        )}
+                      />
+                    </>
+                  ) : null}
+                </View>
+              ) : (
+                <View style={styles.body}>
+                  <Booking />
+                  <Bold label={'No Bookings'} style={styles.welcomeText} />
+                  <Regular
+                    label={'Wait for the booking. Your all bookings will show here.'}
+                    numberOfLines={2}
+                    style={styles.welcomeSubText}
+                  />
+                </View>
+              )}
+        </>
       </ScrollView>
       <ReviewModal visible={reviewModal}
         onUploadImage={(image) => onUploadImage(image)}

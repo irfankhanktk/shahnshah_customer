@@ -15,37 +15,38 @@ import {
   DiscountExpiring,
   Percent,
 } from '../../assets/common-icons';
-import {Bg} from '../../assets/images';
+import { Bg } from '../../assets/images';
 import Bold from '../../presentation/typography/bold-text';
 import Regular from '../../presentation/typography/regular-text';
 import SemiBold from '../../presentation/typography/semibold-text';
 import colors from '../../services/colors';
-import {mvs, width} from '../../services/metrices';
+import { mvs, width } from '../../services/metrices';
 import ImagePlaceholder from '../atoms/Placeholder';
 import HeadingTitle from '../molecules/heading-title';
-import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
-import {useNavigation} from '@react-navigation/native';
-import {Avatar} from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
+import { Avatar } from 'react-native-elements';
 import Row from '../atoms/row';
 import Buttons from '../atoms/Button';
-import {useBusinessProfile} from '../../screens/business-profile-screen/useBusinessProfile';
+import { useBusinessProfile } from '../../screens/business-profile-screen/useBusinessProfile';
 import Svg from 'react-native-svg';
 import fonts from '../../services/fonts';
-import {globalStyles} from '../../styles/globalStyles';
+import { globalStyles } from '../../styles/globalStyles';
 import Medium from '../../presentation/typography/medium-text';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
-const CouponPromo = ({coupons = [], business = {}, ...props}) => {
+const CouponPromo = ({ coupons = [], business = {}, ...props }) => {
   const navigation = useNavigation();
-  const {isObjectEmpty} = useBusinessProfile();
+  const { isObjectEmpty } = useBusinessProfile();
+  console.log('business=>>>', business);
   return (
-    <View style={{margin: 0}}>
+    <View style={{ margin: 0 }}>
       <HeadingTitle
         title="Coupons & Promos"
         marginVertical={0}
         size={mvs(18)}
-        // paddingBottom={mvs(10)}
-        // paddingTop={mvs(22)}
+      // paddingBottom={mvs(10)}
+      // paddingTop={mvs(22)}
       />
       <View>
         {coupons?.length === 1 && (
@@ -84,7 +85,7 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                     },
                   ]}>
                   <ShimmerPlaceholder
-                    style={{height: mvs(150), width: '100%'}}
+                    style={{ height: mvs(150), width: '100%' }}
                     visible={props.loading}>
                     <ImagePlaceholder
                       containerStyle={{
@@ -93,15 +94,15 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                         borderTopRightRadius: mvs(8),
                         width: '100%',
                       }}
-                      uri={ele?.cover ? {uri: ele?.cover} : Bg}
+                      uri={ele?.cover ? { uri: ele?.cover } : Bg}
                     />
                     {ele?.service?.icon && (
                       <View style={styles.roundedView}>
                         <Avatar
                           size={mvs(32)}
                           rounded
-                          source={{uri: ele?.service?.icon}}
-                          // key={ele?.service?.id}
+                          source={{ uri: ele?.service?.icon }}
+                        // key={ele?.service?.id}
                         />
                       </View>
                     )}
@@ -176,7 +177,7 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                       />
 
                       <Row
-                        style={{marginTop: mvs(8)}}
+                        style={{ marginTop: mvs(8) }}
                         justifyContent={
                           isObjectEmpty(ele) ? 'space-between' : 'flex-end'
                         }>
@@ -247,7 +248,6 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
               backgroundColor: colors.white,
             }}>
             {coupons.map((ele, index) => {
-              console.log('ele.service.icon', ele?.service?.icon);
               return (
                 <Pressable
                   onPress={() => {
@@ -280,19 +280,19 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                     },
                   ]}>
                   <ShimmerPlaceholder
-                    style={{height: mvs(150), width: '100%'}}
+                    style={{ height: mvs(150), width: '100%' }}
                     visible={props.loading}>
                     <ImagePlaceholder
-                      containerStyle={{height: mvs(150), width: '100%'}}
-                      uri={ele?.cover ? {uri: ele?.cover} : Bg}
+                      containerStyle={{ height: mvs(150), width: '100%' }}
+                      uri={ele?.cover ? { uri: ele?.cover } : Bg}
                     />
                     {ele?.service?.icon && (
                       <View style={styles.roundedView}>
                         <Avatar
                           size={mvs(32)}
                           rounded
-                          source={{uri: ele?.service?.icon}}
-                          // key={ele?.service?.id}
+                          source={{ uri: ele?.service?.icon }}
+                        // key={ele?.service?.id}
                         />
                       </View>
                     )}
@@ -306,7 +306,7 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                       borderBottomRightRadius: mvs(8),
                     }}>
                     <Row justifyContent="space-between">
-                      <View style={{width:'60%'}}>
+                      <View style={{ width: '60%' }}>
                         <ShimmerPlaceholder
                           style={{
                             // height: mvs(24),
@@ -371,7 +371,7 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                       />
 
                       <Row
-                        style={{marginTop: mvs(8)}}
+                        style={{ marginTop: mvs(8) }}
                         justifyContent={
                           isObjectEmpty(ele) ? 'space-between' : 'flex-end'
                         }>
@@ -422,7 +422,7 @@ const CouponPromo = ({coupons = [], business = {}, ...props}) => {
                               label={ele?.price}
                             />
                           </Row>
-                        ):null}
+                        ) : null}
                       </Row>
                     </ShimmerPlaceholder>
                   </View>

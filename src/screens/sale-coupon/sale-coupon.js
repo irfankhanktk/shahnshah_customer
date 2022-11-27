@@ -9,6 +9,7 @@ import AlertMessage from '../../components/review-schedule-items/alert-message';
 import BillView from '../../components/review-schedule-items/bill-view';
 import PaymentCard from '../../components/review-schedule-items/payment-card';
 import SaleCouponBusinessCustomer from '../../components/review-schedule-items/sale-coupon-business-customer';
+import Shimmer from '../../components/shimmer';
 import { getData } from '../../localStorage';
 import Medium from '../../presentation/typography/medium-text';
 import Regular from '../../presentation/typography/regular-text';
@@ -219,7 +220,6 @@ const SaleCoupon = props => {
   const navigation = useNavigation();
   // const customerId = 3333;
   const { couponId, businessId = 3333, saleId } = route?.params;
-  console.log('couponId====>', couponId);
   const showToast = (type, text1, text2) => {
     Toast.show({
       type: type,
@@ -232,6 +232,7 @@ const SaleCoupon = props => {
   };
   const [booking, setSaleData] = useState({});
   const [refresh, setRefresh] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [payload, setpayload] = useState({
     updateStart: false,
   });
@@ -239,11 +240,13 @@ const SaleCoupon = props => {
     getSaledetails();
   }, [refresh]);
   const getSaledetails = async () => {
+    setLoading(true);
     const customerId = await getData('customer_id');
     const response = await get_coupon_sale_details(customerId, saleId);
     // const response = await get_coupon_sale(couponId, businessId, customerId);
     console.log('Coupon Sale Data ===> ', response?.data);
     setSaleData(response?.data);
+    setLoading(false)
   };
   const updatePayment = async method => {
     try {
@@ -277,80 +280,106 @@ const SaleCoupon = props => {
       <ScrollView
         contentContainerStyle={{ flexGrow: 1, paddingHorizontal: mvs(16) }}>
         <View style={styles.body}>
-          <SaleCouponBusinessCustomer item={booking} />
+          <SaleCouponBusinessCustomer loading={!loading} item={booking} />
           <Medium
             label={'Payment Method'}
             color={colors.black}
             size={16}
-            style={{ marginVertical: mvs(15) }}
+            style={{ marginTop: mvs(15) }}
           />
-          <FlatList
+          {loading ? <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingVertical: mvs(12) }}
-            data={booking?.paymentOptions}
+            data={[{}, {}, {}]}
             renderItem={({ item, index }) => (
               <PaymentCard
+                loading={loading}
                 key={index}
                 title={item?.title}
-                icon={item?.icon}
+                // icon={item?.icon}
                 borderColor={item?.color}
                 selected={item?.selected}
                 selectable={item?.selectable}
                 onClick={() => {
-                  if (item?.selectable) {
-                    updatePayment(item?.id);
-                  }
+                  // if (item?.selectable) {
+                  //   updatePayment(item?.id);
+                  // }
                 }}
               />
             )}
           />
-          <Regular
-            label={booking?.payment?.view?.message}
-            color={
-              booking?.payment?.view?.error ? colors.red : colors.lightgrey1
-            }
-            size={14}
-          />
-          <BillView invoice={booking?.invoice} />
-          <View style={styles.paymentView}>
-            {booking?.view?.continue ?
-              <View style={{ height: mvs(70) }}>
-                <Buttons.ButtonPrimary
-                  title={'Confirm'}
-                  style={styles.button}
-                  onClick={() => purchaseCoupon()}
-                  loading={payload.updateStart}
+            : <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingVertical: mvs(12) }}
+              data={booking?.paymentOptions}
+              renderItem={({ item, index }) => (
+                <PaymentCard
+                  key={index}
+                  title={item?.title}
+                  icon={item?.icon}
+                  borderColor={item?.color}
+                  selected={item?.selected}
+                  selectable={item?.selectable}
+                  onClick={() => {
+                    if (item?.selectable) {
+                      updatePayment(item?.id);
+                    }
+                  }}
                 />
-              </View>
-              :
-              <AlertMessage
-                view={booking?.view}
-                color={booking?.view?.message?.color}
-                title={booking?.view?.message?.message}
-                bgColor={
-                  booking?.view?.message?.color == 'green'
-                    ? colors.lightGreen1
-                    : booking?.view?.message?.color == 'red'
-                      ? colors.lightPink1
-                      : booking?.view?.message?.color == 'blue'
-                        ? colors.lightBlue
-                        : booking?.view?.message?.color == 'grey'
-                          ? colors.lightgrey
-                          : null
-                }
-                fillColor={
-                  booking?.view?.message?.color == 'green'
-                    ? colors.green
-                    : booking?.view?.message?.color == 'red'
-                      ? colors.red
-                      : booking?.view?.message?.color == 'blue'
-                        ? colors.blue
-                        : booking?.view?.message?.color == 'grey'
-                          ? colors.lightgrey1
-                          : null
-                }
-              />
+              )}
+            />}
+          <Shimmer visible={!loading}>
+            <Regular
+              label={booking?.payment?.view?.message}
+              color={
+                booking?.payment?.view?.error ? colors.red : colors.lightgrey1
+              }
+              size={14}
+            />
+          </Shimmer>
+          <BillView loading={!loading} invoice={booking?.invoice} />
+          <View style={styles.paymentView}>
+            {loading ?
+              <Shimmer shimmerStyle={{ height: mvs(70), width: '100%' }} />
+              : booking?.view?.continue ?
+                <View style={{ height: mvs(70) }}>
+                  <Buttons.ButtonPrimary
+                    title={'Confirm'}
+                    style={styles.button}
+                    onClick={() => purchaseCoupon()}
+                    loading={payload.updateStart}
+                  />
+                </View>
+                :
+                <AlertMessage
+                  view={booking?.view}
+                  color={booking?.view?.message?.color}
+                  title={booking?.view?.message?.message}
+                  bgColor={
+                    booking?.view?.message?.color == 'green'
+                      ? colors.lightGreen1
+                      : booking?.view?.message?.color == 'red'
+                        ? colors.lightPink1
+                        : booking?.view?.message?.color == 'blue'
+                          ? colors.lightBlue
+                          : booking?.view?.message?.color == 'grey'
+                            ? colors.lightgrey
+                            : null
+                  }
+                  fillColor={
+                    booking?.view?.message?.color == 'green'
+                      ? colors.green
+                      : booking?.view?.message?.color == 'red'
+                        ? colors.red
+                        : booking?.view?.message?.color == 'blue'
+                          ? colors.blue
+                          : booking?.view?.message?.color == 'grey'
+                            ? colors.lightgrey1
+                            : null
+                  }
+                />
             }
           </View>
         </View>

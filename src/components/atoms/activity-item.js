@@ -9,6 +9,7 @@ import Bold from '../../presentation/typography/bold-text';
 import ImagePlaceholder from './Placeholder';
 import Medium from '../../presentation/typography/medium-text';
 import * as Progress from 'react-native-progress';
+import Shimmer from '../shimmer';
 const ActivityItem = ({
   onPress,
   image = require('../../assets/images/carwash.png'),
@@ -26,17 +27,24 @@ const ActivityItem = ({
   section = "schedule",
   onLikePress,
   onResumePress,
+  loading
 }) => {
-  console.log('progress=>>>', progress);
   return (
-
     <View style={styles.CONTAINER}>
       <Row style={styles.UPPERROW}>
-        <ImagePlaceholder containerStyle={styles.IMAGE} uri={image} />
+        <Shimmer visible={loading} shimmerStyle={styles.IMAGE}>
+          <ImagePlaceholder containerStyle={styles.IMAGE} uri={image} />
+        </Shimmer>
         <View style={{ marginHorizontal: mvs(10), flex: 1 }}>
-          <Medium numberOfLines={2} label={details} />
-          <Regular label={subDetails} style={{ fontSize: 12 }} />
-          <Regular label={bookingTime} style={{ fontSize: 10, color: colors.primary }} />
+          <Shimmer visible={loading}>
+            <Medium numberOfLines={1} label={details} />
+          </Shimmer>
+          <Shimmer visible={loading}>
+            <Regular label={subDetails} style={{ fontSize: 12 }} />
+          </Shimmer>
+          <Shimmer visible={loading}>
+            <Regular label={bookingTime} style={{ fontSize: 10, color: colors.primary }} />
+          </Shimmer>
         </View>
         {/* <View style={{ alignItems: 'center' }}>
           {status == 'schedule' || status == "Completed" ?
@@ -54,11 +62,16 @@ const ActivityItem = ({
         </View> */}
       </Row>
       <Row style={{ ...styles.UPPERROW, ...styles.BOTTOMROW }}>
-        <ImagePlaceholder containerStyle={styles.SUBIMAGE} uri={subImage} />
+        <Shimmer shimmerStyle={styles.SUBIMAGE} visible={loading}>
+          <ImagePlaceholder containerStyle={styles.SUBIMAGE} uri={subImage} />
+        </Shimmer>
         <View style={{ marginHorizontal: mvs(10), flex: 1 }}>
-          <Medium label={bussinessName} />
-          <Regular label={address} style={{ fontSize: 13 }} />
-
+          <Shimmer visible={loading}>
+            <Medium label={bussinessName} />
+          </Shimmer>
+          <Shimmer visible={loading}>
+            <Regular label={address} style={{ fontSize: 13 }} />
+          </Shimmer>
         </View>
         <View style={{ alignItems: 'flex-end' }}>
           {section == "draft" ?

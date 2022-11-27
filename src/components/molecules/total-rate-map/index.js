@@ -1,15 +1,16 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {Map, RightArrow, Total} from '../../../assets/common-icons';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { Map, RightArrow, Total } from '../../../assets/common-icons';
 import Bold from '../../../presentation/typography/bold-text';
-import {mvs} from '../../../services/metrices';
+import { mvs } from '../../../services/metrices';
 import Row from '../../atoms/row';
 import colors from '../../../services/colors';
 import Regular from '../../../presentation/typography/regular-text';
 import RatingStar from '../rating-star';
-import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
 import Medium from '../../../presentation/typography/medium-text';
+import Shimmer from '../../shimmer';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 const TotalRateMap = ({
   reviewSchedule,
@@ -28,18 +29,18 @@ const TotalRateMap = ({
         borderColor: colors.GD8D8D8,
         backgroundColor: colors.white,
       }}>
-      <ShimmerPlaceholder
-        style={{
-          width: smallImg ? mvs(46) : mvs(82),
-          height: smallImg ? mvs(46) : mvs(77),
+      <Shimmer
+        shimmerStyle={{
+          borderRadius: mvs(8),
+          width: mvs(82),
+          height: mvs(77),
         }}
         visible={loading}>
         {!smallImg && data?.businessReviews?.logo && (
           <Image
-            source={{uri: data?.businessReviews?.logo}}
+            source={{ uri: data?.businessReviews?.logo }}
             resizeMode="contain"
             style={{
-              // width: mvs(100), height: mvs(100)
               borderRadius: mvs(8),
               width: mvs(82),
               height: mvs(77),
@@ -62,32 +63,31 @@ const TotalRateMap = ({
             }}
           />
         )}
-      </ShimmerPlaceholder>
+      </Shimmer>
 
-      <View style={{flex: 1, marginLeft: mvs(20)}}>
-        <ShimmerPlaceholder visible={loading}>
+      <View style={{ flex: 1, marginLeft: mvs(20) }}>
+        <Shimmer visible={loading}>
           <Medium
             label={smallImg ? data?.title : data?.businessReviews?.title}
             size={mvs(16)}
             color={colors.black}
           />
-        </ShimmerPlaceholder>
-        <ShimmerPlaceholder visible={loading}>
+        </Shimmer>
+        <Shimmer shimmerStyle={{ marginTop: mvs(5) }} visible={loading}>
           <Row
             style={{
               marginVertical: mvs(8),
             }}
             justifyContent="flex-start">
-            {/* <Map /> */}
             <Regular
               size={mvs(14)}
-              style={{transform: [{translateY: mvs(-3)}]}}
+              style={{ transform: [{ translateY: mvs(-3) }] }}
               color={colors.G9B9B9B}
               label={` ${address}`}
             />
           </Row>
-        </ShimmerPlaceholder>
-        <ShimmerPlaceholder visible={loading}>
+        </Shimmer>
+        <Shimmer shimmerStyle={{ marginTop: mvs(5) }} visible={loading}>
           {data?.businessReviews?.rating &&
             data?.businessReviews?.rating?.length > 0 && (
               <RatingStar
@@ -107,7 +107,7 @@ const TotalRateMap = ({
               rate={data?.rating[7]}
             />
           )}
-        </ShimmerPlaceholder>
+        </Shimmer>
       </View>
       {/* <TouchableOpacity>
                 <RightArrow />

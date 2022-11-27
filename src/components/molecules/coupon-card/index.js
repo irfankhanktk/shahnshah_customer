@@ -1,21 +1,22 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {DiscountIcon, OffCarWash, Percent} from '../../../assets/common-icons';
+import { View, Text, StyleSheet } from 'react-native';
+import { DiscountIcon, OffCarWash, Percent } from '../../../assets/common-icons';
 import Bold from '../../../presentation/typography/bold-text';
 import Medium from '../../../presentation/typography/medium-text';
 import Regular from '../../../presentation/typography/regular-text';
 import colors from '../../../services/colors';
-import {mvs} from '../../../services/metrices';
+import { mvs } from '../../../services/metrices';
 import Row from '../../atoms/row';
-import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
-import {Image} from 'react-native-elements';
+import { Image } from 'react-native-elements';
 import LinedColoredCard from '../../linedColoredCard';
+import Shimmer from '../../shimmer';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
-const CouponCard = ({loading, coupon = {}}) => {
+const CouponCard = ({ loading, coupon = {} }) => {
   console.log('coupon comp :', coupon);
   return (
-    <View style={{backgroundColor: colors.white}}>
+    <View style={{ backgroundColor: colors.white }}>
       <Row
         justifyContent="flex-start"
         style={{
@@ -26,8 +27,8 @@ const CouponCard = ({loading, coupon = {}}) => {
           backgroundColor: colors.white,
           borderBottomColor: colors.yellowLightLine,
         }}>
-        <ShimmerPlaceholder
-          style={{width: mvs(82), height: mvs(77)}}
+        <Shimmer
+          shimmerStyle={{ width: mvs(82), height: mvs(77), borderRadius: mvs(8), }}
           visible={loading}>
           <Image
             style={{
@@ -35,9 +36,9 @@ const CouponCard = ({loading, coupon = {}}) => {
               width: mvs(82),
               height: mvs(77),
             }}
-            source={{uri: coupon?.cover}}
+            source={{ uri: coupon?.cover }}
           />
-        </ShimmerPlaceholder>
+        </Shimmer>
 
         <View
           style={{
@@ -45,10 +46,10 @@ const CouponCard = ({loading, coupon = {}}) => {
 
             flex: 1,
           }}>
-          <ShimmerPlaceholder visible={loading}>
+          <Shimmer visible={loading}>
             <Medium size={mvs(16)} label={coupon?.title?.toUpperCase()} />
-          </ShimmerPlaceholder>
-          <ShimmerPlaceholder visible={loading}>
+          </Shimmer>
+          <Shimmer shimmerStyle={{ marginTop: mvs(5) }} visible={loading}>
             <Regular
               style={{
                 marginBottom: mvs(8),
@@ -62,13 +63,13 @@ const CouponCard = ({loading, coupon = {}}) => {
             size={mvs(16)}
             label={coupon?.price + ' AED'}
           /> */}
-          </ShimmerPlaceholder>
-          <ShimmerPlaceholder visible={loading}>
+          </Shimmer>
+          <Shimmer shimmerStyle={{ marginTop: mvs(5) }} visible={loading}>
             <View style={styles.discountVouchedIconView}>
               <DiscountIcon width={mvs(14)} height={mvs(13)} />
               <Medium
                 size={mvs(10)}
-                style={{marginLeft: 5}}
+                style={{ marginLeft: 5 }}
                 color={colors.black}
                 label={coupon?.highlight}
               />
@@ -83,7 +84,7 @@ const CouponCard = ({loading, coupon = {}}) => {
               label={' ' + coupon?.highlight}
             />
           </Row> */}
-          </ShimmerPlaceholder>
+          </Shimmer>
         </View>
       </Row>
     </View>

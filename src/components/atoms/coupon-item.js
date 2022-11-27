@@ -12,6 +12,7 @@ import Bold from '../../presentation/typography/bold-text';
 import ImagePlaceholder from './Placeholder';
 import Medium from '../../presentation/typography/medium-text';
 import * as Progress from 'react-native-progress';
+import Shimmer from '../shimmer';
 const CouponItem = ({
     onPress,
     image = require('../../assets/images/carwash.png'),
@@ -27,21 +28,30 @@ const CouponItem = ({
     onViewPress,
     onPaymentPress,
     item = {},
+    loading,
 }) => {
     return (
 
         <View style={styles.CONTAINER}>
             <Row style={styles.UPPERROW}>
-                <ImagePlaceholder containerStyle={styles.IMAGE} uri={image} />
+                <Shimmer shimmerStyle={{ ...styles.IMAGE, marginTop: 0 }} visible={loading}>
+                    <ImagePlaceholder containerStyle={styles.IMAGE} uri={image} />
+                </Shimmer>
                 <View style={{ marginHorizontal: mvs(10), flex: 1 }}>
-                    <Medium numberOfLines={2} label={discount + "% OFF Car Wash"} />
-                    <Regular label={item?.subTitle} style={{ fontSize: 12 }} />
+                    <Shimmer shimmerStyle={{ height: mvs(20), }} visible={loading}>
+                        <Medium numberOfLines={2} label={discount + "% OFF Car Wash"} />
+                    </Shimmer>
+                    <Shimmer shimmerStyle={{ height: mvs(15), }} visible={loading}>
+                        <Regular label={item?.subTitle} style={{ fontSize: 12 }} />
+                    </Shimmer>
                     <Row alignItems='center' style={styles.highlighted}>
                         <SVG.Percent />
-                        <Regular color={colors.black}
-                            size={mvs(13)} label={item?.highlight}
-                            style={{ marginLeft: mvs(6), }}
-                        />
+                        <Shimmer visible={loading}>
+                            <Regular color={colors.black}
+                                size={mvs(13)} label={item?.highlight}
+                                style={{ marginLeft: mvs(6), }}
+                            />
+                        </Shimmer>
                     </Row>
                     {/* <Row style={{ justifyContent: 'flex-start' }}>
                         {status == 'active' ? <SVG.PrimaryPercentage /> : <SVG.GrayPercentage />}
@@ -58,27 +68,34 @@ const CouponItem = ({
                 </View> */}
             </Row>
             <Row style={{ ...styles.UPPERROW, ...styles.BOTTOMROW }}>
-                <ImagePlaceholder containerStyle={styles.SUBIMAGE} uri={subImage} />
+                <Shimmer visible={loading} shimmerStyle={styles.SUBIMAGE}>
+                    <ImagePlaceholder containerStyle={styles.SUBIMAGE} uri={subImage} />
+                </Shimmer>
                 <View style={{ marginHorizontal: mvs(10), flex: 1 }}>
-                    <Medium label={bussinessName} />
-                    <Regular label={address} style={{ fontSize: 13 }} />
+                    <Shimmer visible={loading}>
+                        <Medium label={bussinessName} />
+                    </Shimmer>
+                    <Shimmer visible={loading}>
+                        <Regular label={address} style={{ fontSize: 13 }} />
+                    </Shimmer>
 
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>
-                    {
-                        status === 'Draft' ?
-                            <TouchableOpacity style={{ ...styles.BUTTON }} onPress={onPaymentPress}>
-                                <Regular label={'Resume'} style={{ ...styles.BUTTONTEXT }} />
-                            </TouchableOpacity>
-                            : status === 'Booked' ?
+                    <Shimmer shimmerStyle={{ ...styles.BUTTON, width: mvs(80) }} visible={loading}>
+                        {
+                            status === 'Draft' ?
                                 <TouchableOpacity style={{ ...styles.BUTTON }} onPress={onPaymentPress}>
-                                    <Regular label={'Make Payment'} style={{ ...styles.BUTTONTEXT }} />
-                                </TouchableOpacity> :
-                                <TouchableOpacity style={{ ...styles.BUTTON }} onPress={onViewPress}>
-                                    <Regular label={'View'} style={{ ...styles.BUTTONTEXT }} />
+                                    <Regular label={'Resume'} style={{ ...styles.BUTTONTEXT }} />
                                 </TouchableOpacity>
-                    }
-
+                                : status === 'Booked' ?
+                                    <TouchableOpacity style={{ ...styles.BUTTON }} onPress={onPaymentPress}>
+                                        <Regular label={'Make Payment'} style={{ ...styles.BUTTONTEXT }} />
+                                    </TouchableOpacity> :
+                                    <TouchableOpacity style={{ ...styles.BUTTON }} onPress={onViewPress}>
+                                        <Regular label={'View'} style={{ ...styles.BUTTONTEXT }} />
+                                    </TouchableOpacity>
+                        }
+                    </Shimmer>
                 </View>
             </Row>
         </View>

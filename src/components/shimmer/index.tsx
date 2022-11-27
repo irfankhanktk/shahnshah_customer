@@ -11,7 +11,7 @@ type props = {
 };
 const Shimmer = ({shimmerStyle, children = <></>,visible}: props) => {
   return (
-    <ShimmerPlaceholder shimmerStyle={[styles.shimmerStyle,shimmerStyle]} visible={visible}>
+    <ShimmerPlaceholder shimmerWidthPercent={1} shimmerStyle={[styles.shimmerStyle,shimmerStyle]} visible={visible}>
       {children}
     </ShimmerPlaceholder>
   );
@@ -19,6 +19,7 @@ const Shimmer = ({shimmerStyle, children = <></>,visible}: props) => {
 export default Shimmer;
 const styles = StyleSheet.create({
     shimmerStyle:{
-        // marginTop:mvs(10)
+        marginTop:mvs(2),
+        height:mvs(20)
     }
 });

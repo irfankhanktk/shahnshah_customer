@@ -7,7 +7,7 @@ import LabelValue from '../../components/molecules/label-value-row';
 import TotalRateMap from '../../components/molecules/total-rate-map/index';
 import Regular from '../../presentation/typography/regular-text';
 import colors from '../../services/colors';
-import { mvs } from '../../services/metrices';
+import { mvs, width } from '../../services/metrices';
 import CouponCard from './../../components/molecules/coupon-card/index';
 import { Styles as styles } from './styles';
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
@@ -25,6 +25,7 @@ import Row from '../../components/atoms/row';
 import Medium from '../../presentation/typography/medium-text';
 import CouponDetailsOfferingCard from '../../components/CouponDetailsOfferingCard';
 import { color } from 'react-native-elements/dist/helpers';
+import Shimmer from '../../components/shimmer';
 
 const CouponDetails = props => {
   const { route, navigation, get_details, avail_coupon } = props;
@@ -35,21 +36,20 @@ const CouponDetails = props => {
   useEffect(() => {
     getCouponDetails();
   }, [refresh]);
-  console.log('coupon?.view:', coupon?.view);
   const getCouponDetails = async () => {
+    setLoading(false)
     var id = await getData('customer_id');
     const response = await get_details(route.params?.id, route.params.bId, id);
     if (response?.data) {
-      console.log(response?.data);
       setCoupon(response?.data);
     }
+    setLoading(true);
   };
   function getString(list) {
     console.log(list.tos);
   }
   const availCoupon = async () => {
     try {
-      console.log('availCoupon func :');
       var id = await getData('customer_id');
       const availResponse = await avail_coupon(id, coupon?.id);
       console.log('Avail Response', availResponse?.data);
@@ -118,36 +118,49 @@ const CouponDetails = props => {
             trimLimit={183}
           />
 
-          {coupon?.offerings?.length > 0 && (
-            <>
-              <HeadingTitle
-                marginVertical={0}
-                title="Offering"
-                size={mvs(18)}
-                // paddingBottom={mvs(10)}
-                paddingTop={mvs(22)}
-              />
-              <View style={styles.offeringWrapperView}>
-                <FlatList
-                  showsHorizontalScrollIndicator={false}
-                  horizontal
-                  data={coupon?.offerings || []}
-                  renderItem={({ item, index }) => {
-                    return (
-                      <CouponDetailsOfferingCard
-                        navigation={navigation}
-                        moveTo="ServiceOfferingDetails"
-                        data={item}
-                        loading={loading}
-                      />
-                    );
-                  }}
-                />
 
-                {/* <CouponDetailsOfferingCard loading={loading} /> */}
-              </View>
-            </>
-          )}
+          <>
+            <HeadingTitle
+              marginVertical={0}
+              title="Offering"
+              size={mvs(18)}
+              paddingTop={mvs(22)}
+            />
+            <View style={styles.offeringWrapperView}>
+              {!loading ? <FlatList
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                data={[{}, {}, {}]}
+                renderItem={({ item, index }) => {
+                  return (
+                    <CouponDetailsOfferingCard
+                      navigation={navigation}
+                      moveTo="ServiceOfferingDetails"
+                      data={item}
+                      loading={loading}
+                    />
+                  );
+                }}
+              /> :
+                coupon?.offerings?.length > 0 && (
+                  <FlatList
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    data={coupon?.offerings || []}
+                    renderItem={({ item, index }) => {
+                      return (
+                        <CouponDetailsOfferingCard
+                          navigation={navigation}
+                          moveTo="ServiceOfferingDetails"
+                          data={item}
+                          loading={loading}
+                        />
+                      );
+                    }}
+                  />
+                )}
+            </View>
+          </>
 
           {/* <HeadingTitle
             paddingTop={mvs(22)}
@@ -184,7 +197,6 @@ const CouponDetails = props => {
             title={'Coupon Terms & Conditions'}
             marginVertical={0}
             size={mvs(18)}
-            // paddingBottom={mvs(10)}
             paddingTop={mvs(22)}
           />
           <View
@@ -192,14 +204,23 @@ const CouponDetails = props => {
               backgroundColor: colors.white,
               paddingTop: mvs(10),
             }}>
-            {coupon?.view?.tncs &&
+            {!loading ?
+              [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}].map((item, index) => (
+                <LabelValue
+                  bw={index === 9 ? 0 : 1}
+                  size={mvs(14)}
+                  paddingTop={mvs(10)}
+                  label={''}
+                  value={''}
+                />
+              ))
+              : coupon?.view?.tncs &&
               Object.entries(coupon?.view?.tncs).map(([key, value], index) => {
                 const lastIndexx = Object.keys(coupon?.view?.tncs).length;
-                console.log('lastIndex:', lastIndexx);
-                console.log('value:', value);
-                console.log('index:>', index);
+
                 return (
                   <LabelValue
+                    loading={loading}
                     bw={index === lastIndexx - 1 ? 0 : 1}
                     size={mvs(14)}
                     paddingTop={mvs(10)}
@@ -216,8 +237,8 @@ const CouponDetails = props => {
               title="Other Conditions"
             />
           )}
-          <ShimmerPlaceholder
-            style={{ width: '100%', backgroundColor: colors.white }}
+          <Shimmer
+            shimmerStyle={{ width: width - mvs(44), alignSelf: 'center', height: mvs(50), backgroundColor: colors.white }}
             visible={loading}>
             <View
               style={{
@@ -225,7 +246,6 @@ const CouponDetails = props => {
                 paddingBottom: mvs(10),
               }}>
               {coupon?.otherConditions?.map((item, index) => {
-                console.log('item:', item);
                 return (
                   <Row
                     alignItems="center"
@@ -252,7 +272,7 @@ const CouponDetails = props => {
                 return;
               })} */}
             </View>
-          </ShimmerPlaceholder>
+          </Shimmer>
 
           {coupon?.view?.resume && (
             <View style={{ marginTop: mvs(10), alignItems: 'center' }}>
