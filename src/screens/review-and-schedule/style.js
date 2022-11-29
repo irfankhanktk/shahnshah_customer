@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import colors from '../../services/colors';
-import { mvs } from '../../services/metrices';
+import {mvs} from '../../services/metrices';
 
 export const Styles = StyleSheet.create({
   conntainer: {
@@ -9,7 +9,7 @@ export const Styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    paddingBottom: mvs(10)
+    paddingBottom: mvs(10),
   },
   bottomView: {
     paddingVertical: mvs(14),
@@ -21,5 +21,5 @@ export const Styles = StyleSheet.create({
     borderBottomColor: colors.lightgrey1,
     borderBottomWidth: 0.2,
     paddingBottom: mvs(13.6),
-  }
+  },
 });

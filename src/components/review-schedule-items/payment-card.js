@@ -1,12 +1,12 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import colors from "../../services/colors";
-import { mvs } from "../../services/metrices";
-import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
-import LinearGradient from "react-native-linear-gradient";
-import Regular from "../../presentation/typography/regular-text";
-import * as SVG from '../../assets/common-icons/payment-method/index'
-import Shimmer from "../shimmer";
+import React from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import colors from '../../services/colors';
+import {mvs} from '../../services/metrices';
+import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import LinearGradient from 'react-native-linear-gradient';
+import Regular from '../../presentation/typography/regular-text';
+import * as SVG from '../../assets/common-icons/payment-method/index';
+import Shimmer from '../shimmer';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 const PaymentCard = ({
   title = 'Accept',
@@ -20,26 +20,34 @@ const PaymentCard = ({
   // const Icon = SVG[icon]
   return (
     <>
-      {loading ? <Shimmer visible={!loading} shimmerStyle={{ ...styles.shimmer, }} /> :
+      {loading ? (
+        <Shimmer visible={!loading} shimmerStyle={{...styles.shimmer}} />
+      ) : (
         <TouchableOpacity
           disabled={!selectable}
           activeOpacity={selectable ? 0 : 1}
-          style={{ ...styles.CONTAINER, borderColor: borderColor }} onPress={onClick}>
-          <Regular label={title} color={colors.lightgrey1} size={14} style={{ marginBottom: mvs(5) }} />
-          {
-            title === 'Credit Card' ? <SVG.CreditCard width="30" height="28" />
-              : title === 'Pay at station' ?
-                <SVG.PayAtStation width="30" height="28" /> :
-                title === 'My Balance' ?
-                  <SVG.MyBalance width="30" height="28" /> : null
-          }
-          {selected &&
-            (
-              <View style={{ position: 'absolute', right: -10, top: -15 }}>
-                <SVG.SelectedIcon />
-              </View>
-            )}
-        </TouchableOpacity>}
+          style={{...styles.CONTAINER, borderColor: borderColor}}
+          onPress={onClick}>
+          <Regular
+            label={title}
+            color={colors.lightgrey1}
+            size={14}
+            style={{marginBottom: mvs(5)}}
+          />
+          {title === 'Credit Card' ? (
+            <SVG.CreditCard width="30" height="28" />
+          ) : title === 'Pay at station' ? (
+            <SVG.PayAtStation width="30" height="28" />
+          ) : title === 'My Balance' ? (
+            <SVG.MyBalance width="30" height="28" />
+          ) : null}
+          {selected && (
+            <View style={{position: 'absolute', right: -10, top: -15}}>
+              <SVG.SelectedIcon />
+            </View>
+          )}
+        </TouchableOpacity>
+      )}
     </>
   );
 };
@@ -54,7 +62,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   shimmer: {
     height: mvs(78),
@@ -63,6 +71,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 });

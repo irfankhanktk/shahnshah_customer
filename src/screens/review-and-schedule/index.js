@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, ScrollView, View } from 'react-native';
-import { connect } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {FlatList, SafeAreaView, ScrollView, View} from 'react-native';
+import {connect} from 'react-redux';
 import Row from '../../components/atoms/row';
-import { CustomAppHeader } from '../../components/molecules/header/custom-header';
+import {CustomAppHeader} from '../../components/molecules/header/custom-header';
 // import ActionButton from "../../components/review-schedule-items/action-button";
 import moment from 'moment';
 import Buttons from '../../components/atoms/Button';
@@ -21,10 +21,11 @@ import WorkerItem from '../../components/service-offering/woker-item';
 import Medium from '../../presentation/typography/medium-text';
 import Regular from '../../presentation/typography/regular-text';
 import colors from '../../services/colors';
-import { mvs } from '../../services/metrices';
+import {mvs} from '../../services/metrices';
 import DIVIY_API from '../../store/api-calls';
-import { Styles as styles } from './style';
-import { getData } from '../../localStorage';
+import {Styles as styles} from './style';
+import {getData} from '../../localStorage';
+import Shimmer from '../../components/shimmer';
 const ReviewAndSchedule = props => {
   const {
     get_booking,
@@ -44,7 +45,7 @@ const ReviewAndSchedule = props => {
     route,
     complete_booking,
   } = props;
-  const { bookingId, businessId, } = route.params;
+  const {bookingId, businessId} = route.params;
   // const customerId = 3333; //selected;
   console.log('bookingId id ', bookingId);
   console.log('businessId id ', businessId);
@@ -59,7 +60,6 @@ const ReviewAndSchedule = props => {
   const [booking, setBooking] = useState();
   const [selectedSlot, setSelectedSlot] = useState();
   const [worker, setWorker] = useState(null);
-
 
   const [isRefresh, setRefresh] = useState(false);
   useEffect(() => {
@@ -105,7 +105,7 @@ const ReviewAndSchedule = props => {
   };
   const getCoupons = async () => {
     try {
-      const customerId = await getData("customer_id");
+      const customerId = await getData('customer_id');
       console.log('customerId=>>>', customerId);
       const couponReponse = await get_booking_coupons(bookingId, customerId);
       console.log('coupons information===>', couponReponse?.data);
@@ -116,7 +116,6 @@ const ReviewAndSchedule = props => {
     } catch (error) {
       console.log('error getCoupons=>>>', error);
     }
-
   };
   const checkin_booking = async () => {
     await checkin(businessId, bookingId);
@@ -160,14 +159,14 @@ const ReviewAndSchedule = props => {
     setRefresh(!isRefresh);
   };
   const apply_booking_discount = async couponId => {
-    const customerId = await getData("customer_id");
+    const customerId = await getData('customer_id');
     await apply_coupon(bookingId, couponId, customerId);
     setRefresh(!isRefresh);
   };
   return (
     <SafeAreaView style={styles.conntainer}>
       <CustomAppHeader
-        style={{ paddingTop: mvs(25) }}
+        style={{paddingTop: mvs(25)}}
         title={'Review & Schedule'}
         color={colors?.lightgrey2}
       />
@@ -193,19 +192,22 @@ const ReviewAndSchedule = props => {
             onFindClick={() => getSlots(date)}
             onRemoveClick={() => remove_booking_slot()}
           />
-          <Row style={{ marginBottom: mvs(10), alignItems: 'center', }}>
+          <Row style={{marginBottom: mvs(10), alignItems: 'center'}}>
             <Medium
               label={coupon?.view?.caption}
               color={colors.black}
               size={16}
             />
-            {coupon?.view?.applyCoupon && <ActionButton
-              style={{ marginTop: 0 }}
-              title="Apply Coupon"
-              onClick={getCoupons}
-              bgColor={colors.lightGreen1}
-              borderColor={colors.green}
-              titleColor={colors.green} />}
+            {coupon?.view?.applyCoupon && (
+              <ActionButton
+                style={{marginTop: 0}}
+                title="Apply Coupon"
+                onClick={getCoupons}
+                bgColor={colors.lightGreen1}
+                borderColor={colors.green}
+                titleColor={colors.green}
+              />
+            )}
           </Row>
           <Row style={styles.coupon_row}>
             <NewCouponItem
@@ -221,10 +223,10 @@ const ReviewAndSchedule = props => {
               style={{
                 alignSelf:
                   coupon?.view?.remove &&
-                    !coupon?.view?.applyCoupon &&
-                    !coupon?.view?.applyDiscount &&
-                    !coupon?.view?.changeCoupon &&
-                    !coupon?.view?.changeDiscount
+                  !coupon?.view?.applyCoupon &&
+                  !coupon?.view?.applyDiscount &&
+                  !coupon?.view?.changeCoupon &&
+                  !coupon?.view?.changeDiscount
                     ? 'flex-end'
                     : 'flex-start',
               }}>
@@ -235,7 +237,7 @@ const ReviewAndSchedule = props => {
                   borderColor={colors.primary}
                   titleColor={colors.primary}
                   onClick={() => getCoupons()}
-                  style={{ alignSelf: 'flex-end' }}
+                  style={{alignSelf: 'flex-end'}}
                 />
               ) : null}
               {coupon?.view?.remove ? (
@@ -244,25 +246,27 @@ const ReviewAndSchedule = props => {
                   bgColor={colors.lightPink1}
                   borderColor={colors.red}
                   titleColor={colors.red}
-                  style={{ alignSelf: 'flex-end' }}
+                  style={{alignSelf: 'flex-end'}}
                   onClick={() => remove_booking_discount()}
                 />
               ) : null}
             </View>
           </Row>
+
           <Medium
             label={'Payment Method'}
             color={colors.black}
             size={16}
-            style={{ marginTop: mvs(15) }}
+            style={{marginTop: mvs(15)}}
           />
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingVertical: mvs(12) }}
+            contentContainerStyle={{paddingVertical: mvs(12)}}
             data={booking?.paymentOptions}
-            renderItem={({ item, index }) => (
+            renderItem={({item, index}) => (
               <PaymentCard
+                loading={true}
                 key={index}
                 title={item?.title}
                 icon={item?.icon}
@@ -277,6 +281,7 @@ const ReviewAndSchedule = props => {
               />
             )}
           />
+
           <Regular
             label={booking?.payment?.view?.message}
             color={
@@ -290,7 +295,11 @@ const ReviewAndSchedule = props => {
             label={'Booking Lifecycle'}
             color={colors.black}
             size={16}
-            style={{ paddingTop: mvs(15), borderTopWidth: 0.2, borderColor: colors.lightgrey1 }}
+            style={{
+              paddingTop: mvs(15),
+              borderTopWidth: 0.2,
+              borderColor: colors.lightgrey1,
+            }}
           />
           {booking?.lifecycle?.booked && (
             <LifeCycleItem
@@ -334,39 +343,45 @@ const ReviewAndSchedule = props => {
         </ScrollView>
 
         <View style={styles.bottomView}>
-          {booking?.view?.continue ? (
-            <View style={{ height: mvs(70) }}>
-              <Buttons.ButtonPrimary title="Confirm" onClick={finish_booking} />
-            </View>
-          ) : (
-            <AlertMessage
-              view={booking?.view}
-              color={booking?.view?.message?.color}
-              title={booking?.view?.message?.message}
-              bgColor={
-                booking?.view?.message?.color == 'green'
-                  ? colors.lightGreen1
-                  : booking?.view?.message?.color == 'red'
+          <Shimmer shimmerStyle={{width: '100%', height: mvs(60)}}>
+            {booking?.view?.continue ? (
+              <View style={{height: mvs(70)}}>
+                <Buttons.ButtonPrimary
+                  title="Confirm"
+                  onClick={finish_booking}
+                />
+              </View>
+            ) : (
+              <AlertMessage
+                view={booking?.view}
+                color={booking?.view?.message?.color}
+                title={booking?.view?.message?.message}
+                loading={false}
+                bgColor={
+                  booking?.view?.message?.color == 'green'
+                    ? colors.lightGreen1
+                    : booking?.view?.message?.color == 'red'
                     ? colors.lightPink1
                     : booking?.view?.message?.color == 'blue'
-                      ? colors.lightBlue
-                      : booking?.view?.message?.color == 'grey'
-                        ? colors.lightgrey
-                        : null
-              }
-              fillColor={
-                booking?.view?.message?.color == 'green'
-                  ? colors.green
-                  : booking?.view?.message?.color == 'red'
+                    ? colors.lightBlue
+                    : booking?.view?.message?.color == 'grey'
+                    ? colors.lightgrey
+                    : null
+                }
+                fillColor={
+                  booking?.view?.message?.color == 'green'
+                    ? colors.green
+                    : booking?.view?.message?.color == 'red'
                     ? colors.red
                     : booking?.view?.message?.color == 'blue'
-                      ? colors.blue
-                      : booking?.view?.message?.color == 'grey'
-                        ? colors.lightgrey1
-                        : null
-              }
-            />
-          )}
+                    ? colors.blue
+                    : booking?.view?.message?.color == 'grey'
+                    ? colors.lightgrey1
+                    : null
+                }
+              />
+            )}
+          </Shimmer>
         </View>
         {console.log('coupons=>>>', coupons)}
         <CouponModal
@@ -375,9 +390,9 @@ const ReviewAndSchedule = props => {
           visible={couponPickerVisible}
           onBackdropPress={() => setCouponPickerVisible(false)}
           items={coupons}
-          setValue={(value) => {
-            setCoupon(value)
-            apply_booking_discount(value?.id)
+          setValue={value => {
+            setCoupon(value);
+            apply_booking_discount(value?.id);
           }}
         />
         <ScheduleModal
@@ -420,10 +435,8 @@ const mapDispatchToProps = {
     DIVIY_API.get_available_slots(bookingId, date),
   get_booking_coupons: (bookingId, customerId) =>
     DIVIY_API.get_booking_coupons(bookingId, customerId),
-  checkin: (businessId, bookingId) =>
-    DIVIY_API.checkin(businessId, bookingId),
-  no_show: (businessId, bookingId) =>
-    DIVIY_API.no_show(businessId, bookingId),
+  checkin: (businessId, bookingId) => DIVIY_API.checkin(businessId, bookingId),
+  no_show: (businessId, bookingId) => DIVIY_API.no_show(businessId, bookingId),
   complete_job: (businessId, bookingId) =>
     DIVIY_API.complete_job(businessId, bookingId),
   start: (businessId, bookingId) => DIVIY_API.start(businessId, bookingId),
@@ -439,6 +452,6 @@ const mapDispatchToProps = {
     DIVIY_API.remove_discount(bookingId, businessId),
   apply_coupon: (bookingId, couponId, customerId) =>
     DIVIY_API.apply_coupon(bookingId, couponId, customerId),
-  complete_booking: (bookingId) => DIVIY_API.complete_booking(bookingId),
+  complete_booking: bookingId => DIVIY_API.complete_booking(bookingId),
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewAndSchedule);

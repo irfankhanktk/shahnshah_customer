@@ -1,13 +1,14 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import colors from "../../services/colors";
-import { mvs } from "../../services/metrices";
-import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
-import LinearGradient from "react-native-linear-gradient";
-import Row from "../atoms/row";
-import Medium from "../../presentation/typography/medium-text";
-import Regular from "../../presentation/typography/regular-text";
-import ActionButton from "./action-button";
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import colors from '../../services/colors';
+import {mvs} from '../../services/metrices';
+import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import LinearGradient from 'react-native-linear-gradient';
+import Row from '../atoms/row';
+import Medium from '../../presentation/typography/medium-text';
+import Regular from '../../presentation/typography/regular-text';
+import ActionButton from './action-button';
+import Shimmer from '../shimmer';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 const SlotItem = ({
   slotText = '12 February 2021 9:30 AM-10:00 AM',
@@ -21,54 +22,67 @@ const SlotItem = ({
   onAcceptClick,
   onChangeClick,
   onFindClick,
-  onRemoveClick
+  onRemoveClick,
 }) => {
   return (
     <Row alignItems="center" style={styles.CONTAINER}>
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <Row>
           <Medium label={'Date & Time'} size={15} color={colors.black} />
-          {showAccept &&
-            (
-              <ActionButton style={styles.button} title="Accept" onClick={onAcceptClick} />
-            )}
-          {showFind &&
-            (
-              <ActionButton title="Find"
-                onClick={onFindClick}
-                style={styles.button} />
-            )}
+          {showAccept && (
+            <ActionButton
+              style={styles.button}
+              title="Accept"
+              onClick={onAcceptClick}
+            />
+          )}
+          {showFind && (
+            <ActionButton
+              title="Find"
+              onClick={onFindClick}
+              style={styles.button}
+            />
+          )}
         </Row>
-        <Regular label={slotText} color={!noSlot ? colors.lightgrey1 : colors.primary} size={13} />
-        <Row style={{ alignItems: 'center', }}>
-          <Regular label={details} color={!noMore ? colors.lightgrey1 : colors.red} size={13} />
-          {showChange &&
-            (
-              <ActionButton
-                style={styles.button}
-                title="Change"
-                onClick={onChangeClick}
-                bgColor={colors.lightGreen1}
-                borderColor={colors.green}
-                titleColor={colors.green} />
-            )}
+        <Shimmer>
+          <Regular
+            label={slotText}
+            color={!noSlot ? colors.lightgrey1 : colors.primary}
+            size={13}
+          />
+        </Shimmer>
+        <Row style={{alignItems: 'center'}}>
+          <Shimmer>
+            <Regular
+              label={details}
+              color={!noMore ? colors.lightgrey1 : colors.red}
+              size={13}
+            />
+          </Shimmer>
+          {showChange && (
+            <ActionButton
+              style={styles.button}
+              title="Change"
+              onClick={onChangeClick}
+              bgColor={colors.lightGreen1}
+              borderColor={colors.green}
+              titleColor={colors.green}
+            />
+          )}
 
-          {showRemove &&
-            (
-              <ActionButton
-                style={styles.button}
-                title="Remove"
-                onClick={onRemoveClick}
-                bgColor={colors.lightPink1}
-                borderColor={colors.red}
-                titleColor={colors.red} />
-            )}
+          {showRemove && (
+            <ActionButton
+              style={styles.button}
+              title="Remove"
+              onClick={onRemoveClick}
+              bgColor={colors.lightPink1}
+              borderColor={colors.red}
+              titleColor={colors.red}
+            />
+          )}
         </Row>
       </View>
-      <View>
-
-
-      </View>
+      <View></View>
     </Row>
   );
 };
@@ -81,5 +95,10 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.lightgrey1,
     borderBottomWidth: 0.2,
   },
-  button: { width: mvs(62), alignItems: 'center', justifyContent: 'center', marginTop: 0 }
+  button: {
+    width: mvs(62),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 0,
+  },
 });
