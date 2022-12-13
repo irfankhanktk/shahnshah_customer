@@ -19,10 +19,11 @@ const ReviewModal = ({
     items = [],
     setItems = (items) => { },
     setRating = (rating) => { },
+    rating,
     onUploadImage = (image) => { },
     onTextChange
 }) => {
-    const [rate, setRate] = React.useState(4);
+    const [rate, setRate] = React.useState(5);
     const onGallery = async () => {
         try {
             const res = await SERVICES._returnImageGallery();
@@ -59,7 +60,7 @@ const ReviewModal = ({
                 <View style={{ alignItems: 'center', marginBottom: mvs(22) }}>
                     <Rating
                         style={{ alignItems: 'flex-start', marginTop: mvs(-13) }}
-                        ratingCount={5}
+                        ratingCount={rating}
                         imageSize={20}
                         onFinishRating={setRating} />
                 </View>

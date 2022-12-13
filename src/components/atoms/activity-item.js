@@ -86,7 +86,7 @@ const ActivityItem = ({
               //   <TouchableOpacity style={{ ...styles.BUTTON, backgroundColor: colors.gray }} onPress={onResumePress}>
               //     <Regular label={'Make Payment'} style={{ ...styles.BUTTONTEXT, color: colors.lightgrey1 }} />
               //   </TouchableOpacity> :
-              section === 'schedule' && status === 'Completed' && !rating ?
+              (section === 'schedule' || status === 'Completed' && !rating) ?
                 <TouchableOpacity style={{ ...styles.BUTTON, marginLeft: mvs(4) }} onPress={onLikePress}>
                   {isLiked == false ? <SVG.Like style={{ marginRight: mvs(5) }} /> : <SVG.Liked style={{ marginRight: mvs(5) }} />}
                   <Regular label={'Like'} style={{ ...styles.BUTTONTEXT }} />

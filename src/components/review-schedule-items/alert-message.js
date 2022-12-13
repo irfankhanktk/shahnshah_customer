@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import colors from '../../services/colors';
-import {mvs} from '../../services/metrices';
-import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import { mvs } from '../../services/metrices';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
 import Regular from '../../presentation/typography/regular-text';
-import {AlertIcon, Liked, Star} from '../../assets/common-icons';
+import { AlertIcon, Liked, Star } from '../../assets/common-icons';
 import * as Progress from 'react-native-progress';
 import moment from 'moment';
 import Row from '../atoms/row';
@@ -30,7 +30,6 @@ const AlertMessage = ({
     }
   }, [progress]);
   function calculateProgress() {
-    console.log(view?.message);
     const startdate = view?.message?.start;
     const minuts = view?.message?.minutes;
     var t = moment(startdate).twix(new Date());
@@ -44,14 +43,14 @@ const AlertMessage = ({
   }
   return (
     <View
-      style={{...styles.container, backgroundColor: bgColor, height: mvs(70)}}>
-      <View style={{...styles.fillView, backgroundColor: fillColor}}></View>
+      style={{ ...styles.container, backgroundColor: bgColor, height: mvs(70) }}>
+      <View style={{ ...styles.fillView, backgroundColor: fillColor }}></View>
       {color == 'red' && (
-        <View style={{alignSelf: 'center', marginLeft: mvs(10)}}>
+        <View style={{ alignSelf: 'center', marginLeft: mvs(10) }}>
           <AlertIcon />
         </View>
       )}
-      <View style={{...styles.mainView, backgroundColor: bgColor}}>
+      <View style={{ ...styles.mainView, backgroundColor: bgColor }}>
         {title && (
           <Regular
             label={title}
@@ -69,8 +68,8 @@ const AlertMessage = ({
           />
         )}
       </View>
-      {view?.message?.showProgress && (
-        <View style={{alignSelf: 'center', marginHorizontal: mvs(5)}}>
+      {view?.message?.showProgress ? (
+        <View style={{ alignSelf: 'center', marginHorizontal: mvs(5) }}>
           <Progress.Circle
             size={36}
             color={colors.primary}
@@ -80,19 +79,19 @@ const AlertMessage = ({
             textStyle={styles.PROGRESSTEXT}
           />
         </View>
-      )}
-      {view?.message?.showRating && view?.message?.rating && (
+      ) : null}
+      {(view?.message?.showRating && view?.message?.rating) ? (
         <Row style={styles.RATING}>
           <Star />
           <Bold label={view?.message?.rating} />
         </Row>
-      )}
-      {view?.message?.showRating && !view?.message?.rating && (
-        <TouchableOpacity style={{...styles.BUTTON}} activeOpacity={1}>
-          <Liked style={{marginRight: mvs(5)}} />
-          <Regular label={'Liked'} size={10} style={{...styles.BUTTONTEXT}} />
+      ) : null}
+      {view?.message?.showRating && !view?.message?.rating ? (
+        <TouchableOpacity style={{ ...styles.BUTTON }} activeOpacity={1}>
+          <Liked style={{ marginRight: mvs(5) }} />
+          <Regular label={'Liked'} size={10} style={{ ...styles.BUTTONTEXT }} />
         </TouchableOpacity>
-      )}
+      ) : null}
     </View>
   );
 };

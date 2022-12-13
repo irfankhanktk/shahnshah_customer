@@ -63,7 +63,7 @@ const Signin = props => {
         console.log('result=>>>>', result?.data);
         // if(result?.data?.registration){
 
-        // }else{
+        // }else {
         //   delayAPI(phone);
         // }
         navigation.navigate('Otp', { phone, registration: result?.data?.registration });

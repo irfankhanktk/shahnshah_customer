@@ -83,7 +83,6 @@ const get_customer_coupons_history = id => {
 };
 const get_coupons_details = (id, bussinessId, cid) => {
   //bussinessId=3334;
-  console.log('Coupon detail api:::', id, 'cid :', cid);
   return async (dispatch, getState) => {
     try {
       console.log(
@@ -143,6 +142,10 @@ const get_coupon_sale_details = (customerId, saleId) => {
 const rate_booking = (customerId, bookingId) => {
   return async (dispatch, getState) => {
     try {
+      console.log('url=>>>====', `${URLS.review.rate_booking + customerId +
+        '/bookings/' +
+        bookingId +
+        '/rate'}`);
       const response = await API_REQUESTS.postData(
         URLS.review.rate_booking +
         customerId +

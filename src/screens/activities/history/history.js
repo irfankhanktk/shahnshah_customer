@@ -30,7 +30,7 @@ const History = props => {
   const [completed, setCompletedData] = useState([]);
   const [cancelled, setCancelledData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [history, setHistoryData] = useState(BOOKING?.history || []);
+  const [history, setHistoryData] = useState([]);
   const isFocus = useIsFocused();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const History = props => {
     const customerId = await getData("customer_id");
     const response = await get_bookings(customerId);
     console.log('response of history=>', response?.data?.history);
-    // setHistoryData(response?.data?.history)
+    setHistoryData(response?.data?.history)
     // setCancelledData(response?.data?.cancelled)
     // setCompletedData(response?.data?.completed)
     // setScheduleData(response?.data?.scheduled)

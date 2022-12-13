@@ -62,11 +62,11 @@ const CouponDetails = props => {
   };
   return (
     <View style={styles.conntainer}>
-      <GeneralStatusBarColor
+      {/* <GeneralStatusBarColor
         translucent
         backgroundColor={colors.white}
         barStyle={'dark-content'}
-      />
+      /> */}
 
       <View style={styles.body}>
         <ScrollView

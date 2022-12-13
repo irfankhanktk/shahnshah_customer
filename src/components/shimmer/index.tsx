@@ -11,7 +11,7 @@ type props = {
 };
 const Shimmer = ({shimmerStyle, children = <></>,visible}: props) => {
   return (
-    <ShimmerPlaceholder shimmerWidthPercent={1} shimmerStyle={[styles.shimmerStyle,shimmerStyle]} visible={visible}>
+    <ShimmerPlaceholder shimmerColors={['#c5c5c5', '#c5c5c5', '#c5c5c5']} shimmerWidthPercent={1} shimmerStyle={[styles.shimmerStyle,shimmerStyle]} visible={visible}>
       {children}
     </ShimmerPlaceholder>
   );

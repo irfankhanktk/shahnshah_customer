@@ -30,7 +30,7 @@ const Bookings = props => {
   const [reviewModal, setReviewModal] = useState(false)
   const [bookingId, setBookingId] = useState(273)
   const [remarks, setRemarks] = useState(' ')
-  const [ratingValue, setRatingValue] = useState(0)
+  const [ratingValue, setRatingValue] = useState(5)
   // console.log('BOOKING=>>>', BOOKING);
   const [schedule, setScheduleData] = useState([]);
   const [draft, setDrafteData] = useState([]);
@@ -50,7 +50,7 @@ const Bookings = props => {
     try {
       const customerId = await getData("customer_id");
       const response = await rate_booking(customerId, bookingId)
-      console.log("review response =>", response)
+      console.log("review rponse id data=>es", response?.data)
       if (response?.data) {
         const reviewRateReponse = await update_review_rating(customerId, response?.data, 5)
         console.log("Review Rate Response ", reviewRateReponse?.data);
@@ -80,7 +80,7 @@ const Bookings = props => {
 
       const customerId = await getData("customer_id");
       const response = await get_bookings(customerId);
-      console.log('response=>> of bookings', response?.data);
+      console.log('response=>> of bookings=>>>>', response?.data);
       setCancelledData(response?.data?.cancelled)
       setCompletedData(response?.data?.completed)
       setScheduleData(response?.data?.scheduled)
@@ -139,14 +139,14 @@ const Bookings = props => {
                   />
                 )}
               /> :
-              draft.length > 0 || schedule.length > 0 || completed.length > 0 || cancelled.length > 0 ? (
+              (draft.length > 0 || schedule.length > 0 || completed.length > 0 || cancelled.length > 0) ? (
                 <View
                   style={{
                     flex: 1,
                     paddingTop: mvs(10),
                     backgroundColor: allColors.tabBackground,
                   }}>
-                  {schedule.length > 0 ? (
+                  {draft.length > 0 ? (
                     <>
                       <Medium
                         label={'Draft'}
@@ -296,10 +296,11 @@ const Bookings = props => {
               )}
         </>
       </ScrollView>
-      <ReviewModal visible={reviewModal}
+      <ReviewModal
+        visible={reviewModal}
         onUploadImage={(image) => onUploadImage(image)}
+        rating={ratingValue}
         setRating={(rate) => {
-          console.log(rate)
           setRatingValue(rate)
         }}
         setItems={(items) => {

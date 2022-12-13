@@ -362,12 +362,11 @@ const BusinessProfile = props => {
           </View>
           <Row
             style={{
-              paddingHorizontal: mvs(36),
+              paddingHorizontal: mvs(20),
               marginTop: mvs(25),
             }}>
             <View
               style={{
-                padding: mvs(3),
                 borderRadius: mvs(23),
                 borderColor: colors.GDFDFDF,
               }}>
@@ -393,6 +392,7 @@ const BusinessProfile = props => {
               style={{
                 flex: 1,
                 marginLeft: mvs(13),
+
               }}>
               <ShimmerPlaceholder style={{ height: mvs(23) }} visible={loading}>
                 <Bold
@@ -421,7 +421,7 @@ const BusinessProfile = props => {
                   justifyContent="flex-start"
                   alignItems="center"
                   style={{
-                    marginLeft: mvs(6),
+                    marginLeft: mvs(3),
                     // width: mvs(250),
                   }}>
                   <View style={{ height: mvs(20), justifyContent: 'center' }}>

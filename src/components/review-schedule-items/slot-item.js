@@ -1,19 +1,20 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import colors from '../../services/colors';
-import {mvs} from '../../services/metrices';
-import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import { StyleSheet, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Row from '../atoms/row';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import Medium from '../../presentation/typography/medium-text';
 import Regular from '../../presentation/typography/regular-text';
-import ActionButton from './action-button';
+import colors from '../../services/colors';
+import { mvs } from '../../services/metrices';
+import Row from '../atoms/row';
 import Shimmer from '../shimmer';
+import ActionButton from './action-button';
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 const SlotItem = ({
   slotText = '12 February 2021 9:30 AM-10:00 AM',
   details = 'The first available slot',
   noMore = false,
+  loading = false,
   noSlot = false,
   showAccept = false,
   showRemove = false,
@@ -26,11 +27,12 @@ const SlotItem = ({
 }) => {
   return (
     <Row alignItems="center" style={styles.CONTAINER}>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <Row>
           <Medium label={'Date & Time'} size={15} color={colors.black} />
           {showAccept && (
             <ActionButton
+              loading={loading}
               style={styles.button}
               title="Accept"
               onClick={onAcceptClick}
@@ -38,21 +40,22 @@ const SlotItem = ({
           )}
           {showFind && (
             <ActionButton
+              loading={loading}
               title="Find"
               onClick={onFindClick}
               style={styles.button}
             />
           )}
         </Row>
-        <Shimmer>
+        <Shimmer visible={loading}>
           <Regular
             label={slotText}
             color={!noSlot ? colors.lightgrey1 : colors.primary}
             size={13}
           />
         </Shimmer>
-        <Row style={{alignItems: 'center'}}>
-          <Shimmer>
+        <Row style={{ alignItems: 'center' }}>
+          <Shimmer visible={loading}>
             <Regular
               label={details}
               color={!noMore ? colors.lightgrey1 : colors.red}
@@ -61,17 +64,19 @@ const SlotItem = ({
           </Shimmer>
           {showChange && (
             <ActionButton
+              loading={loading}
               style={styles.button}
               title="Change"
               onClick={onChangeClick}
               bgColor={colors.lightGreen1}
-              borderColor={colors.green}
+              // borderColor={colors.green}
               titleColor={colors.green}
             />
           )}
 
           {showRemove && (
             <ActionButton
+              loading={loading}
               style={styles.button}
               title="Remove"
               onClick={onRemoveClick}

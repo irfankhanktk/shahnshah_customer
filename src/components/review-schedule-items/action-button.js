@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import colors from '../../services/colors';
-import {mvs} from '../../services/metrices';
-import {createShimmerPlaceholder} from 'react-native-shimmer-placeholder';
+import { mvs } from '../../services/metrices';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 import LinearGradient from 'react-native-linear-gradient';
 import Regular from '../../presentation/typography/regular-text';
 import Shimmer from '../shimmer';
@@ -14,9 +14,11 @@ const ActionButton = ({
   titleColor = colors.lightgrey1,
   onClick,
   style,
+  loading,
 }) => {
   return (
     <Shimmer
+      visible={loading}
       shimmerStyle={{
         ...styles.CONTAINER,
         ...style,
