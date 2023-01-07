@@ -122,8 +122,8 @@ const ServiceOffering = ({
                           containerStyle={{
                             height: mvs(150),
                             width: '100%',
-                            borderTopRightRadius: mvs(8),
-                            borderTopLeftRadius: mvs(8),
+                            borderRadius: mvs(8),
+
                           }}
                           uri={{ uri: ele?.cover }}
                         />
@@ -204,7 +204,7 @@ const ServiceOffering = ({
                                 <Regular
                                   textDecoration={'line-through'}
                                   size={mvs(8)}
-                                  style={{ top: 4 }}
+                                  style={{ top: 1 }}
                                   color={colors.G9B9B9B}
                                   label={'AED'}
                                 />
@@ -276,7 +276,7 @@ const ServiceOffering = ({
                                 <Regular
                                   style={{
                                     position: 'absolute',
-                                    top: mvs(13),
+                                    top: mvs(Platform.OS === 'android' ? 9.8 : 11.2),
                                     left: mvs(25),
                                   }}
                                   size={mvs(7)}
@@ -522,7 +522,7 @@ const ServiceOffering = ({
                               <Regular
                                 style={{
                                   position: 'absolute',
-                                  top: mvs(13),
+                                  top: mvs(Platform.OS === 'android' ? 9.8 : 11.2),
                                   left: mvs(25),
                                 }}
                                 size={mvs(7)}

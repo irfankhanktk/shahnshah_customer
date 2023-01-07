@@ -85,11 +85,13 @@ const History = props => {
               <ActivityItem
                 address={item?.business?.view?.address || ''}
                 bussinessName={item?.business?.title}
+                image={{ uri: item?.business?.logo }}
                 bookingTime={item?.slot?.title}
                 details={item?.offering?.title}
                 status={item?.view?.status}
                 section=""
                 subDetails={item?.offering?.subTitle}
+                subImage={{ uri: item?.offering?.cover }}
                 onPress={() => { }}
                 onResumePress={() => { }}
                 progress={item?.view?.progress?.minutes}
@@ -120,11 +122,13 @@ const History = props => {
                         loading={!loading}
                         address={item?.business?.view?.address || ''}
                         bussinessName={item?.business?.title}
+                        image={{ uri: item?.business?.logo }}
                         bookingTime={item?.slot?.title}
                         details={item?.offering?.title}
                         status={item?.view?.status}
                         section="history"
                         subDetails={item?.offering?.subTitle}
+                        subImage={{ uri: item?.offering?.cover }}
                         onPress={() => { }}
                         onResumePress={() => navigation?.navigate('ReviewAndSchedule',
                           {
@@ -153,11 +157,13 @@ const History = props => {
                     <ActivityItem
                       address={item?.business?.view?.address || ''}
                       bussinessName={item?.business?.title}
+                      image={{ uri: item?.business?.logo }}
                       bookingTime={item?.slot?.title}
                       details={item?.offering?.title}
                       status={item?.view?.status}
                       section="draft"
                       subDetails={item?.offering?.subTitle}
+                      subImage={{ uri: item?.offering?.cover }}
                       onPress={() => { }}
                       onResumePress={() => navigation?.navigate('ReviewAndSchedule',
                         {
@@ -186,11 +192,13 @@ const History = props => {
                     <ActivityItem
                       address={item?.business?.view?.address || ''}
                       bussinessName={item?.business?.title}
+                      image={{ uri: item?.business?.logo }}
                       bookingTime={item?.slot?.title}
                       details={item?.offering?.title}
                       status={item?.view?.status}
                       section="schedule"
                       subDetails={item?.offering?.subTitle}
+                      subImage={{ uri: item?.offering?.cover }}
                       onPress={() => { }}
                       onResumePress={() => navigation?.navigate('ReviewAndSchedule',
                         {
@@ -216,11 +224,13 @@ const History = props => {
                     <ActivityItem
                       address={item?.business?.view?.address || ''}
                       bussinessName={item?.business?.title}
+                      image={{ uri: item?.business?.logo }}
                       bookingTime={item?.slot?.title}
                       details={item?.offering?.title}
                       status={item?.view?.status}
                       section={'Completed'}
                       subDetails={item?.offering?.subTitle}
+                      subImage={{ uri: item?.offering?.cover }}
                       onPress={() => alert('Complete')}
                       progress={item?.view?.progress?.minutes}
                       isLiked={false}
@@ -245,11 +255,13 @@ const History = props => {
                     <ActivityItem
                       address={item?.business?.view?.address || ''}
                       bussinessName={item?.business?.title}
+                      image={{ uri: item?.business?.logo }}
                       bookingTime={item?.slot?.title}
                       details={item?.offering?.title}
                       status={item?.view?.status}
                       section={'Cancelled'}
                       subDetails={item?.offering?.subTitle}
+                      subImage={{ uri: item?.offering?.cover }}
                       onPress={() => alert('cancel')}
                       progress={item?.view?.progress?.minutes}
                       isLiked={true}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  FlatList, ImageBackground, ScrollView, StatusBar, TouchableOpacity, View
+  FlatList, ImageBackground, Platform, ScrollView, StatusBar, TouchableOpacity, View
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
@@ -339,7 +339,7 @@ const ServiceOfferingDetails = props => {
                         size={mvs(8)}
                         color={colors.G9B9B9B}
                         label={`AED `}
-                        style={{ marginTop: 4 }}
+                        style={{ marginTop: Platform.OS === 'android' ? 3 : 5.5 }}
                       />
                       <Shimmer visible={loading} shimmerStyle={{ width: mvs(30) }}>
                         <Medium

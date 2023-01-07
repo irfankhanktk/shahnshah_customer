@@ -216,8 +216,8 @@ const CouponPromo = ({ coupons = [], business = {}, ...props }) => {
                               style={{
                                 textTransform: 'uppercase',
                                 fontSize: mvs(7),
-                                marginRight: 1,
-                                top: mvs(4),
+                                marginRight: mvs(5),
+                                top: mvs(Platform?.OS === 'android' ? 1 : 3),
                                 // marginTop: 7,
                                 color: colors.G9B9B9B,
                               }}
@@ -410,8 +410,8 @@ const CouponPromo = ({ coupons = [], business = {}, ...props }) => {
                               style={{
                                 textTransform: 'uppercase',
                                 fontSize: mvs(7),
-                                marginRight: 1,
-                                top: mvs(4),
+                                marginRight: mvs(5),
+                                top: mvs(Platform?.OS === 'android' ? 1 : 3),
                                 // marginTop: 7,
                                 color: colors.G9B9B9B,
                               }}

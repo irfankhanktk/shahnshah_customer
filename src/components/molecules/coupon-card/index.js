@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   discountVouchedIconView: {
     backgroundColor: colors.yellowLightLine,
     borderRadius: mvs(2),
-    width: mvs(97.35),
+    width: mvs(120),
     paddingHorizontal: mvs(10),
     height: mvs(22.77),
     flexDirection: 'row',

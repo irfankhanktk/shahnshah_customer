@@ -65,6 +65,7 @@ const MyCoupons = props => {
                   }}
                   address={item?.view?.address}
                   bussinessName={item?.business?.title}
+                  image={{ uri: item?.business?.logo }}
                   expireTime={item?.conditions?.to}
                   discount={item?.coupon?.discountValue}
                   status={item?.status}
@@ -73,7 +74,7 @@ const MyCoupons = props => {
                     props?.navigation?.navigate('CouponDetails', { id: item?.couponId, bId: item?.businessId })
                   }
                   progress={0.4}
-                  image={{ uri: item?.cover }}
+                  subImage={{ uri: item?.cover }}
                   price={item?.coupon?.price}
                   item={item}
                 />
@@ -105,6 +106,7 @@ const MyCoupons = props => {
                             }}
                             address={item?.view?.address}
                             bussinessName={item?.business?.title}
+                            image={{ uri: item?.business?.logo }}
                             expireTime={item?.conditions?.to}
                             discount={item?.coupon?.discountValue}
                             status={item?.status}
@@ -113,7 +115,7 @@ const MyCoupons = props => {
                               props?.navigation?.navigate('CouponDetails', { id: item?.couponId, bId: item?.businessId })
                             }
                             progress={0.4}
-                            image={{ uri: item?.cover }}
+                            subImage={{ uri: item?.cover }}
                             price={item?.coupon?.price}
                             item={item}
                           />
@@ -137,6 +139,7 @@ const MyCoupons = props => {
                             }}
                             address={item?.view?.address}
                             bussinessName={item?.business?.title}
+                            image={{ uri: item?.business?.logo }}
                             expireTime={item?.conditions?.to}
                             discount={item?.coupon?.discountValue}
                             status={item?.status}
@@ -145,7 +148,7 @@ const MyCoupons = props => {
                               props?.navigation?.navigate('CouponDetails', { id: item?.couponId, bId: item?.businessId })
                             }
                             progress={0.4}
-                            image={{ uri: item?.cover }}
+                            subImage={{ uri: item?.cover }}
                             price={item?.coupon?.price}
                             item={item}
                           />
@@ -172,6 +175,7 @@ const MyCoupons = props => {
                             }}
                             address={item?.view?.address}
                             bussinessName={item?.business?.title}
+                            image={{ uri: item?.business?.logo }}
                             expireTime={item?.conditions?.to}
                             discount={item?.coupon?.discountValue}
                             status={item?.status}
@@ -180,7 +184,7 @@ const MyCoupons = props => {
                               props?.navigation?.navigate('CouponDetails', { id: item?.couponId, bId: item?.businessId })
                             }
                             progress={0.4}
-                            image={{ uri: item?.cover }}
+                            subImage={{ uri: item?.cover }}
                             price={item?.coupon?.price}
                             item={item}
                           />

@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import colors from '../../services/colors';
-import {mvs} from '../../services/metrices';
+import { mvs } from '../../services/metrices';
 
 export const Styles = StyleSheet.create({
   conntainer: {
@@ -9,17 +9,17 @@ export const Styles = StyleSheet.create({
   },
   body: {
     flexGrow: 1,
-    paddingTop: mvs(40),
+    paddingTop: mvs(Platform.OS === 'android' ? 40 : 20),
   },
-  card:{
-    backgroundColor:colors.white,
-    borderRadius:mvs(20),
-    marginBottom:mvs(20),
+  card: {
+    backgroundColor: colors.white,
+    borderRadius: mvs(20),
+    marginBottom: mvs(20),
     ...colors.shadow,
   },
-  image:{
-    height:mvs(200),
-    width:'100%',
+  image: {
+    height: mvs(200),
+    width: '100%',
 
   }
 });

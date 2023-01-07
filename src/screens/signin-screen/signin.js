@@ -67,7 +67,7 @@ const Signin = props => {
         //   delayAPI(phone);
         // }
         navigation.navigate('Otp', { phone, registration: result?.data?.registration });
-        showToast('success', result.data);
+        showToast('success', 'Otp Sent Successfully');
 
       } catch (error) {
         console.log('error=>', error);

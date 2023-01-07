@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import colors from "../../services/colors";
 import { mvs } from "../../services/metrices";
 import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
@@ -19,7 +19,7 @@ const BillView = ({
         <Medium label={'Sub Total'} size={14} color={colors.black} />
         <Shimmer visible={loading}>
           <Row alignItems="center">
-            <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{}} />
+            <Regular label={'AED  '} size={8} color={colors.lightgrey1} style={{ marginTop: mvs(Platform.OS === 'android' ? 2 : 3) }} />
             <Medium label={invoice?.subTotal + ''} size={14} color={colors.black} />
           </Row>
         </Shimmer>

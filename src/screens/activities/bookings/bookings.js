@@ -80,7 +80,7 @@ const Bookings = props => {
 
       const customerId = await getData("customer_id");
       const response = await get_bookings(customerId);
-      console.log('response=>> of bookings=>>>>', response?.data);
+      console.log('response of bookings=>>>>', response?.data);
       setCancelledData(response?.data?.cancelled)
       setCompletedData(response?.data?.completed)
       setScheduleData(response?.data?.scheduled)
@@ -124,11 +124,13 @@ const Bookings = props => {
                   <ActivityItem
                     address={item?.business?.view?.address || ''}
                     bussinessName={item?.business?.title}
+                    image={{ uri: item?.business?.logo }}
                     bookingTime={item?.slot?.title}
                     details={item?.offering?.title}
                     status={item?.view?.status}
                     section=""
                     subDetails={item?.offering?.subTitle}
+                    subImage={{ uri: item?.offering?.cover }}
                     onPress={() => { }}
                     onResumePress={() => { }}
                     progress={item?.view?.progress?.minutes}
@@ -159,11 +161,13 @@ const Bookings = props => {
                             loading={!loading}
                             address={item?.business?.view?.address || ''}
                             bussinessName={item?.business?.title}
+                            image={{ uri: item?.business?.logo }}
                             bookingTime={item?.slot?.title}
                             details={item?.offering?.title}
                             status={item?.view?.status}
                             section="draft"
                             subDetails={item?.offering?.subTitle}
+                            subImage={{ uri: item?.offering?.cover }}
                             onPress={() => { }}
                             onResumePress={() => navigation?.navigate('ReviewAndSchedule',
                               {
@@ -194,11 +198,13 @@ const Bookings = props => {
                             loading={!loading}
                             address={item?.business?.view?.address || ''}
                             bussinessName={item?.business?.title}
+                            image={{ uri: item?.business?.logo }}
                             bookingTime={item?.slot?.title}
                             details={item?.offering?.title}
                             status={item?.view?.status}
-                            section="schedule"
+                            section="Schedule"
                             subDetails={item?.offering?.subTitle}
+                            subImage={{ uri: item?.offering?.cover }}
                             onPress={() => { }}
                             onResumePress={() => navigation?.navigate('ReviewAndSchedule',
                               {
@@ -226,11 +232,13 @@ const Bookings = props => {
 
                             address={item?.business?.view?.address || ''}
                             bussinessName={item?.business?.title}
+                            image={{ uri: item?.business?.logo }}
                             bookingTime={item?.slot?.title}
                             details={item?.offering?.title}
                             status={item?.view?.status}
                             section={'Completed'}
                             subDetails={item?.offering?.subTitle}
+                            subImage={item?.offering?.cover}
                             onPress={() => alert('Complete')}
                             progress={item?.view?.progress?.minutes}
                             isLiked={false}
@@ -262,11 +270,13 @@ const Bookings = props => {
 
                             address={item?.business?.view?.address || ''}
                             bussinessName={item?.business?.title}
+                            image={{ uri: item?.business?.logo }}
                             bookingTime={item?.slot?.title}
                             details={item?.offering?.title}
                             status={item?.view?.status}
                             section={'Cancelled'}
                             subDetails={item?.offering?.subTitle}
+                            subImage={{ uri: item?.offering?.cover }}
                             onPress={() => alert('cancel')}
                             progress={item?.view?.progress?.minutes}
                             isLiked={true}
